@@ -1,4 +1,4 @@
-#include "Connection.h"
+#include <Connection.h>
 
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlError>
@@ -41,4 +41,8 @@ void Connection::close() {
   emit message(tr("Closing..."));
   QSqlDatabase::database(objectName()).close();
   emit message(tr("Closed."));
+}
+
+void Connection::onExecutionRequest(const QString& sql) {
+  emit message(tr("Execution request: %1").arg(sql));
 }

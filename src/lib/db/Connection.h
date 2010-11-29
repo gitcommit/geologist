@@ -10,6 +10,8 @@ class Connection: public QObject {
     public:
   Connection(QObject* p, const QString& name);
   virtual ~Connection();
+ public slots:
+  void onExecutionRequest(const QString& sql);
  signals:
   void message(const QString& msg);
   public slots:

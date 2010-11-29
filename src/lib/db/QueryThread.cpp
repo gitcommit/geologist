@@ -1,4 +1,4 @@
-#include "QueryThread.h"
+#include <QueryThread.h>
 
 #include <QtCore/QDebug>
 

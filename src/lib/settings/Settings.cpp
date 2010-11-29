@@ -1,7 +1,7 @@
-#include "Settings.h"
+#include <Settings.h>
 
 Settings::Settings(QObject* p)
-	:QSettings(p)
+  : QSettings(p)
 {}
 
 Settings::~Settings()

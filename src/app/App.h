@@ -2,7 +2,6 @@
 #define App_H
 
 #include <QtGui/QApplication>
-
 #include <QtCore/QString>
 
 #include <ConnectionData.h>

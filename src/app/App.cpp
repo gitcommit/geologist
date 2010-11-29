@@ -1,4 +1,4 @@
-#include "App.h"
+#include <App.h>
 
 #include <QtCore/QDebug>
 
@@ -34,16 +34,16 @@ void App::init() {
 
 App::~App()
 {/*
-  if (reader_) {
-    reader_->quit();
-    reader_->wait();
-    delete reader_;
-  }
-  if (writer_) {
-    writer_->quit();
-    writer_->wait();
-    delete writer_;
-    }*/
+   if (reader_) {
+   reader_->quit();
+   reader_->wait();
+   delete reader_;
+   }
+   if (writer_) {
+   writer_->quit();
+   writer_->wait();
+   delete writer_;
+   }*/
 }
 
 void App::debug(const QString& msg) {
