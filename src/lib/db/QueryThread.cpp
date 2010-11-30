@@ -19,6 +19,7 @@ void QueryThread::run() {
   emit message(tr("Running..."));
   conn_ = new Connection(this, QString("db_conn_%1").arg(objectName()));
   connect(conn_, SIGNAL(message(const QString&)), this, SLOT(onConnectionMessage(const QString&)));
+  exec();
 }
 
 void QueryThread::open(const ConnectionData& cd) {
