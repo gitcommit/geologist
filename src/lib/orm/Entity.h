@@ -1,18 +1,18 @@
 #ifndef ENTITY_H_
 #define ENTITY_H_
 
-#include <QtCore/QObject>
-#include <QtSql/QSqlRecord>
+#include <QtCore/QMetaObject>
 
-class Entity: public QObject
+class Entity
 {
-  Q_OBJECT
-    public:
-  Entity(QObject* p=0);
+ public:
+  Entity();
+  Entity(const Entity& other);
+  virtual ~Entity();
+
   virtual void save();
   virtual void refresh();
   virtual void remove();
-  virtual ~Entity();
  protected:
   virtual void createOrUpdate();
   virtual void create();

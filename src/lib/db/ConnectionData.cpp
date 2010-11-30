@@ -8,5 +8,17 @@ ConnectionData::ConnectionData(const QString& host,
   drop_(drop), create_(create), debug_(debug) {
 }
 
+ConnectionData::ConnectionData(const ConnectionData& o) {
+  setHost(o.host());
+  setPort(o.port());
+  setDatabase(o.database());
+  setLogin(o.login());
+  setPassword(o.password());
+  setDrop(o.drop());
+  setCreate(o.create());
+  setDebug(o.debug());
+}
+
 ConnectionData::~ConnectionData() {
 }
+

@@ -6,7 +6,7 @@
 
 #include <ConnectionData.h>
 
-class QueryThread;
+#include <QueryThread.h>
  
 class App: public QApplication {
   Q_OBJECT
@@ -14,6 +14,9 @@ class App: public QApplication {
   App(int argc, char** argv);
   virtual ~App();
   void init();
+ signals:
+  void connectRequest(const ConnectionData& cd);
+  void disconnectRequest();
   public slots:
   virtual void debug(const QString& msg);
   virtual void openDb();
@@ -21,9 +24,10 @@ class App: public QApplication {
   void onReaderMessage(const QString& msg);
   void onWriterMessage(const QString& msg);
  protected:
+  virtual void registerMetatypes();
  private:
-  QueryThread* reader_;
-  QueryThread* writer_;
+  QueryThread reader_;
+  QueryThread writer_;
 
   ConnectionData cd_;
 };

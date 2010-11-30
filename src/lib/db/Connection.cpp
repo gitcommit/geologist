@@ -2,6 +2,7 @@
 
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlError>
+#include <QtSql/QSqlQuery>
 
 #include <QtCore/QVariant>
 #include <QtCore/QDebug>
@@ -9,9 +10,8 @@
 
 #include <ConnectionData.h>
 
-Connection::Connection(QObject* p, const QString& name)
+Connection::Connection(QObject* p)
   : QObject(p) {
-  setObjectName(name);
 }
 
 Connection::~Connection() {
@@ -21,7 +21,7 @@ Connection::~Connection() {
 void Connection::open(const ConnectionData& cd) {
   cd_ = cd;
   emit message(tr("Connecting to %1 ...").arg(cd_.info()));
-  QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL", objectName());
+  QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL", connectionName());
   db.setHostName(cd_.host());
   db.setPort(QVariant(cd_.port()).toInt());
   db.setDatabaseName(cd_.database());
@@ -39,10 +39,17 @@ void Connection::open(const ConnectionData& cd) {
 
 void Connection::close() {
   emit message(tr("Closing..."));
-  QSqlDatabase::database(objectName()).close();
+  QSqlDatabase::database(connectionName()).close();
   emit message(tr("Closed."));
-}
+} 
 
-void Connection::onExecutionRequest(const QString& sql) {
-  emit message(tr("Execution request: %1").arg(sql));
+void Connection::exec(const QString& sql) {
+  emit message(tr("exec: %1").arg(sql));
+  QSqlQuery q(sql, QSqlDatabase::database(objectName()));
+  QList<QSqlRecord> ret;
+  while(q.next()) {
+    ret.append(q.record());
+  }
+  q.finish();
+  emit queryCompleted(ret);
 }

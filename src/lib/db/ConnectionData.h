@@ -2,6 +2,7 @@
 #define CONNECTIONDATA_H_
 
 #include <QtCore/QString>
+#include <QtCore/QMetaObject>
 
 class ConnectionData {
  public:
@@ -13,6 +14,7 @@ class ConnectionData {
 		 const bool& drop = false,
 		 const bool& create = false,
 		 const bool& debug = false);
+  ConnectionData(const ConnectionData& other);
   virtual ~ConnectionData();
   QString host() const { return host_; }
   QString port() const { return port_; }

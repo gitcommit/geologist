@@ -4,12 +4,10 @@
 
 #include "Connection.h"
 
-QueryThread::QueryThread(QObject* p, const QString& name)
+QueryThread::QueryThread(QObject* p)
   : QThread(p),
     conn_(0)
 {
-  setObjectName(name);
-  run();
 }
 
 QueryThread::~QueryThread()
@@ -17,14 +15,18 @@ QueryThread::~QueryThread()
 
 void QueryThread::run() {
   emit message(tr("Running..."));
-  conn_ = new Connection(this, QString("db_conn_%1").arg(objectName()));
-  connect(conn_, SIGNAL(message(const QString&)), this, SLOT(onConnectionMessage(const QString&)));
+  qDebug() << connectionName() << " running...";
+  connect(&conn_, SIGNAL(message(const QString&)), this, SLOT(onConnectionMessage(const QString&)));
   exec();
 }
 
 void QueryThread::open(const ConnectionData& cd) {
+  if (!isRunning()) {
+    start(LowPriority);
+  }
   emit message(tr("Connecting..."));
-  conn_->open(cd);
+  conn_.setConnectionName(connectionName());
+  conn_.open(cd);
 }
 
 void QueryThread::close() {
@@ -33,4 +35,8 @@ void QueryThread::close() {
 
 void QueryThread::onConnectionMessage(const QString& msg) {
   emit message(msg);
+}
+
+void QueryThread::onExecutionRequest(const QString& sql) {
+  conn_.exec(sql);
 }

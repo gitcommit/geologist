@@ -34,6 +34,8 @@ SET(geo_SRCS_CXX
     
     lib/orm/Entity.cpp
     
+    lib/model/SIPrefix.cpp
+
     lib/db/ConnectionData.cpp
     lib/db/Connection.cpp
     lib/db/QueryThread.cpp
@@ -45,9 +47,7 @@ SET(geo_SRCS_CXX
 SET(geo_MOC_SRCS    
     app/App.h
 
-    lib/orm/Entity.h
-    
-   lib/db/Connection.h
+    lib/db/Connection.h
     lib/db/QueryThread.h
 
     lib/settings/Settings.h

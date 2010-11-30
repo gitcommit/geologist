@@ -1,7 +1,11 @@
 #include <Entity.h>
 
-Entity::Entity(QObject* p) :
-  QObject(p) {
+Entity::Entity() 
+{
+}
+
+Entity::Entity(const Entity& other)
+{
 }
 
 Entity::~Entity() {
