@@ -16,9 +16,11 @@ class Connection: public QObject {
   void setConnectionName(const QString& n) { connectionName_ = n; }
   QString connectionName() const { return connectionName_; }
  public slots:
-  virtual void open(const ConnectionData& cd);
-  virtual void close();
+  virtual void onConnectRequest(const ConnectionData& cd, const QString& connName);
+  virtual void onDisconnectRequest();
  signals:
+  void connected(const QString& info);
+  void disconnected();
   void message(const QString& msg);
   void queryCompleted(const QList<QSqlRecord>& res);
  private:

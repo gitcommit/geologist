@@ -6,17 +6,25 @@
 
 QueryThread::QueryThread(QObject* p)
   : QThread(p),
-    conn_(0)
+    abort_(false)
 {
+  connect(this, SIGNAL(connectRequest(const ConnectionData&, const QString&)), &conn_, SLOT(onConnectRequest(const ConnectionData&, const QString&)));
+  connect(this, SIGNAL(disconnectRequest()), &conn_, SLOT(onDisconnectRequest()));
 }
 
 QueryThread::~QueryThread()
-{}
+{
+  mutex_.lock();
+  abort_ = true;
+  mutex_.unlock();
+}
 
 void QueryThread::run() {
   emit message(tr("Running..."));
   qDebug() << connectionName() << " running...";
   connect(&conn_, SIGNAL(message(const QString&)), this, SLOT(onConnectionMessage(const QString&)));
+  connect(&conn_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
+  connect(&conn_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
   exec();
 }
 
@@ -24,13 +32,14 @@ void QueryThread::open(const ConnectionData& cd) {
   if (!isRunning()) {
     start(LowPriority);
   }
-  emit message(tr("Connecting..."));
+  emit message(tr("Sending Connect Request to Database Connection..."));
   conn_.setConnectionName(connectionName());
-  conn_.open(cd);
+  emit connectRequest(cd, connectionName());
 }
 
 void QueryThread::close() {
-  emit message(tr("Closing..."));
+  emit message(tr("Sendig Close Request to Database Connection..."));
+  emit disconnectRequest();
 }
 
 void QueryThread::onConnectionMessage(const QString& msg) {
@@ -39,4 +48,18 @@ void QueryThread::onConnectionMessage(const QString& msg) {
 
 void QueryThread::onExecutionRequest(const QString& sql) {
   conn_.exec(sql);
+}
+
+void QueryThread::abort() {
+  mutex_.lock();
+  abort_ = true;
+  mutex_.unlock();
+}
+
+void QueryThread::onConnected(const QString& info) {
+  emit connected(info);
+}
+
+void QueryThread::onDisconnected() {
+  emit disconnected();
 }

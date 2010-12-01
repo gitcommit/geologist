@@ -17,17 +17,20 @@ class App: public QApplication {
  signals:
   void connectRequest(const ConnectionData& cd);
   void disconnectRequest();
+  void databaseOpened(const QString& info);
+  void databaseClosed();
+  void databaseMessage(const QString& msg);
   public slots:
   virtual void debug(const QString& msg);
   virtual void openDb();
   virtual void closeDb();
-  void onReaderMessage(const QString& msg);
-  void onWriterMessage(const QString& msg);
+  void onDatabaseMessage(const QString& msg);
+  void onConnected(const QString& msg);
+  void onDisconnected();
  protected:
   virtual void registerMetatypes();
  private:
-  QueryThread reader_;
-  QueryThread writer_;
+  QueryThread dbThread_;
 
   ConnectionData cd_;
 };

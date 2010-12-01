@@ -16,7 +16,7 @@ Q_DECLARE_METATYPE(Entity);
 Q_DECLARE_METATYPE(SIPrefix);
 
 App::App(int argc, char** argv)
-  : QApplication(argc, argv, false)
+  : QApplication(argc, argv)
 {
   setApplicationVersion(APP_VERSION);
   setApplicationName(APP_NAME);
@@ -24,7 +24,6 @@ App::App(int argc, char** argv)
   setOrganizationName(ORG_NAME);
   registerMetatypes();
   init();
-  openDb();
 }
 
 void App::registerMetatypes() {
@@ -39,28 +38,18 @@ void App::init() {
   cd_.setDatabase("test");
   cd_.setLogin("jolo");
   cd_.setPassword("nix");
-  reader_.setConnectionName("reader");
-  writer_.setConnectionName("writer");
-  connect(&reader_, SIGNAL(message(const QString&)), this, SLOT(onReaderMessage(const QString&)));
-  connect(&writer_, SIGNAL(message(const QString&)), this, SLOT(onWriterMessage(const QString&)));
-  connect(this, SIGNAL(connectRequest(const ConnectionData&)), &reader_, SLOT(open(const ConnectionData&)));
-  connect(this, SIGNAL(connectRequest(const ConnectionData&)), &writer_, SLOT(open(const ConnectionData&)));
-  connect(this, SIGNAL(disconnectRequest()), &reader_, SLOT(close()));
-  connect(this, SIGNAL(disconnectRequest()), &writer_, SLOT(close()));
+  dbThread_.setConnectionName("dbconn");
+  connect(&dbThread_, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
+  connect(&dbThread_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
+  connect(&dbThread_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+  connect(this, SIGNAL(connectRequest(const ConnectionData&)), &dbThread_, SLOT(open(const ConnectionData&)));
+  connect(this, SIGNAL(disconnectRequest()), &dbThread_, SLOT(close()));
 }
 
 App::~App()
-{/*
-   if (reader_) {
-   reader_->quit();
-   reader_->wait();
-   delete reader_;
-   }
-   if (writer_) {
-   writer_->quit();
-   writer_->wait();
-   delete writer_;
-   }*/
+{
+  dbThread_.quit();
+  dbThread_.wait();
 }
 
 void App::debug(const QString& msg) {
@@ -75,10 +64,17 @@ void App::closeDb() {
   emit disconnectRequest();
 }
 
-void App::onReaderMessage(const QString& msg) {
-  debug(tr("Reader: %1").arg(msg));
+void App::onDatabaseMessage(const QString& msg) {
+  debug(tr("Database: %1").arg(msg));
+  emit databaseMessage(msg);
 }
 
-void App::onWriterMessage(const QString& msg) {
-  debug(tr("Writer: %1").arg(msg));
+void App::onConnected(const QString& msg) {
+  emit databaseMessage(tr("Connected: %1").arg(msg));
+  emit databaseOpened(msg);
+}
+
+void App::onDisconnected() {
+  emit databaseMessage(tr("Disconnected."));
+  emit databaseClosed();
 }

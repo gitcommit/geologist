@@ -15,12 +15,13 @@ Connection::Connection(QObject* p)
 }
 
 Connection::~Connection() {
-  close();
+  onDisconnectRequest();
 }
 
-void Connection::open(const ConnectionData& cd) {
+void Connection::onConnectRequest(const ConnectionData& cd, const QString& connName) {
   cd_ = cd;
-  emit message(tr("Connecting to %1 ...").arg(cd_.info()));
+  setConnectionName(connName);
+  emit message(tr("Connecting to %1 ... as connection %2").arg(cd_.info()).arg(connectionName()));
   QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL", connectionName());
   db.setHostName(cd_.host());
   db.setPort(QVariant(cd_.port()).toInt());
@@ -28,19 +29,22 @@ void Connection::open(const ConnectionData& cd) {
   db.setUserName(cd_.login());
   db.setPassword(cd_.password());
   bool isConn = db.open();
-  emit message(tr("Connection result: %1").arg(isConn));
-  QApplication::instance()->processEvents();
   if (!isConn) {
     emit message(tr("Connection failed: %1").arg(db.lastError().text()));
+    QSqlDatabase::removeDatabase(connectionName());
+    emit disconnected();
     return;
   }
-  emit message(tr("Connected to %1").arg(cd_.info()));
+  emit message(tr("Connected to %1 as %2").arg(cd_.info()).arg(connectionName()));
+  emit connected(cd_.info());
 }
 
-void Connection::close() {
+void Connection::onDisconnectRequest() {
   emit message(tr("Closing..."));
   QSqlDatabase::database(connectionName()).close();
+  QSqlDatabase::removeDatabase(connectionName());
   emit message(tr("Closed."));
+  emit disconnected();
 } 
 
 void Connection::exec(const QString& sql) {

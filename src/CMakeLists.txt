@@ -41,6 +41,10 @@ SET(geo_SRCS_CXX
     lib/db/QueryThread.cpp
 
     lib/settings/Settings.cpp
+
+    lib/gui/MainWindow.cpp
+    lib/gui/LogDisplay.cpp
+    lib/gui/LogWidget.cpp
 )
 
 # files which need to be moc'd by Qt (headers)
@@ -51,6 +55,10 @@ SET(geo_MOC_SRCS
     lib/db/QueryThread.h
 
     lib/settings/Settings.h
+
+    lib/gui/MainWindow.h
+    lib/gui/LogDisplay.h
+    lib/gui/LogWidget.h
 )
 
 # client UI files
