@@ -20,10 +20,10 @@ QueryThread::~QueryThread()
 }
 
 void QueryThread::run() {
-  emit message(tr("Running..."));
-  qDebug() << connectionName() << " running...";
+  emit message(tr("Query Thread Running..."));
   connect(&conn_, SIGNAL(message(const QString&)), this, SLOT(onConnectionMessage(const QString&)));
   connect(&conn_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
+  connect(this, SIGNAL(execQueryRequest(const QString&)), &conn_, SLOT(execQuery(const QString&)));
   connect(&conn_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
   exec();
 }
@@ -33,7 +33,6 @@ void QueryThread::open(const ConnectionData& cd) {
     start(LowPriority);
   }
   emit message(tr("Sending Connect Request to Database Connection..."));
-  conn_.setConnectionName(connectionName());
   emit connectRequest(cd, connectionName());
 }
 
@@ -47,7 +46,7 @@ void QueryThread::onConnectionMessage(const QString& msg) {
 }
 
 void QueryThread::onExecutionRequest(const QString& sql) {
-  conn_.exec(sql);
+  emit execQueryRequest(sql);
 }
 
 void QueryThread::abort() {

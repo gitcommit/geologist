@@ -34,6 +34,7 @@ class QueryThread: public QThread {
   void disconnected();
   void connectRequest(const ConnectionData& cd, const QString& connectionName);
   void disconnectRequest();
+  void execQueryRequest(const QString& sql);
  protected:
   virtual void run();
 

@@ -4,6 +4,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 #include <QtSql/QSqlRecord>
+#include <QtSql/QSqlQuery>
 
 #include <ConnectionData.h>
 
@@ -12,17 +13,19 @@ class Connection: public QObject {
     public:
   Connection(QObject* p=0);
   virtual ~Connection();
-  void exec(const QString& sql);
   void setConnectionName(const QString& n) { connectionName_ = n; }
   QString connectionName() const { return connectionName_; }
  public slots:
   virtual void onConnectRequest(const ConnectionData& cd, const QString& connName);
   virtual void onDisconnectRequest();
+  virtual void execQuery(const QString& sql);
  signals:
   void connected(const QString& info);
   void disconnected();
   void message(const QString& msg);
   void queryCompleted(const QList<QSqlRecord>& res);
+ protected:
+  virtual QSqlQuery exec(const QString& sql);
  private:
   ConnectionData cd_;
   QString connectionName_;
