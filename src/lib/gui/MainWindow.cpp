@@ -11,6 +11,8 @@
 MainWindow::MainWindow(QWidget* p)
   : QMainWindow(p)
 {
+  setMinimumWidth(800);
+  setMinimumHeight(600);
   setupMenu();
   logW_ = new LogWidget(this);
   setCentralWidget(logW_);

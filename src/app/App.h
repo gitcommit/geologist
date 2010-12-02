@@ -9,8 +9,8 @@
 #include <QueryThread.h>
  
 class App: public QApplication {
-  Q_OBJECT
-    public:
+  Q_OBJECT;
+ public:
   App(int argc, char** argv);
   virtual ~App();
   void init();
@@ -20,6 +20,8 @@ class App: public QApplication {
   void databaseOpened(const QString& info);
   void databaseClosed();
   void databaseMessage(const QString& msg);
+  void currentUserRequest();
+  void currentTimestampRequest();
   public slots:
   virtual void debug(const QString& msg);
   virtual void openDb();
@@ -27,6 +29,8 @@ class App: public QApplication {
   void onDatabaseMessage(const QString& msg);
   void onConnected(const QString& msg);
   void onDisconnected();
+  void onCurrentUserRequestCompleted(const QString& usr);
+  void onCurrentTimestampRequestCompleted(const QDateTime& ts);
  protected:
   virtual void registerMetatypes();
  private:

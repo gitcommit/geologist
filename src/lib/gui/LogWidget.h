@@ -7,8 +7,8 @@ class LogDisplay;
 
 class LogWidget: public QSplitter
 {
-  Q_OBJECT
-    public:
+  Q_OBJECT;
+ public:
   LogWidget(QWidget* p);
   virtual ~LogWidget();
   public slots:

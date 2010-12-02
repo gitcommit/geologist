@@ -47,7 +47,7 @@ void Connection::onDisconnectRequest() {
   emit disconnected();
 } 
 
-void Connection::execQuery(const QString& sql) {
+void Connection::execQuery(const QString& sql, const Queries::QueryId& qid) {
   QSqlQuery q = exec(sql);
 
   QList<QSqlRecord> ret;
@@ -57,11 +57,17 @@ void Connection::execQuery(const QString& sql) {
   }
   emit message(tr("Query Results Processed: %1 Records.").arg(ret.size()));
   q.finish();
-  emit queryCompleted(ret);
+  emit queryCompleted(ret, qid);
 }
 
 QSqlQuery Connection::exec(const QString& sql) {
-  emit message(tr("exec: %1").arg(sql));
-  QSqlQuery q(sql, QSqlDatabase::database(objectName()));
+  emit message(tr("Executing query: %1").arg(sql));
+  QSqlQuery q(sql, QSqlDatabase::database(connectionName()));
+  if (!q.isActive()) {
+    emit message(tr("ERROR: Executed Query '%1' is not active. Query Error: '%2' Database Error: '%3'.").arg(sql)
+		 .arg(q.lastError().text())
+		 .arg(QSqlDatabase::database(connectionName()).lastError().text()));
+  }
+  emit message(tr("Executed Query '%1' is active.").arg(sql));
   return q;
 }

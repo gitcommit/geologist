@@ -9,14 +9,13 @@ class QMenu;
 class LogWidget;
 
 class MainWindow: public QMainWindow {
-Q_OBJECT
-  public:
+  Q_OBJECT;
+ public:
   MainWindow(QWidget* p = 0);
   virtual ~MainWindow();
 
  signals:
   void databaseMessage(const QString& msg);
-
   public slots:
   void onDatabaseMessage(const QString& msg);
   void onDatabaseOpened(const QString& info);
