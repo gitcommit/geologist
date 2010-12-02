@@ -45,6 +45,12 @@ SET(geo_SRCS_CXX
     lib/gui/MainWindow.cpp
     lib/gui/LogDisplay.cpp
     lib/gui/LogWidget.cpp
+    lib/gui/Dialog.cpp
+    lib/gui/Label.cpp
+    lib/gui/FieldLabel.cpp
+    lib/gui/LineEdit.cpp
+    lib/gui/GroupBox.cpp
+    lib/gui/SmartGroupBox.cpp
 )
 
 # files which need to be moc'd by Qt (headers)
@@ -59,6 +65,12 @@ SET(geo_MOC_SRCS
     lib/gui/MainWindow.h
     lib/gui/LogDisplay.h
     lib/gui/LogWidget.h
+    lib/gui/Dialog.h
+    lib/gui/Label.h
+    lib/gui/FieldLabel.h
+    lib/gui/LineEdit.h
+    lib/gui/GroupBox.h
+    lib/gui/SmartGroupBox.h
 )
 
 # client UI files

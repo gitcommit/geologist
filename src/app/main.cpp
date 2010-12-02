@@ -10,8 +10,8 @@ int main(int argc, char** argv) {
   QObject::connect(a, SIGNAL(databaseOpened(const QString&)), w, SLOT(onDatabaseOpened(const QString&)));
   QObject::connect(a, SIGNAL(databaseClosed()), w, SLOT(onDatabaseClosed()));
   w->show();
-  a->exec();
+  int ret = a->exec();
   delete w;
   delete a;
-  return 1;
+  return ret;
 }
