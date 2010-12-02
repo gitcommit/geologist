@@ -5,7 +5,8 @@ SET(EXECUTABLE_OUTPUT_PATH ../bin)
 SET(geo_INCLUDE_DIRS
 	app
 	lib
-	lib/gui
+	lib/gui/widgets
+	lib/gui/db
 	lib/model
 	lib/orm
 	lib/db
@@ -42,15 +43,19 @@ SET(geo_SRCS_CXX
 
     lib/settings/Settings.cpp
 
-    lib/gui/MainWindow.cpp
-    lib/gui/LogDisplay.cpp
-    lib/gui/LogWidget.cpp
-    lib/gui/Dialog.cpp
-    lib/gui/Label.cpp
-    lib/gui/FieldLabel.cpp
-    lib/gui/LineEdit.cpp
-    lib/gui/GroupBox.cpp
-    lib/gui/SmartGroupBox.cpp
+    lib/gui/widgets/MainWindow.cpp
+    lib/gui/widgets/LogDisplay.cpp
+    lib/gui/widgets/LogWidget.cpp
+    lib/gui/widgets/Dialog.cpp
+    lib/gui/widgets/Label.cpp
+    lib/gui/widgets/FieldLabel.cpp
+    lib/gui/widgets/LineEdit.cpp
+    lib/gui/widgets/GroupBox.cpp
+    lib/gui/widgets/SmartGroupBox.cpp
+    lib/gui/widgets/Editor.cpp
+    lib/gui/widgets/PasswordEdit.cpp
+    
+    lib/gui/db/DatabaseConnectionDialog.cpp
 )
 
 # files which need to be moc'd by Qt (headers)
@@ -62,15 +67,19 @@ SET(geo_MOC_SRCS
 
     lib/settings/Settings.h
 
-    lib/gui/MainWindow.h
-    lib/gui/LogDisplay.h
-    lib/gui/LogWidget.h
-    lib/gui/Dialog.h
-    lib/gui/Label.h
-    lib/gui/FieldLabel.h
-    lib/gui/LineEdit.h
-    lib/gui/GroupBox.h
-    lib/gui/SmartGroupBox.h
+    lib/gui/widgets/MainWindow.h
+    lib/gui/widgets/LogDisplay.h
+    lib/gui/widgets/LogWidget.h
+    lib/gui/widgets/Dialog.h
+    lib/gui/widgets/Label.h
+    lib/gui/widgets/FieldLabel.h
+    lib/gui/widgets/LineEdit.h
+    lib/gui/widgets/GroupBox.h
+    lib/gui/widgets/SmartGroupBox.h
+    lib/gui/widgets/Editor.h
+    lib/gui/widgets/PasswordEdit.h
+    
+    lib/gui/db/DatabaseConnectionDialog.h
 )
 
 # client UI files

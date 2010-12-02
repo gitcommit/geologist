@@ -3,13 +3,17 @@
 
 #include <QtCore/QSettings>
 
-class Settings: public QSettings {
-  Q_OBJECT;
- public:
-  Settings(QObject* p = 0);
-  virtual ~Settings();
- protected:
- private:
+class ConnectionData;
+
+class Settings : public QSettings {
+	Q_OBJECT;
+public:
+	Settings(QObject* p = 0);
+	virtual ~Settings();
+	void save(ConnectionData* cd_);
+	void load(ConnectionData* cd_);
+protected:
+private:
 };
 
 #endif

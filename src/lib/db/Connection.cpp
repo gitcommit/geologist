@@ -22,7 +22,7 @@ void Connection::onConnectRequest(const ConnectionData& cd, const QString& connN
   cd_ = cd;
   setConnectionName(connName);
   emit message(tr("Connecting to %1 ... as connection %2").arg(cd_.info()).arg(connectionName()));
-  QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL", connectionName());
+  QSqlDatabase db = QSqlDatabase::addDatabase(cd.driver(), connectionName());
   db.setHostName(cd_.host());
   db.setPort(QVariant(cd_.port()).toInt());
   db.setDatabaseName(cd_.database());

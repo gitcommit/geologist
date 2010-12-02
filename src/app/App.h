@@ -24,8 +24,8 @@ class App: public QApplication {
   void currentTimestampRequest();
   public slots:
   virtual void debug(const QString& msg);
-  virtual void openDb();
-  virtual void closeDb();
+  virtual void onOpenDb();
+  virtual void onCloseDb();
   void onDatabaseMessage(const QString& msg);
   void onConnected(const QString& msg);
   void onDisconnected();

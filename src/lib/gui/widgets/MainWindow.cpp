@@ -16,9 +16,10 @@ MainWindow::MainWindow(QWidget* p)
   setupMenu();
   logW_ = new LogWidget(this);
   setCentralWidget(logW_);
-  connect(this, SIGNAL(databaseMessage(const QString&)), logW_, SLOT(onDatabaseMessage(const QString&)));
   connect((qobject_cast<App*>(QApplication::instance())), SIGNAL(databaseOpened(const QString&)), this, SLOT(onDatabaseOpened(const QString&)));
   connect((qobject_cast<App*>(QApplication::instance())), SIGNAL(databaseClosed()), this, SLOT(onDatabaseClosed()));
+  connect((qobject_cast<App*>(QApplication::instance())), SIGNAL(databaseMessage(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
+  connect(this, SIGNAL(databaseMessage(const QString&)), logW_, SLOT(onDatabaseMessage(const QString&)));
 }
 
 MainWindow::~MainWindow()
@@ -32,10 +33,10 @@ void MainWindow::setupMenu() {
   dbM_ = new QMenu(tr("&Database"), this);
   connectA_ = new QAction(tr("&Open..."), this);
   connectA_->setShortcut(QKeySequence("Ctrl+o"));
-  connect(connectA_, SIGNAL(triggered()), (qobject_cast<App*>(QApplication::instance())), SLOT(openDb()));
+  connect(connectA_, SIGNAL(triggered()), (qobject_cast<App*>(QApplication::instance())), SLOT(onOpenDb()));
   disconnectA_ = new QAction(tr("&Close"), this);
   disconnectA_->setShortcut(QKeySequence("Ctrl+d"));
-  connect(disconnectA_, SIGNAL(triggered()), (qobject_cast<App*>(QApplication::instance())), SLOT(closeDb()));
+  connect(disconnectA_, SIGNAL(triggered()), (qobject_cast<App*>(QApplication::instance())), SLOT(onCloseDb()));
   dbM_->addAction(connectA_);
   dbM_->addAction(disconnectA_);
   menuBar()->addMenu(dbM_);

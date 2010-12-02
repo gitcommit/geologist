@@ -10,9 +10,12 @@
 #include <QueryThread.h>
 #include <ConnectionData.h>
 
+#include <DatabaseConnectionDialog.h>
+
 #include <SIPrefix.h>
 #include <Entity.h>
 #include <Queries.h>
+#include <Settings.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(Entity)
@@ -43,22 +46,19 @@ void App::registerMetatypes() {
 }
 
 void App::init() {
-  cd_.setHost("localhost");
-  cd_.setPort("5433");
-  cd_.setDatabase("test");
-  cd_.setLogin("jolo");
-  cd_.setPassword("nix");
-  connect(&dbThread_, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
-  connect(&dbThread_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
-  connect(&dbThread_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-  connect(&dbThread_, SIGNAL(currentUserRequestCompleted(const QString&)), this, SLOT(onCurrentUserRequestCompleted(const QString&)));
-  connect(&dbThread_, SIGNAL(currentTimestampRequestCompleted(const QDateTime&)), this, SLOT(onCurrentTimestampRequestCompleted(const QDateTime&)));
-  connect(this, SIGNAL(currentUserRequest()), &dbThread_, SLOT(onCurrentUserRequest()));
-  connect(this, SIGNAL(currentTimestampRequest()), &dbThread_, SLOT(onCurrentTimestampRequest()));
-  connect(this, SIGNAL(connectRequest(const ConnectionData&)), &dbThread_, SLOT(open(const ConnectionData&)));
-  connect(this, SIGNAL(disconnectRequest()), &dbThread_, SLOT(close()));
-  connect(this, SIGNAL(currentUserRequest()), &dbThread_, SLOT(onCurrentUserRequest()));
-  connect(this, SIGNAL(currentTimestampRequest()), &dbThread_, SLOT(onCurrentTimestampRequest()));
+	Settings s(this);
+	s.load(&cd_);
+	connect(&dbThread_, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
+	connect(&dbThread_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
+	connect(&dbThread_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+	connect(&dbThread_, SIGNAL(currentUserRequestCompleted(const QString&)), this, SLOT(onCurrentUserRequestCompleted(const QString&)));
+	connect(&dbThread_, SIGNAL(currentTimestampRequestCompleted(const QDateTime&)), this, SLOT(onCurrentTimestampRequestCompleted(const QDateTime&)));
+	connect(this, SIGNAL(currentUserRequest()), &dbThread_, SLOT(onCurrentUserRequest()));
+	connect(this, SIGNAL(currentTimestampRequest()), &dbThread_, SLOT(onCurrentTimestampRequest()));
+	connect(this, SIGNAL(connectRequest(const ConnectionData&)), &dbThread_, SLOT(open(const ConnectionData&)));
+	connect(this, SIGNAL(disconnectRequest()), &dbThread_, SLOT(close()));
+	connect(this, SIGNAL(currentUserRequest()), &dbThread_, SLOT(onCurrentUserRequest()));
+	connect(this, SIGNAL(currentTimestampRequest()), &dbThread_, SLOT(onCurrentTimestampRequest()));
 }
 
 App::~App()
@@ -71,11 +71,18 @@ void App::debug(const QString& msg) {
   qDebug() << msg;
 }
 
-void App::openDb() {
+void App::onOpenDb() {
+	Settings s(this);
+	DatabaseConnectionDialog* d = new DatabaseConnectionDialog(activeWindow(), &cd_);
+	if (QDialog::Accepted != d->exec()) {
+		s.load(&cd_);
+		return;
+	}
+	s.save(&cd_);
   emit connectRequest(cd_);
 }
 
-void App::closeDb() {
+void App::onCloseDb() {
   emit disconnectRequest();
 }
 
