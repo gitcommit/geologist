@@ -7,7 +7,7 @@ SET(geo_INCLUDE_DIRS
 	lib
 	lib/gui/widgets
 	lib/gui/db
-	lib/model
+	lib/model/core
 	lib/orm
 	lib/db
 	lib/settings
@@ -35,7 +35,7 @@ SET(geo_SRCS_CXX
     
     lib/orm/Entity.cpp
     
-    lib/model/SIPrefix.cpp
+    lib/model/core/SIPrefix.cpp
 
     lib/db/ConnectionData.cpp
     lib/db/Connection.cpp
