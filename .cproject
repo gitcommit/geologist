@@ -43,7 +43,7 @@
 </inputType>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.assembler.macosx.exe.debug.1119555830" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.macosx.exe.debug">
-<option id="gnu.both.asm.option.include.paths.1163921721" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+<option id="gnu.both.asm.option.include.paths.1163921721" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="/Users/jolo/usr/qt/include"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.1191436789" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
@@ -56,7 +56,15 @@
 <option id="gnu.cpp.compiler.option.preprocessor.preprocess.1819342355" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess"/>
 <option id="gnu.cpp.compiler.option.preprocessor.def.2053739797" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
 <option id="gnu.cpp.compiler.option.preprocessor.undef.1314336617" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef"/>
-<option id="gnu.cpp.compiler.option.include.paths.1701512277" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths"/>
+<option id="gnu.cpp.compiler.option.include.paths.1701512277" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+<listOptionValue builtIn="false" value="&quot;${project_loc}/src/lib/db&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${project_loc}/src/lib/gui&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${project_loc}/src/lib/model&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${project_loc}/src/lib/orm&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${project_loc}/src/lib/settings&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${project_loc}/src/app&quot;"/>
+<listOptionValue builtIn="false" value="/Users/jolo/usr/qt/include/QtCore"/>
+</option>
 <option id="gnu.cpp.compiler.option.optimization.flags.762063821" name="Other optimization flags" superClass="gnu.cpp.compiler.option.optimization.flags"/>
 <option id="gnu.cpp.compiler.option.debugging.other.1703693982" name="Other debugging flags" superClass="gnu.cpp.compiler.option.debugging.other"/>
 <option id="gnu.cpp.compiler.option.debugging.prof.349707818" name="Generate prof information (-p)" superClass="gnu.cpp.compiler.option.debugging.prof"/>

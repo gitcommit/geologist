@@ -13,11 +13,13 @@ class LogWidget: public QSplitter
   virtual ~LogWidget();
   public slots:
   void onDatabaseMessage(const QString& msg);
+  void onDebugMessage(const QString& msg);
  signals:
   void databaseMessage(const QString& msg);
-
+  void debugMessage(const QString& msg);
  private:
   LogDisplay* databaseW_;
+  LogDisplay* debugW_;
 };
 
 #endif

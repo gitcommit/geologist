@@ -2,10 +2,15 @@
 #define QUERIES_H
 
 class Queries {
- public:
-  enum QueryId {
-    CurrentUser,
-    CurrentTimestamp
-  };
+public:
+	enum QueryId {
+		None = 0,
+		CurrentUser,
+		CurrentTimestamp,
+
+		AllSIPrefixesOpenCursor,
+		AllSIPrefixesFetchAll,
+		AllSIPrefixesCloseCursor
+	};
 };
 #endif

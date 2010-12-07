@@ -24,9 +24,19 @@ void QueryThread::run() {
   emit message(tr("Query Thread Running..."));
   connect(&conn_, SIGNAL(message(const QString&)), this, SLOT(onConnectionMessage(const QString&)));
   connect(&conn_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
-  connect(this, SIGNAL(execQueryRequest(const QString&, const Queries::QueryId&)), &conn_, SLOT(execQuery(const QString&, const Queries::QueryId&)));
-  connect(&conn_, SIGNAL(queryCompleted(const QList<QSqlRecord>&, const Queries::QueryId&)), this, SLOT(onQueryCompleted(const QList<QSqlRecord>&, const Queries::QueryId&)));
   connect(&conn_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+  connect(&conn_, SIGNAL(queryCompleted(const QList<QSqlRecord>&, const Queries::QueryId&)), this, SLOT(onQueryCompleted(const QList<QSqlRecord>&, const Queries::QueryId&)));
+  connect(&conn_, SIGNAL(queryCompleted(const TypedQuery&)), this, SLOT(onQueryCompleted(const TypedQuery&)));
+  
+  connect(this, SIGNAL(execRequest(const QList<TypedQuery>&)), &conn_, SLOT(onExecRequest(const QList<TypedQuery>&)));
+  connect(this, SIGNAL(execRequest(const TypedQuery&)), &conn_, SLOT(onExecRequest(const TypedQuery&)));
+  connect(this, SIGNAL(execQueryRequest(const QString&, const Queries::QueryId&)), &conn_, SLOT(execQuery(const QString&, const Queries::QueryId&)));
+  connect(this, SIGNAL(beginRequest()), &conn_, SLOT(onBeginRequest()));
+  connect(this, SIGNAL(commitRequest()), &conn_, SLOT(onCommitRequest()));
+  connect(this, SIGNAL(rollbackRequest()), &conn_, SLOT(onRollbackRequest()));
+  connect(this, SIGNAL(savepointRequest(const QString&)), &conn_, SLOT(onSavepointRequest(const QString&)));
+  connect(this, SIGNAL(rollbackToSavepointRequest(const QString&)), &conn_, SLOT(onRollbackToSavepointRequest(const QString&)));
+  
   exec();
 }
 
@@ -61,29 +71,42 @@ void QueryThread::onDisconnected() {
   emit disconnected();
 }
 
+void QueryThread::onBeginRequest() {
+	emit beginRequest();
+}
+
+void QueryThread::onCommitRequest() {
+	emit commitRequest();
+}
+
+void QueryThread::onRollbackRequest() {
+	emit rollbackRequest();
+}
+
+void QueryThread::onSavepointRequest(const QString& name) {
+	emit savepointRequest(name);
+}
+
+void QueryThread::onRollbackToSavepointRequest(const QString& name) {
+	emit rollbackToSavepointRequest(name);
+}
+
 void QueryThread::onQueryCompleted(const QList<QSqlRecord>& res, const Queries::QueryId& qid) {
-  emit queryCompleted(res);
-  switch(qid) {
-  case Queries::CurrentUser: emit currentUserRequestCompleted(extractCurrentUserFromQueryResult(res)); break;
-  case Queries::CurrentTimestamp: emit currentTimestampRequestCompleted(extractCurrentTimestampFromQueryResult(res)); break;
-  default: break;
-  };
+  emit queryCompleted(res, qid);
 }
 
-QString QueryThread::extractCurrentUserFromQueryResult(const QList<QSqlRecord>& res) const {
-  Q_ASSERT(!res.isEmpty());
-  return res.first().field("CURRENT_USER").value().toString();
+void QueryThread::onQueryRequest(const QString& sql, const Queries::QueryId& qid) {
+	emit execQueryRequest(sql, qid);
 }
 
-QDateTime QueryThread::extractCurrentTimestampFromQueryResult(const QList<QSqlRecord>& res) const {
-  Q_ASSERT(!res.isEmpty());
-  return res.first().field("CURRENT_TIMESTAMP").value().toDateTime();
+void QueryThread::onExecRequest(const QList<TypedQuery>& lst) {
+	emit execRequest(lst);
 }
 
-void QueryThread::onCurrentUserRequest() {
-  emit execQueryRequest("SELECT CURRENT_USER AS CURRENT_USER", Queries::CurrentUser);
+void QueryThread::onExecRequest(const TypedQuery& q) {
+	emit execRequest(q);
 }
 
-void QueryThread::onCurrentTimestampRequest() {
-  emit execQueryRequest("SELECT CURRENT_TIMESTAMP AS CURRENT_TIMESTAMP", Queries::CurrentTimestamp);
+void QueryThread::onQueryCompleted(const TypedQuery& q) {
+	emit queryCompleted(q);
 }

@@ -32,14 +32,18 @@ INCLUDE_DIRECTORIES(${QT_QTSQL_INCLUDE_DIR} ${QT_QTSVG_INCLUDE_DIR} ${QT_QTXML_I
 SET(geo_SRCS_CXX
     app/main.cpp
     app/App.cpp
+    app/tools.cpp
     
     lib/orm/Entity.cpp
+    lib/orm/Mapper.cpp
     
     lib/model/core/SIPrefix.cpp
+    lib/model/core/SIPrefixMapper.cpp
 
     lib/db/ConnectionData.cpp
     lib/db/Connection.cpp
     lib/db/QueryThread.cpp
+    lib/db/TypedQuery.cpp
 
     lib/settings/Settings.cpp
 
@@ -80,6 +84,10 @@ SET(geo_MOC_SRCS
     lib/gui/widgets/PasswordEdit.h
     
     lib/gui/db/DatabaseConnectionDialog.h
+    
+    lib/orm/Mapper.h
+    
+    lib/model/core/SIPrefixMapper.h
 )
 
 # client UI files

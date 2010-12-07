@@ -21,6 +21,7 @@ DatabaseConnectionDialog::DatabaseConnectionDialog(QWidget* p,
 	addWidget(buttonsW_);
 	connect(buttonsW_, SIGNAL(accepted()), this, SLOT(accept()));
 	connect(buttonsW_, SIGNAL(rejected()), this, SLOT(reject()));
+	passwordW_->setFocus();
 }
 
 DatabaseConnectionDialog::~DatabaseConnectionDialog() {
