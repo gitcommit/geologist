@@ -7,5 +7,5 @@ Mapper::Mapper(QObject* p) :
 Mapper::~Mapper() {
 }
 
-void Mapper::onQueryCompleted(const QList<QSqlRecord>& res, const Queries::QueryId& qid) {
+void Mapper::onQueryCompleted(const TypedQuery& q) {
 }

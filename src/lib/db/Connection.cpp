@@ -49,19 +49,6 @@ void Connection::onDisconnectRequest() {
 	emit disconnected();
 }
 
-void Connection::execQuery(const QString& sql, const Queries::QueryId& qid) {
-	QSqlQuery q = exec(sql);
-
-	QList<QSqlRecord> ret;
-	emit message(tr("Processing Query Results..."));
-	while (q.next()) {
-		ret.append(q.record());
-	}
-	emit message(tr("Query Results Processed: %1 Records.").arg(ret.size()));
-	q.finish();
-	emit queryCompleted(ret, qid);
-}
-
 QSqlQuery Connection::exec(const QString& sql) {
 	emit message(tr("Executing query: %1").arg(sql));
 	QSqlQuery q(sql, QSqlDatabase::database(connectionName()));

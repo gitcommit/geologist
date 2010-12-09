@@ -8,7 +8,6 @@
 
 #include <ConnectionData.h>
 #include <TypedQuery.h>
-#include <Queries.h>
 
 class Connection: public QObject {
 	Q_OBJECT;
@@ -22,7 +21,6 @@ public:
 public slots:
 	virtual void onConnectRequest(const ConnectionData& cd, const QString& connName);
 	virtual void onDisconnectRequest();
-	virtual void execQuery(const QString& sql, const Queries::QueryId& qid);
 	virtual void onExecRequest(const QList<TypedQuery>& lst);
 	virtual void onExecRequest(const TypedQuery& q);
 	void onBeginRequest();
@@ -35,7 +33,6 @@ signals:
 	void connected(const QString& info);
 	void disconnected();
 	void message(const QString& msg);
-	void queryCompleted(const QList<QSqlRecord>& res, const Queries::QueryId& qid);
 	void queryCompleted(const TypedQuery& q);
 	void execRequest(const TypedQuery& q);
 	void begin();

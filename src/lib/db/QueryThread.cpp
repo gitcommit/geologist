@@ -25,12 +25,10 @@ void QueryThread::run() {
   connect(&conn_, SIGNAL(message(const QString&)), this, SLOT(onConnectionMessage(const QString&)));
   connect(&conn_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
   connect(&conn_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-  connect(&conn_, SIGNAL(queryCompleted(const QList<QSqlRecord>&, const Queries::QueryId&)), this, SLOT(onQueryCompleted(const QList<QSqlRecord>&, const Queries::QueryId&)));
   connect(&conn_, SIGNAL(queryCompleted(const TypedQuery&)), this, SLOT(onQueryCompleted(const TypedQuery&)));
   
   connect(this, SIGNAL(execRequest(const QList<TypedQuery>&)), &conn_, SLOT(onExecRequest(const QList<TypedQuery>&)));
   connect(this, SIGNAL(execRequest(const TypedQuery&)), &conn_, SLOT(onExecRequest(const TypedQuery&)));
-  connect(this, SIGNAL(execQueryRequest(const QString&, const Queries::QueryId&)), &conn_, SLOT(execQuery(const QString&, const Queries::QueryId&)));
   connect(this, SIGNAL(beginRequest()), &conn_, SLOT(onBeginRequest()));
   connect(this, SIGNAL(commitRequest()), &conn_, SLOT(onCommitRequest()));
   connect(this, SIGNAL(rollbackRequest()), &conn_, SLOT(onRollbackRequest()));
@@ -89,14 +87,6 @@ void QueryThread::onSavepointRequest(const QString& name) {
 
 void QueryThread::onRollbackToSavepointRequest(const QString& name) {
 	emit rollbackToSavepointRequest(name);
-}
-
-void QueryThread::onQueryCompleted(const QList<QSqlRecord>& res, const Queries::QueryId& qid) {
-  emit queryCompleted(res, qid);
-}
-
-void QueryThread::onQueryRequest(const QString& sql, const Queries::QueryId& qid) {
-	emit execQueryRequest(sql, qid);
 }
 
 void QueryThread::onExecRequest(const QList<TypedQuery>& lst) {

@@ -7,6 +7,7 @@
 #include <ConnectionData.h>
 
 #include <QueryThread.h>
+#include <TypedQuery.h>
 
 #include <SIPrefix.h>
  
@@ -21,8 +22,9 @@ class App: public QApplication {
 	SIPrefixMapper* siPrefixMapper() const {
 		return siPrefixMapper_;
 	}
+	qlonglong nextQueryId() { lastQueryId_++; return lastQueryId_; }
+	
  signals:
- 	void queryRequest(const QString& sql, const Queries::QueryId& qid);
  	void queryRequest(const TypedQuery& q);
  	void queryRequest(const QList<TypedQuery>& qlst);
  	void beginRequest();
@@ -43,7 +45,6 @@ class App: public QApplication {
   	void onDatabaseMessage(const QString& msg);
   	void onConnected(const QString& msg);
   	void onDisconnected();
-  	void onQueryCompleted(const QList<QSqlRecord>& res, const Queries::QueryId& qid);
   	void onQueryCompleted(const TypedQuery& q);
   	void onSIPrefixesLoaded(const QList<SIPrefix>& lst);
  protected:
@@ -53,6 +54,8 @@ class App: public QApplication {
 
 	ConnectionData cd_;
 	SIPrefixMapper* siPrefixMapper_;
+	qlonglong lastQueryId_;
+	qlonglong currentUserQueryId_;
 };
 
 #endif

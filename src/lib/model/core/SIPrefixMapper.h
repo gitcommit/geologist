@@ -13,7 +13,7 @@ public:
 signals:
 	void loaded(const QList<SIPrefix>& res);
 public slots:
-	virtual void onQueryCompleted(const QList<QSqlRecord>& res, const Queries::QueryId& qid);
+	virtual void onQueryCompleted(const TypedQuery& q);
 protected:
 	SIPrefix fromRecord(const QSqlRecord& rec);
 };

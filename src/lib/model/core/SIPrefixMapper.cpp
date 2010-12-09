@@ -3,8 +3,6 @@
 #include <QtSql/QSqlRecord>
 #include <QtSql/QSqlField>
 
-#include <Queries.h>
-
 SIPrefixMapper::SIPrefixMapper(QObject* p) :
 	Mapper(p) {
 }
@@ -12,11 +10,8 @@ SIPrefixMapper::SIPrefixMapper(QObject* p) :
 SIPrefixMapper::~SIPrefixMapper() {
 }
 
-void SIPrefixMapper::onQueryCompleted(const QList<QSqlRecord>& res,
-		const Queries::QueryId& qid) {
-	if (qid != Queries::AllSIPrefixesFetchAll) {
-		return;
-	}
+void SIPrefixMapper::onQueryCompleted(const TypedQuery& q) {
+	QList<QSqlRecord> res = q.results();
 	QList<SIPrefix> ret;
 	for (QList<QSqlRecord>::const_iterator it = res.begin(); it != res.end(); it++) {
 		ret.append(fromRecord(*it));

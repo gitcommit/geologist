@@ -5,7 +5,7 @@
 #include <QtCore/QList>
 #include <QtSql/QSqlRecord>
 
-#include <Queries.h>
+#include <TypedQuery.h>
 
 class Mapper : public QObject {
 	Q_OBJECT
@@ -13,7 +13,7 @@ public:
 	Mapper(QObject* p=0);
 	virtual ~Mapper();
 public slots:
-	virtual void onQueryCompleted(const QList<QSqlRecord>& res, const Queries::QueryId& qid);
+	virtual void onQueryCompleted(const TypedQuery& q);
 };
 
 #endif /*MAPPER_H_*/
