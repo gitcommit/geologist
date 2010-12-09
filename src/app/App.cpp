@@ -32,7 +32,7 @@ Q_DECLARE_METATYPE(QSqlRecord)
 Q_DECLARE_METATYPE(QList<QSqlRecord>)
 
 App::App(int argc, char** argv)
-: QApplication(argc, argv), siPrefixMapper_(0), lastQueryId_(0), currentUserQueryId_(0)
+: QApplication(argc, argv), siPrefixMapper_(0), lastQueryId_(0)
 {
   setApplicationVersion(APP_VERSION);
   setApplicationName(APP_NAME);
@@ -59,12 +59,14 @@ void App::init() {
 	Settings s(this);
 	s.load(&cd_);
 	siPrefixMapper_ = new SIPrefixMapper(this);
+
+	connect(&dbThread_, SIGNAL(queryCompleted(const TypedQuery&)), siPrefixMapper(), SLOT(onQueryCompleted(const TypedQuery&)));
 	connect(siPrefixMapper(), SIGNAL(loaded(const QList<SIPrefix>&)), this, SLOT(onSIPrefixesLoaded(const QList<SIPrefix>&)));
+	connect(siPrefixMapper(), SIGNAL(queryRequest(const TypedQuery&)), &dbThread_, SLOT(onExecRequest(const TypedQuery&)));
 	
 	connect(&dbThread_, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
 	connect(&dbThread_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
 	connect(&dbThread_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-	connect(&dbThread_, SIGNAL(queryCompleted(const TypedQuery&)), this, SLOT(onQueryCompleted(const TypedQuery&)));
 	
 	connect(this, SIGNAL(connectRequest(const ConnectionData&)), &dbThread_, SLOT(open(const ConnectionData&)));
 	connect(this, SIGNAL(disconnectRequest()), &dbThread_, SLOT(close()));
@@ -110,10 +112,9 @@ void App::onConnected(const QString& msg) {
   emit databaseMessage(tr("Connected: %1").arg(msg));
   emit databaseOpened(msg);
   currentUserQueryId_ = nextQueryId();
+  emit beginRequest();
   emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
-  emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
-  emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
-  emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
+  siPrefixMapper_->testLoad();
 }
 
 void App::onDisconnected() {
@@ -121,15 +122,8 @@ void App::onDisconnected() {
   emit databaseClosed();
 }
 void App::onSIPrefixesLoaded(const QList<SIPrefix>& lst) {
+	emit debugMessage(tr("App::onSIPrefixesLoaded(...)"));
 	for (QList<SIPrefix>::const_iterator it = lst.begin(); it != lst.end(); it++) {
 		emit debugMessage(tr("Loaded SI Prefix: %1").arg((*it).toString()));
-	}
-}
-
-void App::onQueryCompleted(const TypedQuery& q) {
-	emit debugMessage(tr("Typed Query Completed."));
-	QList<QSqlRecord> res = q.results();
-	if (q.queryId() == currentUserQueryId_) {
-		emit debugMessage(tr("Current User: %1").arg(res.first().field("CURRENT_USER").value().toString()));
 	}
 }

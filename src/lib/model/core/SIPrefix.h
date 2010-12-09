@@ -14,15 +14,6 @@ public:
 			const QString& description = QString::null);
 	SIPrefix(const SIPrefix& other);
 	virtual ~SIPrefix();
-	static QString createCursorQuery() {
-		return QString("SELECT LOGIC.GET_ALL_SI_PREFIXES('foobar');");
-	}
-	static QString fetchAllQuery() {
-		return QString("FETCH ALL IN foobar;");
-	}
-	static QString closeCursorQuery() {
-		return QString("CLOSE foobar;");
-	}
 	qulonglong id() const {
 		return id_;
 	}

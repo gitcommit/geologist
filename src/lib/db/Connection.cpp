@@ -6,17 +6,26 @@
 
 #include <QtCore/QVariant>
 #include <QtCore/QDebug>
+#include <QtCore/QDateTime>
 #include <QtGui/QApplication>
 
 #include <ConnectionData.h>
 
 Connection::Connection(QObject* p) :
 	QObject(p) {
-	connect(this, SIGNAL(execRequest(const TypedQuery&)), this, SLOT(onExecRequest(const TypedQuery&)));
+    logF_.setFileName("log.sql");
+    if (!logF_.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
+        qFatal(tr("Could not open SQL log file %1. terminating.").arg(logF_.fileName()).toLocal8Bit());
+    }
+    
+    logStrm_.setDevice(&logF_);
+    connect(this, SIGNAL(execRequest(const TypedQuery&)), this, SLOT(onExecRequest(const TypedQuery&)));
+	connect(this, SIGNAL(logQuery(const QString&)), this, SLOT(log(const QString&)));
 }
 
 Connection::~Connection() {
 	onDisconnectRequest();
+	logF_.close();
 }
 
 void Connection::onConnectRequest(const ConnectionData& cd,
@@ -58,6 +67,7 @@ QSqlQuery Connection::exec(const QString& sql) {
 				.arg(QSqlDatabase::database(connectionName()).lastError().text()));
 	}
 	emit message(tr("Executed Query '%1' is active.").arg(sql));
+	emit logQuery(q.executedQuery());
 	return q;
 }
 
@@ -124,4 +134,8 @@ void Connection::onExecRequest(const TypedQuery& q) {
 		ret.appendRecord(qry.record());
 	}
 	emit queryCompleted(ret);
+}
+
+void Connection::log(const QString& sql) {
+	logStrm_ << sql << endl;
 }

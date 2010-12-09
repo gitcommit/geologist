@@ -3,6 +3,8 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
 #include <QtSql/QSqlRecord>
 #include <QtSql/QSqlQuery>
 
@@ -40,12 +42,17 @@ signals:
 	void rollback();
 	void savepoint(const QString& name);
 	void rollbackToSavepoint(const QString& name);
+	void logQuery(const QString& sql);
+protected slots:
+	void log(const QString& sql);
 protected:
 	virtual QSqlQuery exec(const QString& sql);
-
+	
 private:
 	ConnectionData cd_;
 	QString connectionName_;
+	QFile logF_;
+	QTextStream logStrm_;
 };
 
 #endif // CONNECTION_H

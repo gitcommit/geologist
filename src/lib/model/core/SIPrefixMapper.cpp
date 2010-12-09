@@ -4,22 +4,34 @@
 #include <QtSql/QSqlField>
 
 SIPrefixMapper::SIPrefixMapper(QObject* p) :
-	Mapper(p) {
-	selectAllOpenCursorQueryId_ = nextQueryId();
-	selectAllFetchAllQueryId_ = nextQueryId();
-	selectAllCloseCursorQueryId_ = nextQueryId();
+	Mapper(p, "c_all_si_prefixes", "logic.get_all_si_prefixes") {
 }
 
 SIPrefixMapper::~SIPrefixMapper() {
 }
 
+void SIPrefixMapper::testLoad() {
+	emit queryRequest(TypedQuery(createCursorQuery(), selectAllOpenId()));
+}
+
 void SIPrefixMapper::onQueryCompleted(const TypedQuery& q) {
-	QList<QSqlRecord> res = q.results();
-	QList<SIPrefix> ret;
-	for (QList<QSqlRecord>::const_iterator it = res.begin(); it != res.end(); it++) {
-		ret.append(fromRecord(*it));
+	if (q.queryId() == selectAllOpenId()) {
+		emit queryRequest(TypedQuery(fetchAllQuery(), fetchAllId())); 
+		return;
 	}
-	emit loaded(ret);
+	if (q.queryId() == fetchAllId()) {
+		QList<QSqlRecord> res = q.results();
+		QList<SIPrefix> ret;
+		for (QList<QSqlRecord>::const_iterator it = res.begin(); it != res.end(); it++) {
+			ret.append(fromRecord(*it));
+		}
+		emit loaded(ret);		
+		emit queryRequest(TypedQuery(closeCursorQuery(), closeCursorId()));
+		return;
+	}
+	if (q.queryId() == closeCursorId()) {
+		return;
+	}
 }
 
 SIPrefix SIPrefixMapper::fromRecord(const QSqlRecord& rec) {

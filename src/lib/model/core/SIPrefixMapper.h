@@ -10,6 +10,7 @@ class SIPrefixMapper: public Mapper
 public:
 	SIPrefixMapper(QObject* p);
 	virtual ~SIPrefixMapper();
+	void testLoad();
 signals:
 	void loaded(const QList<SIPrefix>& res);
 public slots:
