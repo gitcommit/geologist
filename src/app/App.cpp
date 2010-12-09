@@ -22,8 +22,6 @@
 #include <Settings.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
-Q_DECLARE_METATYPE(Entity)
-Q_DECLARE_METATYPE(SIPrefix)
 Q_DECLARE_METATYPE(TypedQuery)
 Q_DECLARE_METATYPE(QList<TypedQuery>)
 Q_DECLARE_METATYPE(QDateTime)
@@ -44,9 +42,6 @@ App::App(int argc, char** argv)
 
 void App::registerMetatypes() {
   qRegisterMetaType<ConnectionData>("ConnectionData");
-  qRegisterMetaType<SIPrefix>("SIPrefix");
-  qRegisterMetaType<QList<SIPrefix> >("QList<SIPrefix>");
-  qRegisterMetaType<Entity>("Entity");
   qRegisterMetaType<QList<QSqlRecord> >("QList<QSqlRecord>");
   qRegisterMetaType<TypedQuery>("TypedQuery");
   qRegisterMetaType<QList<TypedQuery> >("QList<TypedQuery>"); 
@@ -61,7 +56,7 @@ void App::init() {
 	siPrefixMapper_ = new SIPrefixMapper(this);
 
 	connect(&dbThread_, SIGNAL(queryCompleted(const TypedQuery&)), siPrefixMapper(), SLOT(onQueryCompleted(const TypedQuery&)));
-	connect(siPrefixMapper(), SIGNAL(loaded(const QList<SIPrefix>&)), this, SLOT(onSIPrefixesLoaded(const QList<SIPrefix>&)));
+	connect(siPrefixMapper(), SIGNAL(loaded(const QList<SIPrefix*>&)), this, SLOT(onSIPrefixesLoaded(const QList<SIPrefix*>&)));
 	connect(siPrefixMapper(), SIGNAL(queryRequest(const TypedQuery&)), &dbThread_, SLOT(onExecRequest(const TypedQuery&)));
 	
 	connect(&dbThread_, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
@@ -121,9 +116,9 @@ void App::onDisconnected() {
   emit databaseMessage(tr("Disconnected."));
   emit databaseClosed();
 }
-void App::onSIPrefixesLoaded(const QList<SIPrefix>& lst) {
+void App::onSIPrefixesLoaded(const QList<SIPrefix*>& lst) {
 	emit debugMessage(tr("App::onSIPrefixesLoaded(...)"));
-	for (QList<SIPrefix>::const_iterator it = lst.begin(); it != lst.end(); it++) {
-		emit debugMessage(tr("Loaded SI Prefix: %1").arg((*it).toString()));
+	for (QList<SIPrefix*>::const_iterator it = lst.begin(); it != lst.end(); it++) {
+		emit debugMessage(tr("Loaded SI Prefix: %1").arg((*it)->toString()));
 	}
 }

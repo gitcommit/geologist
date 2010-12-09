@@ -35,6 +35,7 @@ SET(geo_SRCS_CXX
     app/tools.cpp
     
     lib/orm/Entity.cpp
+    lib/orm/IdentifiedEntity.cpp
     lib/orm/Mapper.cpp
     
     lib/model/core/SIPrefix.cpp
@@ -66,6 +67,14 @@ SET(geo_SRCS_CXX
 SET(geo_MOC_SRCS    
     app/App.h
 
+    lib/orm/Entity.h
+    lib/orm/IdentifiedEntity.h
+    
+    lib/model/core/SIPrefix.h
+   
+    lib/orm/Mapper.h
+    lib/model/core/SIPrefixMapper.h
+    
     lib/db/Connection.h
     lib/db/QueryThread.h
 
@@ -84,10 +93,6 @@ SET(geo_MOC_SRCS
     lib/gui/widgets/PasswordEdit.h
     
     lib/gui/db/DatabaseConnectionDialog.h
-    
-    lib/orm/Mapper.h
-    
-    lib/model/core/SIPrefixMapper.h
 )
 
 # client UI files

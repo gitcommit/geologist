@@ -45,7 +45,7 @@ class App: public QApplication {
   	void onDatabaseMessage(const QString& msg);
   	void onConnected(const QString& msg);
   	void onDisconnected();
-  	void onSIPrefixesLoaded(const QList<SIPrefix>& lst);
+  	void onSIPrefixesLoaded(const QList<SIPrefix*>& lst);
  protected:
 	virtual void registerMetatypes();
  private:

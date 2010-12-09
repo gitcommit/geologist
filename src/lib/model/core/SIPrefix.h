@@ -1,22 +1,24 @@
 #ifndef SI_PREFIX_H
 #define SI_PREFIX_H
 
-#include <Entity.h>
+#include <IdentifiedEntity.h>
 
 #include <QtCore/QString>
 #include <QtCore/QObject>
 
-class SIPrefix : public Entity {
+class SIPrefix : public IdentifiedEntity {
+	Q_OBJECT
+	Q_PROPERTY(QString name READ name WRITE setName)
+	Q_PROPERTY(QString code READ code WRITE setCode)
+	Q_PROPERTY(QString symbol READ symbol WRITE setSymbol)
+	Q_PROPERTY(QString description READ description WRITE setDescription)
 public:
-	SIPrefix(const qulonglong& id = 0, const QString& name = QString::null,
+	SIPrefix(QObject* p=0,
+			const qulonglong& id = 0, const QString& name = QString::null,
 			const QString& code = QString::null,
 			const QString& symbol = QString::null, const qreal& factor = 0.0,
 			const QString& description = QString::null);
-	SIPrefix(const SIPrefix& other);
 	virtual ~SIPrefix();
-	qulonglong id() const {
-		return id_;
-	}
 	QString name() const {
 		return name_;
 	}
@@ -39,9 +41,6 @@ public:
 		.arg(code())
 		.arg(factor());
 	}
-	void setId(const qulonglong& id) {
-		id_ = id;
-	}
 	void setName(const QString& n) {
 		name_ = n;
 	}
@@ -58,7 +57,8 @@ public:
 		description_ = d;
 	}
 private:
-	qulonglong id_;
+	SIPrefix(const SIPrefix& other);
+
 	QString name_;
 	QString code_;
 	QString symbol_;

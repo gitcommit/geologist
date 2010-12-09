@@ -1,6 +1,7 @@
 #include <Entity.h>
 
-Entity::Entity() 
+Entity::Entity(QObject* p)
+: QObject(p)
 {
 }
 

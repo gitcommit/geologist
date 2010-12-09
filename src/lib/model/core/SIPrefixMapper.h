@@ -12,11 +12,11 @@ public:
 	virtual ~SIPrefixMapper();
 	void testLoad();
 signals:
-	void loaded(const QList<SIPrefix>& res);
+	void loaded(const QList<SIPrefix*>& res);
 public slots:
 	virtual void onQueryCompleted(const TypedQuery& q);
 protected:
-	SIPrefix fromRecord(const QSqlRecord& rec);
+	SIPrefix* fromRecord(const QSqlRecord& rec);
 };
 
 #endif /*SIPREFIXMAPPER_H_*/

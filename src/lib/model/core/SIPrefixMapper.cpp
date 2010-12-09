@@ -1,5 +1,6 @@
 #include "SIPrefixMapper.h"
 
+#include <QtGui/QApplication>
 #include <QtSql/QSqlRecord>
 #include <QtSql/QSqlField>
 
@@ -21,7 +22,7 @@ void SIPrefixMapper::onQueryCompleted(const TypedQuery& q) {
 	}
 	if (q.queryId() == fetchAllId()) {
 		QList<QSqlRecord> res = q.results();
-		QList<SIPrefix> ret;
+		QList<SIPrefix*> ret;
 		for (QList<QSqlRecord>::const_iterator it = res.begin(); it != res.end(); it++) {
 			ret.append(fromRecord(*it));
 		}
@@ -34,13 +35,13 @@ void SIPrefixMapper::onQueryCompleted(const TypedQuery& q) {
 	}
 }
 
-SIPrefix SIPrefixMapper::fromRecord(const QSqlRecord& rec) {
-	SIPrefix ret;
-	ret.setId(rec.field("ID").value().toInt());
-	ret.setName(rec.field("NAME").value().toString());
-	ret.setCode(rec.field("CODE").value().toString());
-	ret.setSymbol(rec.field("SYMBOL").value().toString());
-	ret.setFactor(rec.field("FACTOR").value().toDouble());
-	ret.setDescription(rec.field("DESCRIPTION").value().toString());
+SIPrefix* SIPrefixMapper::fromRecord(const QSqlRecord& rec) {
+	SIPrefix* ret = new SIPrefix(QApplication::instance());
+	ret->setId(rec.field("ID").value().toInt());
+	ret->setName(rec.field("NAME").value().toString());
+	ret->setCode(rec.field("CODE").value().toString());
+	ret->setSymbol(rec.field("SYMBOL").value().toString());
+	ret->setFactor(rec.field("FACTOR").value().toDouble());
+	ret->setDescription(rec.field("DESCRIPTION").value().toString());
 	return ret;
 }
