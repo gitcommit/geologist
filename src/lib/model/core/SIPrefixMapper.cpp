@@ -5,6 +5,9 @@
 
 SIPrefixMapper::SIPrefixMapper(QObject* p) :
 	Mapper(p) {
+	selectAllOpenCursorQueryId_ = nextQueryId();
+	selectAllFetchAllQueryId_ = nextQueryId();
+	selectAllCloseCursorQueryId_ = nextQueryId();
 }
 
 SIPrefixMapper::~SIPrefixMapper() {

@@ -1,7 +1,0 @@
-src/app
-src/lib/db
-src/lib/gui/db
-src/lib/gui/widgets
-src/lib/model/core
-src/lib/orm
-src/lib/settings

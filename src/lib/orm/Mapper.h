@@ -14,6 +14,11 @@ public:
 	virtual ~Mapper();
 public slots:
 	virtual void onQueryCompleted(const TypedQuery& q);
+protected:
+	virtual qlonglong nextQueryId();
+	qlonglong selectAllOpenCursorQueryId_;
+	qlonglong selectAllFetchAllQueryId_;
+	qlonglong selectAllCloseCursorQueryId_;
 };
 
 #endif /*MAPPER_H_*/
