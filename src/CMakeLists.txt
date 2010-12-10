@@ -36,6 +36,7 @@ SET(geo_SRCS_CXX
     
     lib/orm/Entity.cpp
     lib/orm/IdentifiedEntity.cpp
+    lib/orm/StandardEntity.cpp
     lib/orm/Mapper.cpp
     
     lib/model/core/SIPrefix.cpp
@@ -69,6 +70,7 @@ SET(geo_MOC_SRCS
 
     lib/orm/Entity.h
     lib/orm/IdentifiedEntity.h
+    lib/orm/StandardEntity.h
     
     lib/model/core/SIPrefix.h
    
