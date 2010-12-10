@@ -52,3 +52,7 @@ void DbModel::setName(const QString& n) {
 QString DbModel::name() const {
 	return _d->name();
 }
+
+QString DbModel::qualifiedName() const {
+	return name();
+}

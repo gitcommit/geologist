@@ -17,6 +17,7 @@ public:
 	
 	void setName(const QString& n);
 	QString name() const;
+	QString qualifiedName() const;
 	virtual QStringList create() const;
 protected:
 	virtual QStringList createSchemas() const;

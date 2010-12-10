@@ -5,7 +5,7 @@
 #include <Schema.h>
 
 Table::Table(Schema* schema, const QString& name) :
-	ModelComponent(schema), _d(0) {
+	InSchemaModelComponent(schema), _d(0) {
 	_d = new TableData;
 	setName(name);
 }
@@ -27,6 +27,10 @@ QString Table::name() const {
 
 QStringList Table::create() const {
 	QStringList ret;
-	ret.append(QString("CREATE Table %1();").arg(name()));
+	ret.append(QString("CREATE Table %1();").arg(qualifiedName()));
 	return ret;
+}
+
+QString Table::qualifiedName() const {
+	return QString("%1.%2").arg(schema()->qualifiedName()).arg(name());
 }

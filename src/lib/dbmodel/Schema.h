@@ -1,13 +1,13 @@
 #ifndef SCHEMA_H_
 #define SCHEMA_H_
 
-#include <ModelComponent.h>
+#include <InDbModelComponent.h>
 
 #include <private/SchemaData.h>
 
 class DbModel;
 
-class Schema : public ModelComponent {
+class Schema : public InDbModelComponent {
 	Q_OBJECT
 public:
 	Schema(DbModel* dbM = 0, const QString& name = QString::null);
@@ -16,6 +16,7 @@ public:
 
 	void setName(const QString& n);
 	QString name() const;
+	QString qualifiedName() const;
 	QStringList create() const;
 	
 	DbModel* dbModel();

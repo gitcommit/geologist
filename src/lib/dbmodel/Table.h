@@ -1,13 +1,13 @@
 #ifndef TABLE_H_
 #define TABLE_H_
 
-#include <ModelComponent.h>
+#include <InSchemaModelComponent.h>
 
 #include <private/TableData.h>
 
 class Schema;
 
-class Table : public ModelComponent {
+class Table : public InSchemaModelComponent {
 	Q_OBJECT
 public:
 	Table(Schema* schema = 0, const QString& name = QString::null);
@@ -16,6 +16,7 @@ public:
 
 	void setName(const QString& n);
 	QString name() const;
+	virtual QString qualifiedName() const;
 	QStringList create() const;
 private:
 	QExplicitlySharedDataPointer<TableData> _d;
