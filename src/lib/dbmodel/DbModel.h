@@ -11,14 +11,17 @@ class DbModel: public QObject {
 	Q_OBJECT
 public:
 	DbModel(QObject* p = 0, const QString& name = QString::null);
-	DbModel(const DbModel&other);
+	DbModel(const DbModel& other);
 	virtual ~DbModel();
 	
 	void setName(const QString& n);
 	QString name() const;
-	QStringList create() const;
+	virtual QStringList create() const;
+protected:
+	virtual QStringList createSchemas() const;
+	virtual QStringList createTables() const;
 private:
-	QExplicitlySharedDataPointer<DbModelData> d;
+	QExplicitlySharedDataPointer<DbModelData> _d;
 };
 
 #endif

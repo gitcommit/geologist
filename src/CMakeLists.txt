@@ -32,7 +32,11 @@ INCLUDE_DIRECTORIES(${QT_QTSQL_INCLUDE_DIR} ${QT_QTSVG_INCLUDE_DIR} ${QT_QTXML_I
 # .cxx sources
 SET(geo_SRCS_CXX
     lib/dbmodel/DbModel.cpp
+    lib/dbmodel/Schema.cpp
+    lib/dbmodel/Table.cpp
     lib/dbmodel/private/DbModelData.cpp
+    lib/dbmodel/private/SchemaData.cpp
+    lib/dbmodel/private/TableData
     
     app/main.cpp
     app/App.cpp
@@ -75,6 +79,8 @@ SET(geo_MOC_SRCS
     app/AppDbModel.h
     
     lib/dbmodel/DbModel.h
+    lib/dbmodel/Schema.h
+    lib/dbmodel/Table.h
     
     lib/orm/Entity.h
     lib/orm/IdentifiedEntity.h

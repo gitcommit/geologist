@@ -2,30 +2,53 @@
 
 #include <QtCore/QStringList>
 
+#include <Schema.h>
+#include <Table.h>
+
 DbModel::DbModel(QObject* p, const QString& n) :
-	QObject(p), d(0) {
-	d = new DbModelData;
+	QObject(p), _d(0) {
+	_d = new DbModelData;
 	setName(n);
 }
 
 DbModel::DbModel(const DbModel& other) :
-	d(other.d) {
+	_d(other._d) {
 
 }
 
 DbModel::~DbModel() {
 }
 
+QStringList DbModel::createSchemas() const {
+	QStringList ret;
+	SchemaList lst = findChildren<Schema*>();
+	for(SchemaList::const_iterator i = lst.begin(); i != lst.end(); i++) {
+		ret.append(QString("CREATE SCHEMA %1;").arg((*i)->name()));
+	}
+	return ret;
+}
+
+QStringList DbModel::createTables() const {
+	QStringList ret;
+	TableList lst = findChildren<Table*>();
+	for(TableList::const_iterator i = lst.begin(); i != lst.end(); i++) {
+		ret.append(QString("CREATE TABLE %1()").arg((*i)->name()));
+	}
+	return ret;
+}
+
 QStringList DbModel::create() const {
 	QStringList ret;
 	ret.append(QString("-- CREATE DATABASE %1").arg(name()));
+	ret.append(createSchemas());
+	ret.append(createTables());
 	return ret;
 }
 
 void DbModel::setName(const QString& n) {
-	d->setName(n);
+	_d->setName(n);
 }
 
 QString DbModel::name() const {
-	return d->name();
+	return _d->name();
 }
