@@ -12,6 +12,7 @@
 #include <SIPrefix.h>
  
 class SIPrefixMapper;
+class AppDbModel;
 
 class App: public QApplication {
 	Q_OBJECT;
@@ -55,6 +56,7 @@ class App: public QApplication {
 	SIPrefixMapper* siPrefixMapper_;
 	qlonglong lastQueryId_;
 	qlonglong currentUserQueryId_;
+	AppDbModel* _dbModel;
 };
 
 #endif

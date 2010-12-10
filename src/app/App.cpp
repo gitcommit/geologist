@@ -20,6 +20,7 @@
 
 #include <Entity.h>
 #include <Settings.h>
+#include <AppDbModel.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(TypedQuery)
@@ -30,7 +31,7 @@ Q_DECLARE_METATYPE(QSqlRecord)
 Q_DECLARE_METATYPE(QList<QSqlRecord>)
 
 App::App(int argc, char** argv)
-: QApplication(argc, argv), siPrefixMapper_(0), lastQueryId_(0)
+: QApplication(argc, argv), siPrefixMapper_(0), lastQueryId_(0), _dbModel(0)
 {
   setApplicationVersion(APP_VERSION);
   setApplicationName(APP_NAME);
@@ -54,7 +55,8 @@ void App::init() {
 	Settings s(this);
 	s.load(&cd_);
 	siPrefixMapper_ = new SIPrefixMapper(this);
-
+	_dbModel = new AppDbModel(this, DB_NAME);
+	  
 	connect(&dbThread_, SIGNAL(queryCompleted(const TypedQuery&)), siPrefixMapper(), SLOT(onQueryCompleted(const TypedQuery&)));
 	connect(siPrefixMapper(), SIGNAL(loaded(const QList<SIPrefix*>&)), this, SLOT(onSIPrefixesLoaded(const QList<SIPrefix*>&)));
 	connect(siPrefixMapper(), SIGNAL(queryRequest(const TypedQuery&)), &dbThread_, SLOT(onExecRequest(const TypedQuery&)));
@@ -109,6 +111,10 @@ void App::onConnected(const QString& msg) {
   currentUserQueryId_ = nextQueryId();
   emit beginRequest();
   emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
+  
+  emit debugMessage(tr("\n-- CREATE DATABASE script --\n%1\n-- end of CREATE DATABASE script.\n")
+		  .arg(_dbModel->create().join("\n")));
+  
   siPrefixMapper_->testLoad();
 }
 

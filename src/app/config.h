@@ -6,4 +6,6 @@
 #define ORG_DOMAIN "johanneslochmann.blogspot.com"
 #define ORG_NAME "LochiSoft"
 
+#define DB_NAME "test"
+
 #endif
