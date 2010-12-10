@@ -55,7 +55,7 @@ void App::init() {
 	Settings s(this);
 	s.load(&cd_);
 	siPrefixMapper_ = new SIPrefixMapper(this);
-	_dbModel = new AppDbModel(DB_NAME);
+	_dbModel.setName(DB_NAME);
 	  
 	connect(&dbThread_, SIGNAL(queryCompleted(const TypedQuery&)), siPrefixMapper(), SLOT(onQueryCompleted(const TypedQuery&)));
 	connect(siPrefixMapper(), SIGNAL(loaded(const QList<SIPrefix*>&)), this, SLOT(onSIPrefixesLoaded(const QList<SIPrefix*>&)));
@@ -80,7 +80,6 @@ App::~App()
 {
   dbThread_.quit();
   dbThread_.wait();
-  delete _dbModel;
 }
 
 void App::debug(const QString& msg) {
@@ -114,8 +113,13 @@ void App::onConnected(const QString& msg) {
   emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
   
   emit debugMessage(tr("\n-- CREATE DATABASE script --\n%1\n-- end of CREATE DATABASE script.\n")
-		  .arg(_dbModel->create().join("\n")));
-  
+		  .arg(_dbModel.create().join("\n")));
+  AppDbModel test = _dbModel;
+  test.setName("COPY_TEST");
+  emit debugMessage(tr("\n-- CREATE DATABASE COPY_TEST script --\n%1\n-- end of CREATE DATABASE script.\n")
+		  .arg(test.create().join("\n")));
+  emit debugMessage(tr("\n-- CREATE DATABASE script AFTER setName(...)--\n%1\n-- end of CREATE DATABASE script.\n")
+  		  .arg(_dbModel.create().join("\n")));
   siPrefixMapper_->testLoad();
 }
 

@@ -8,7 +8,6 @@ public:
 	AppDbModel(const QString& name = QString::null);
 	virtual ~AppDbModel();
 private:
-	AppDbModel(const AppDbModel& other) {} 
 	void configure();
 };
 
