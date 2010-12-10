@@ -16,5 +16,6 @@
 
 #define CORE_SCHEMA_NAME "core"
 #define SEQ_SI_PREFIXES "seq_si_prefixes"
+#define TBL_SI_PREFIXES "si_prefixes"
 
 #endif /*DBCONFIG_H_*/

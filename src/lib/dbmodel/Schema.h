@@ -6,6 +6,7 @@
 #include <QtCore/QMap>
 
 class Sequence;
+class Table;
 
 class Schema : public InDbModelElement {
 	Q_OBJECT
@@ -14,12 +15,16 @@ public:
 	virtual ~Schema();
 	virtual QStringList create() const;
 	
-	Sequence* createSequence(const QString& name);
 	Sequence* registerSequence(Sequence* s);
 	Sequence* sequence(const QString& name);
 	QMap<QString, Sequence*> sequences() const { return _sequences; }
+	
+	Table* registerTable(Table* t);
+	Table* table(const QString& name);
+	QMap<QString, Table*> tables() const { return _tables; }
 private:
 	QMap<QString, Sequence*> _sequences;
+	QMap<QString, Table*> _tables;
 };
 
 #endif /*SCHEMA_H_*/

@@ -38,6 +38,7 @@ SET(geo_SRCS_CXX
     lib/dbmodel/DataType.cpp
     lib/dbmodel/InSchemaModelElement.cpp
     lib/dbmodel/Sequence.cpp
+    lib/dbmodel/Table.cpp
     
     app/main.cpp
     app/App.cpp
@@ -86,6 +87,7 @@ SET(geo_MOC_SRCS
     lib/dbmodel/DataType.h
     lib/dbmodel/InSchemaModelElement.h
     lib/dbmodel/Sequence.h
+    lib/dbmodel/Table.h
 
     lib/orm/Entity.h
     lib/orm/IdentifiedEntity.h

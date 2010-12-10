@@ -13,12 +13,10 @@ class DbModel : public DbModelElement {
 public:
 	DbModel(QObject* p = 0, const QString& name=QString::null);
 	virtual ~DbModel();
-	Schema* createSchema(const QString& name);
 	Schema* registerSchema(Schema* schema);
 	Schema* schema(const QString& name);
 	QMap<QString, Schema*> schemas() const { return _schemas; }
 	
-	DataType* createDataType(const QString& name, const QString& sqlName);
 	DataType* registerDataType(DataType* t);
 	DataType* dataType(const QString& name);
 	QMap<QString, DataType*> dataTypes() const { return _dataTypes; }
@@ -28,6 +26,7 @@ protected:
 	QStringList createDataTypes() const;
 	QStringList createSchemas() const;
 	QStringList createSequences(Schema* s) const;
+	QStringList createTables(Schema* s) const;
 private:
 	DbModel(const DbModel& other) {}
 	QMap<QString, Schema*> _schemas;
