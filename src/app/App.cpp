@@ -55,7 +55,7 @@ void App::init() {
 	Settings s(this);
 	s.load(&cd_);
 	siPrefixMapper_ = new SIPrefixMapper(this);
-	_dbModel = new AppDbModel(this, DB_NAME);
+	_dbModel = new AppDbModel(DB_NAME);
 	  
 	connect(&dbThread_, SIGNAL(queryCompleted(const TypedQuery&)), siPrefixMapper(), SLOT(onQueryCompleted(const TypedQuery&)));
 	connect(siPrefixMapper(), SIGNAL(loaded(const QList<SIPrefix*>&)), this, SLOT(onSIPrefixesLoaded(const QList<SIPrefix*>&)));
@@ -80,6 +80,7 @@ App::~App()
 {
   dbThread_.quit();
   dbThread_.wait();
+  delete _dbModel;
 }
 
 void App::debug(const QString& msg) {

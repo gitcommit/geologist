@@ -1,36 +1,21 @@
 #ifndef DBMODEL_H_
 #define DBMODEL_H_
 
-#include <QtCore/QMap>
+#include <QtCore/QExplicitlySharedDataPointer>
+#include <QtCore/QString>
 
-#include <DbModelElement.h>
+#include <private/DbModelData.h>
 
-class Schema;
-class DataType;
-
-class DbModel : public DbModelElement {
-	Q_OBJECT
+class DbModel {
 public:
-	DbModel(QObject* p = 0, const QString& name=QString::null);
+	DbModel(const QString& name = QString::null);
+	DbModel(const DbModel&other);
 	virtual ~DbModel();
-	Schema* registerSchema(Schema* schema);
-	Schema* schema(const QString& name);
-	QMap<QString, Schema*> schemas() const { return _schemas; }
-	
-	DataType* registerDataType(DataType* t);
-	DataType* dataType(const QString& name);
-	QMap<QString, DataType*> dataTypes() const { return _dataTypes; }
-	
+	void setName(const QString& n);
+	QString name() const;
 	QStringList create() const;
-protected:
-	QStringList createDataTypes() const;
-	QStringList createSchemas() const;
-	QStringList createSequences(Schema* s) const;
-	QStringList createTables(Schema* s) const;
 private:
-	DbModel(const DbModel& other) {}
-	QMap<QString, Schema*> _schemas;
-	QMap<QString, DataType*> _dataTypes;
+	QExplicitlySharedDataPointer<DbModelData> d;
 };
 
-#endif /*DBMODEL_H_*/
+#endif

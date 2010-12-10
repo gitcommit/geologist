@@ -31,14 +31,8 @@ INCLUDE_DIRECTORIES(${QT_QTSQL_INCLUDE_DIR} ${QT_QTSVG_INCLUDE_DIR} ${QT_QTXML_I
 
 # .cxx sources
 SET(geo_SRCS_CXX
-    lib/dbmodel/DbModelElement.cpp
     lib/dbmodel/DbModel.cpp
-    lib/dbmodel/InDbModelElement.cpp
-    lib/dbmodel/Schema.cpp
-    lib/dbmodel/DataType.cpp
-    lib/dbmodel/InSchemaModelElement.cpp
-    lib/dbmodel/Sequence.cpp
-    lib/dbmodel/Table.cpp
+    lib/dbmodel/private/DbModelData.cpp
     
     app/main.cpp
     app/App.cpp
@@ -78,17 +72,7 @@ SET(geo_SRCS_CXX
 # files which need to be moc'd by Qt (headers)
 SET(geo_MOC_SRCS    
     app/App.h
-    app/AppDbModel.h
     
-    lib/dbmodel/DbModelElement.h
-    lib/dbmodel/DbModel.h
-    lib/dbmodel/InDbModelElement.h
-    lib/dbmodel/Schema.h
-    lib/dbmodel/DataType.h
-    lib/dbmodel/InSchemaModelElement.h
-    lib/dbmodel/Sequence.h
-    lib/dbmodel/Table.h
-
     lib/orm/Entity.h
     lib/orm/IdentifiedEntity.h
     lib/orm/StandardEntity.h
