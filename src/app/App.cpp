@@ -108,19 +108,13 @@ void App::onDatabaseMessage(const QString& msg) {
 void App::onConnected(const QString& msg) {
   emit databaseMessage(tr("Connected: %1").arg(msg));
   emit databaseOpened(msg);
-  currentUserQueryId_ = nextQueryId();
+  /*currentUserQueryId_ = nextQueryId();
   emit beginRequest();
   emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
-  
+  */
   emit debugMessage(tr("\n-- CREATE DATABASE script --\n%1\n-- end of CREATE DATABASE script.\n")
 		  .arg(_dbModel.create().join("\n")));
-  AppDbModel test = _dbModel;
-  test.setName("COPY_TEST");
-  emit debugMessage(tr("\n-- CREATE DATABASE COPY_TEST script --\n%1\n-- end of CREATE DATABASE script.\n")
-		  .arg(test.create().join("\n")));
-  emit debugMessage(tr("\n-- CREATE DATABASE script AFTER setName(...)--\n%1\n-- end of CREATE DATABASE script.\n")
-  		  .arg(_dbModel.create().join("\n")));
-  siPrefixMapper_->testLoad();
+  //siPrefixMapper_->testLoad();
 }
 
 void App::onDisconnected() {

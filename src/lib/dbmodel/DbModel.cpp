@@ -23,7 +23,7 @@ QStringList DbModel::createSchemas() const {
 	QStringList ret;
 	SchemaList lst = findChildren<Schema*>();
 	for(SchemaList::const_iterator i = lst.begin(); i != lst.end(); i++) {
-		ret.append(QString("CREATE SCHEMA %1;").arg((*i)->name()));
+		ret.append((*i)->create());
 	}
 	return ret;
 }
@@ -32,7 +32,7 @@ QStringList DbModel::createTables() const {
 	QStringList ret;
 	TableList lst = findChildren<Table*>();
 	for(TableList::const_iterator i = lst.begin(); i != lst.end(); i++) {
-		ret.append(QString("CREATE TABLE %1()").arg((*i)->name()));
+		ret.append((*i)->create());
 	}
 	return ret;
 }
