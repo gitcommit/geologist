@@ -3,19 +3,21 @@
 
 #include <Entity.h>
 
-class IdentifiedEntity: public Entity
-{
+class IdentifiedEntity : public Entity {
 	Q_OBJECT
-	Q_PROPERTY(qulonglong id READ id WRITE setId)
+	Q_PROPERTY(qulonglong id READ id WRITE setId NOTIFY idChanged)
 public:
 	IdentifiedEntity(QObject* p=0, const qulonglong& id=0);
 	virtual ~IdentifiedEntity();
-	void setId(const qulonglong& id) { id_ = id; }
-	qulonglong id() const { return id_; }
-	const bool hasId() const { return (id_ > 0); }
+	void setId(const qulonglong& id) {_id = id; emit idChanged(); }
+	qulonglong id() const {return _id;}
+	const bool hasId() const {return (_id> 0);}
+	virtual QString toString() const { return tr("Identified Entity with ID %1").arg(id()); }
+signals:
+	void idChanged();
 private:
 	IdentifiedEntity(const IdentifiedEntity& other) {}
-	qulonglong id_;
+	qulonglong _id;
 };
 
 #endif /*IDENTIFIEDENTITY_H_*/

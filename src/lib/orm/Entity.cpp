@@ -1,5 +1,7 @@
 #include <Entity.h>
 
+#include <QtCore/QDebug>
+
 Entity::Entity(QObject* p) :
 	QObject(p) {
 	connect(this, SIGNAL(dataChanged()), this, SLOT(onDataChanged()));
@@ -12,24 +14,7 @@ Entity::Entity(const Entity& other) {
 Entity::~Entity() {
 }
 
-void Entity::save() {
-}
-
-void Entity::refresh() {
-}
-
-void Entity::remove() {
-}
-
-void Entity::createOrUpdate() {
-}
-
-void Entity::create() {
-}
-
-void Entity::update() {
-}
-
 void Entity::onDataChanged() {
-	
+	setStatus(Entity::Dirty);
+	qDebug() << "Entity::onDataChanged()";
 }

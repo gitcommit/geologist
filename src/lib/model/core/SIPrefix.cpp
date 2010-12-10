@@ -6,6 +6,8 @@ SIPrefix::SIPrefix(QObject* p, const qulonglong& id, const QString& name,
 	StandardEntity(p, id, name, code, description),
 	_symbol(symbol),
 	_factor(factor) {
+	connect(this, SIGNAL(symbolChanged()), this, SIGNAL(dataChanged()));
+	connect(this, SIGNAL(factorChanged()), this, SIGNAL(dataChanged()));
 }
 
 SIPrefix::SIPrefix(const SIPrefix& o) {

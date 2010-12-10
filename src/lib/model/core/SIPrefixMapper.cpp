@@ -37,11 +37,12 @@ void SIPrefixMapper::onQueryCompleted(const TypedQuery& q) {
 
 SIPrefix* SIPrefixMapper::fromRecord(const QSqlRecord& rec) {
 	SIPrefix* ret = new SIPrefix(QApplication::instance());
-	ret->setId(rec.field("ID").value().toInt());
-	ret->setName(rec.field("NAME").value().toString());
-	ret->setCode(rec.field("CODE").value().toString());
-	ret->setSymbol(rec.field("SYMBOL").value().toString());
-	ret->setFactor(rec.field("FACTOR").value().toDouble());
-	ret->setDescription(rec.field("DESCRIPTION").value().toString());
+	ret->setProperty("id", rec.field("ID").value());
+	ret->setProperty("name", rec.field("NAME").value());
+	ret->setProperty("code", rec.field("CODE").value());
+	ret->setProperty("symbol", rec.field("SYMBOL").value());
+	ret->setProperty("factor", rec.field("FACTOR").value());
+	ret->setProperty("description", rec.field("DESCRIPTION").value());
+	ret->setStatus(Entity::Clean);
 	return ret;
 }

@@ -16,18 +16,21 @@ public:
 	Entity(QObject* p = 0);
 	virtual ~Entity();
 
-	virtual void save();
-	virtual void refresh();
-	virtual void remove();
 	Entity::States status() const { return _status; }
+	virtual QString const toString() { return tr("Entity [%1]").arg(descriptiveStatus()); } 
+	
+	QString descriptiveStatus() const {
+		switch(status()) {
+		case(Entity::New): return tr("New");
+		case(Entity::Dirty): return tr("Dirty");
+		case(Entity::Clean): return tr("Clean");
+		default: return tr("Unknowne");
+		}
+	}
 signals:
 	void dataChanged();
 public slots:
-	void onDataChanged();
-protected:
-	virtual void createOrUpdate();
-	virtual void create();
-	virtual void update();
+	virtual void onDataChanged();
 	virtual void setStatus(const Entity::States& s) { _status = s; }
 private:
 	Entity(const Entity& other);

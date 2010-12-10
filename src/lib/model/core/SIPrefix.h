@@ -8,8 +8,8 @@
 
 class SIPrefix : public StandardEntity {
 	Q_OBJECT
-	Q_PROPERTY(QString symbol READ symbol WRITE setSymbol)
-	Q_PROPERTY(qreal factor READ factor WRITE setFactor)
+	Q_PROPERTY(QString symbol READ symbol WRITE setSymbol NOTIFY symbolChanged)
+	Q_PROPERTY(qreal factor READ factor WRITE setFactor NOTIFY factorChanged)
 public:
 	SIPrefix(QObject* p=0,
 			const qulonglong& id = 0, const QString& name = QString::null,
@@ -24,18 +24,24 @@ public:
 		return _factor;
 	}
 	QString toString() const {
-		return QObject::tr("Name: %1, Symbol: %2, Code: %3, Factor: %4")
+		return QObject::tr("Name: %1, Symbol: %2, Code: %3, Factor: %4 [%5]")
 		.arg(name())
 		.arg(symbol())
 		.arg(code())
-		.arg(factor());
+		.arg(factor())
+		.arg(descriptiveStatus());
 	}
 	void setSymbol(const QString& s) {
 		_symbol = s;
+		emit symbolChanged();
 	}
 	void setFactor(const qreal& r) {
 		_factor = r;
+		emit factorChanged();
 	}
+signals:
+	void symbolChanged();
+	void factorChanged();
 private:
 	SIPrefix(const SIPrefix& other);
 
