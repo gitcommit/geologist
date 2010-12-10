@@ -72,6 +72,9 @@ SET(geo_SRCS_CXX
 # files which need to be moc'd by Qt (headers)
 SET(geo_MOC_SRCS    
     app/App.h
+    app/AppDbModel.h
+    
+    lib/dbmodel/DbModel.h
     
     lib/orm/Entity.h
     lib/orm/IdentifiedEntity.h

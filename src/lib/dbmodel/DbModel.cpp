@@ -2,8 +2,8 @@
 
 #include <QtCore/QStringList>
 
-DbModel::DbModel(const QString& n) :
-	d(0) {
+DbModel::DbModel(QObject* p, const QString& n) :
+	QObject(p), d(0) {
 	d = new DbModelData;
 	setName(n);
 }

@@ -4,8 +4,9 @@
 #include <DbModel.h>
 
 class AppDbModel : public DbModel {
+	Q_OBJECT
 public:
-	AppDbModel(const QString& name = QString::null);
+	AppDbModel(QObject* p = 0, const QString& name = QString::null);
 	virtual ~AppDbModel();
 private:
 	void configure();
