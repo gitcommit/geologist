@@ -1,12 +1,12 @@
 #include <private/DbModelData.h>
 
 DbModelData::DbModelData(const QString& name) :
-	_name(name) {
+	Base(name) {
 }
 
 DbModelData::DbModelData(const DbModelData& other) :
-	QSharedData(other), _name(other.name()) {
+	Base(other) {
 }
 
-DbModelData::~DbModelData()
-{}
+DbModelData::~DbModelData() {
+}

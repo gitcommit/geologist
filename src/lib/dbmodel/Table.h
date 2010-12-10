@@ -1,13 +1,13 @@
 #ifndef TABLE_H_
 #define TABLE_H_
 
-#include <QtCore/QObject>
+#include <ModelComponent.h>
 
 #include <private/TableData.h>
 
 class Schema;
 
-class Table : public QObject {
+class Table : public ModelComponent {
 	Q_OBJECT
 public:
 	Table(Schema* schema = 0, const QString& name = QString::null);

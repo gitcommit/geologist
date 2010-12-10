@@ -6,7 +6,7 @@
 #include <Table.h>
 
 DbModel::DbModel(QObject* p, const QString& n) :
-	QObject(p), _d(0) {
+	ModelComponent(p), _d(0) {
 	_d = new DbModelData;
 	setName(n);
 }

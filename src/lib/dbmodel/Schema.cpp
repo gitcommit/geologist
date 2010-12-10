@@ -4,7 +4,7 @@
 #include <DbModel.h>
 
 Schema::Schema(DbModel* dbM, const QString& name) :
-	QObject(dbM), _d(0) {
+	ModelComponent(dbM), _d(0) {
 	_d = new SchemaData;
 	setName(name);
 }
@@ -28,4 +28,8 @@ QStringList Schema::create() const {
 	QStringList ret;
 	ret.append(QString("CREATE SCHEMA %1;").arg(name()));
 	return ret;
+}
+
+DbModel* Schema::dbModel() {
+	return qobject_cast<DbModel*>(parent());
 }

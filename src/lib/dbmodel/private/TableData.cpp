@@ -1,11 +1,11 @@
 #include <private/TableData.h>
 
 TableData::TableData(const QString& name) :
-	_name(name) {
+	Base(name) {
 }
 
 TableData::TableData(const TableData& other) :
-	QSharedData(other), _name(other._name) {
+	Base(other) {
 }
 
 TableData::~TableData() {

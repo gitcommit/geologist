@@ -1,11 +1,11 @@
 #include <private/SchemaData.h>
 
 SchemaData::SchemaData(const QString& name) :
-	_name(name) {
+	Base(name) {
 }
 
 SchemaData::SchemaData(const SchemaData& other) :
-	QSharedData(other), _name(other._name) {
+	Base(other) {
 }
 
 SchemaData::~SchemaData() {

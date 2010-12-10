@@ -5,7 +5,7 @@
 #include <Schema.h>
 
 Table::Table(Schema* schema, const QString& name) :
-	QObject(schema), _d(0) {
+	ModelComponent(schema), _d(0) {
 	_d = new TableData;
 	setName(name);
 }

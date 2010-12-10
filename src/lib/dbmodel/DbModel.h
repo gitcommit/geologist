@@ -1,13 +1,14 @@
 #ifndef DBMODEL_H_
 #define DBMODEL_H_
 
-#include <QtCore/QObject>
+#include <ModelComponent.h>
+
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QString>
 
 #include <private/DbModelData.h>
 
-class DbModel: public QObject {
+class DbModel: public ModelComponent {
 	Q_OBJECT
 public:
 	DbModel(QObject* p = 0, const QString& name = QString::null);
