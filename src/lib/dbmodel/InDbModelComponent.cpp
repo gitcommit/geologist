@@ -8,3 +8,7 @@ InDbModelComponent::InDbModelComponent(DbModel* m) :
 
 InDbModelComponent::~InDbModelComponent() {
 }
+
+DbModel* InDbModelComponent::dbModel() const {
+	return qobject_cast<DbModel*>(parent());
+}

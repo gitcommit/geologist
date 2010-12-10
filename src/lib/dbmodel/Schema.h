@@ -18,8 +18,6 @@ public:
 	QString name() const;
 	QString qualifiedName() const;
 	QStringList create() const;
-	
-	DbModel* dbModel();
 private:
 	QExplicitlySharedDataPointer<SchemaData> _d;
 };

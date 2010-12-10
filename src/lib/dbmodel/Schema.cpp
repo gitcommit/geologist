@@ -30,10 +30,6 @@ QStringList Schema::create() const {
 	return ret;
 }
 
-DbModel* Schema::dbModel() {
-	return qobject_cast<DbModel*>(parent());
-}
-
 QString Schema::qualifiedName() const {
 	return name();
 }

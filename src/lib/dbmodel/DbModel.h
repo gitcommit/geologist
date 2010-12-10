@@ -20,6 +20,7 @@ public:
 	QString qualifiedName() const;
 	virtual QStringList create() const;
 protected:
+	virtual QStringList createDataTypes() const;
 	virtual QStringList createSchemas() const;
 	virtual QStringList createTables() const;
 private:

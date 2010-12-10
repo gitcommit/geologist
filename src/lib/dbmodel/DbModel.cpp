@@ -4,6 +4,7 @@
 
 #include <Schema.h>
 #include <Table.h>
+#include <DataType.h>
 
 DbModel::DbModel(QObject* p, const QString& n) :
 	ModelComponent(p), _d(0) {
@@ -17,6 +18,15 @@ DbModel::DbModel(const DbModel& other) :
 }
 
 DbModel::~DbModel() {
+}
+
+QStringList DbModel::createDataTypes() const {
+	QStringList ret;
+	DataTypeList lst = findChildren<DataType*>();
+	for (DataTypeList::const_iterator i = lst.begin(); i != lst.end(); i++) {
+		ret.append((*i)->create());
+	}
+	return ret;
 }
 
 QStringList DbModel::createSchemas() const {
@@ -40,6 +50,7 @@ QStringList DbModel::createTables() const {
 QStringList DbModel::create() const {
 	QStringList ret;
 	ret.append(QString("-- CREATE DATABASE %1").arg(name()));
+	ret.append(createDataTypes());
 	ret.append(createSchemas());
 	ret.append(createTables());
 	return ret;
