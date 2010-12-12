@@ -1,0 +1,40 @@
+<xml version="1.0" encoding="utf-8">
+	<database name="test">
+		<data_type name="int" sql_name="INTEGER" requires_quoting="false"/>
+		<data_type name="text" sql_name="TEXT" requires_quoting="true"/>
+		<data_type name="code" sql_name="TEXT" requires_quoting="true"/>
+		<data_type name="date" sql_name="DATE" requires_quoting="true"/>
+		<data_type name="time" sql_name="TIME" requires_quoting="true"/>
+		<data_type name="timestamp" sql_name="TIMESTAMP" requires_quoting="true"/>
+		<data_type name="numeric" sql_name="NUMERIC" requires_quoting="false"/>
+		<schema name="core">
+			<sequence name="seq_si_prefixes"/>
+			<table name="si_prefixes">
+				<column name="id" type="int" nullable="false" sequence="seq_si_prefixes"/>
+				<column name="name" type="text" nullable="false" default_value="New SI Prefix"/>
+				<column name="code" type="code" nullable="true"/>
+				<column name="factor" type="numeric" nullable="false"/>
+				<column name="description" type="text" nullable="false" default_value=""/>
+				<constraint type="primary key">
+					<constraint_column name="id"/>
+				</constraint>
+				<constraint type="unique">
+					<constraint_column name="name"/>
+				</constraint>
+				<constraint type="unique">
+					<constrant_column name="code"/>
+				</constraint>
+				<constraint type="prevent_value" value="0.0">
+					<constraint_column name="factor"/>
+				</constraint>
+				<constraint type="prevent_value" value="">
+					<constraint_column name="name"/>
+				</constraint>
+			</table>
+			<table name="units">
+			</table>
+			<table name="unit_conversion">
+			</table>
+		</schema>
+	</database>
+</xml>

@@ -1,20 +1,34 @@
 #include <DbModel.h>
 
 #include <QtCore/QStringList>
+#include <QtCore/QDebug>
 
 #include <Schema.h>
 #include <Table.h>
 #include <DataType.h>
+#include <Sequence.h>
+#include <TableColumn.h>
+#include <XMLParser.h>
 
 DbModel::DbModel(QObject* p, const QString& n) :
 	ModelComponent(p), _d(0) {
 	_d = new DbModelData;
+	_parser = new XMLParser(this);
+	connect(_parser, SIGNAL(createDataType(const QString&, const QString&, const bool&)), this, SLOT(createDataType(const QString&, const QString&, const bool&)));
+	connect(_parser, SIGNAL(createSchema(const QString&)), this, SLOT(createSchema(const QString&)));
+	connect(_parser, SIGNAL(createSequence(const QString&, const QString&)), this, SLOT(createSequence(const QString&, const QString&)));
+	connect(_parser, SIGNAL(createTable(const QString&, const QString&)), this, SLOT(createTable(const QString&, const QString&)));
+	connect(_parser, SIGNAL(createTableColumn(const QString&, const QString&, const QString&, const QString&)), this, SLOT(createTableColumn(const QString&, const QString&, const QString&, const QString&)));
 	setName(n);
 }
 
 DbModel::DbModel(const DbModel& other) :
 	_d(other._d) {
 
+}
+
+void DbModel::loadFromFile(const QString& fn) {
+	_parser->loadFromFile(fn);
 }
 
 DbModel::~DbModel() {
@@ -43,6 +57,25 @@ QStringList DbModel::createTables() const {
 	TableList lst = findChildren<Table*>();
 	for(TableList::const_iterator i = lst.begin(); i != lst.end(); i++) {
 		ret.append((*i)->create());
+		ret.append(tr("-- %1 columns omitted.").arg((*i)->findChildren<TableColumn*>().size()));
+	}
+	return ret;
+}
+
+QStringList DbModel::createSequences() const {
+	QStringList ret;
+	SequenceList lst = findChildren<Sequence*>();
+	for(SequenceList::const_iterator i = lst.begin(); i != lst.end(); i++) {
+		ret.append((*i)->create());
+	}
+	return ret;
+}
+
+QStringList DbModel::createTableColumns() const {
+	QStringList ret;
+	TableColumnList lst = findChildren<TableColumn*>();
+	for (TableColumnList::const_iterator i = lst.begin(); i != lst.end(); i++) {
+		ret.append((*i)->create());
 	}
 	return ret;
 }
@@ -52,11 +85,14 @@ QStringList DbModel::create() const {
 	ret.append(QString("-- CREATE DATABASE %1").arg(name()));
 	ret.append(createDataTypes());
 	ret.append(createSchemas());
+	ret.append(createSequences());
 	ret.append(createTables());
+	ret.append(createTableColumns());
 	return ret;
 }
 
 void DbModel::setName(const QString& n) {
+	setObjectName(n);
 	_d->setName(n);
 }
 
@@ -66,4 +102,32 @@ QString DbModel::name() const {
 
 QString DbModel::qualifiedName() const {
 	return name();
+}
+
+Schema* DbModel::schema(const QString& name) const {
+	return findChild<Schema*>(name);
+}
+
+DataType* DbModel::dataType(const QString& name) const {
+	return findChild<DataType*>(name);
+}
+
+void DbModel::createSchema(const QString& name) {
+	(void) new Schema(this, name);
+}
+
+void DbModel::createSequence(const QString& schemaName, const QString& sequenceName) {
+	(void) new Sequence(schema(schemaName), sequenceName);
+}
+
+void DbModel::createTable(const QString& schemaName, const QString& tableName) {
+	(void) new Table(schema(schemaName), tableName);
+}
+
+void DbModel::createTableColumn(const QString& schemaName, const QString& tableName, const QString& colName, const QString& typeName) {
+	(void) new TableColumn(schema(schemaName)->table(tableName), colName, dataType(typeName));
+}
+
+void DbModel::createDataType(const QString& name, const QString& sqlName, const bool& requiresQuoting) {
+	DataType* t = new DataType(this, name, sqlName, requiresQuoting);
 }

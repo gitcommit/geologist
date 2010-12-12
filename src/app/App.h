@@ -4,7 +4,7 @@
 #include <QtGui/QApplication>
 #include <QtCore/QString>
 
-#include <AppDbModel.h>
+#include <DbModel.h>
 
 #include <ConnectionData.h>
 
@@ -57,7 +57,7 @@ class App: public QApplication {
 	SIPrefixMapper* siPrefixMapper_;
 	qlonglong lastQueryId_;
 	qlonglong currentUserQueryId_;
-	AppDbModel _dbModel;
+	DbModel _dbModel;
 };
 
 #endif

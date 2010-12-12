@@ -18,6 +18,7 @@ Table::~Table() {
 }
 
 void Table::setName(const QString& n) {
+	setObjectName(n);
 	_d->setName(n);
 }
 

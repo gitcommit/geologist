@@ -1,7 +1,9 @@
 #include <Schema.h>
 
 #include <QtCore/QStringList>
+
 #include <DbModel.h>
+#include <Table.h>
 
 Schema::Schema(DbModel* dbM, const QString& name) :
 	InDbModelComponent(dbM), _d(0) {
@@ -17,6 +19,7 @@ Schema::~Schema() {
 }
 
 void Schema::setName(const QString& n) {
+	setObjectName(n);
 	_d->setName(n);
 }
 
@@ -32,4 +35,8 @@ QStringList Schema::create() const {
 
 QString Schema::qualifiedName() const {
 	return name();
+}
+
+Table* Schema::table(const QString& name) const {
+	return findChild<Table*>(name);
 }

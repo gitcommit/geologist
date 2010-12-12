@@ -20,7 +20,7 @@
 
 #include <Entity.h>
 #include <Settings.h>
-#include <AppDbModel.h>
+#include <DbModel.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(TypedQuery)
@@ -56,6 +56,7 @@ void App::init() {
 	s.load(&cd_);
 	siPrefixMapper_ = new SIPrefixMapper(this);
 	_dbModel.setName(DB_NAME);
+	_dbModel.loadFromFile(DB_CONFIG_FILE);
 	  
 	connect(&dbThread_, SIGNAL(queryCompleted(const TypedQuery&)), siPrefixMapper(), SLOT(onQueryCompleted(const TypedQuery&)));
 	connect(siPrefixMapper(), SIGNAL(loaded(const QList<SIPrefix*>&)), this, SLOT(onSIPrefixesLoaded(const QList<SIPrefix*>&)));
