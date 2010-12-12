@@ -15,4 +15,5 @@ public:
 private:
 	DataType* _dataType;
 };
+
 #endif /*TABLECOLUMNDATA_H_*/

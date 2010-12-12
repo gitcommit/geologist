@@ -3,6 +3,8 @@
 #include <QtCore/QStringList>
 
 #include <Schema.h>
+#include <TableColumn.h>
+#include <PrimaryKeyConstraint.h>
 
 Table::Table(Schema* schema, const QString& name) :
 	InSchemaModelComponent(schema), _d(0) {
@@ -34,4 +36,16 @@ QStringList Table::create() const {
 
 QString Table::qualifiedName() const {
 	return QString("%1.%2").arg(schema()->qualifiedName()).arg(name());
+}
+
+PrimaryKeyConstraint* Table::primaryKeyConstraint() const {
+	return findChild<PrimaryKeyConstraint*>();
+}
+
+bool Table::hasPrimaryKeyConstraint() const {
+	return (0 != primaryKeyConstraint());
+}
+
+TableColumn* Table::column(const QString& name) {
+	return findChild<TableColumn*>(name);
 }

@@ -19,8 +19,8 @@ public:
 	void createSchema(const QString& name) const;
 	void createSequence(const QString& schema, const QString& name) const;
 	void createTable(const QString& schema, const QString& name) const;
-	void createTableColumn(const QString& schema, const QString& table, 
-			const QString& columnName, const QString& dataType) const;
+	void createTableColumn(const QString& schema, const QString& table, const QString& columnName, const QString& dataType) const;
+	void createPrimaryKeyConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames) const;
 
 protected:
 	virtual void parse();
@@ -28,12 +28,13 @@ protected:
 	virtual void createSchemata(const QDomNodeList& schemata) const;
 	virtual void createSequences(const QString& schemaName, const QDomNodeList& sequences) const;
 	virtual void createTables(const QString& schemaName, const QDomNodeList& tables) const;
-	virtual void createTableColumns(const QString& schemaName, 
-			const QString& tableName, const QDomNodeList& cols) const;
-
+	virtual void createTableColumns(const QString& schemaName, const QString& tableName, const QDomNodeList& cols) const;
+	virtual void createPrimaryKeyConstraints(const QString& schemaName, const QString& tableName, const QDomNodeList& pk) const;
+	
 	QDomElement documentElement() const;
 	QDomElement dbElement() const;
 	QDomElement dataTypeElementByName(const QString& name) const;
+	QStringList constraintColumnNames(const QDomNode& constraintNode) const;
 	
 	virtual bool stringToBool(const QString& str) const;
 private:

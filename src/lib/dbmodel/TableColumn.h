@@ -5,7 +5,6 @@
 
 #include <private/TableColumnData.h>
 
-class Schema;
 class DataType;
 
 class TableColumn : public InTableModelComponent {

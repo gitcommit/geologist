@@ -8,12 +8,15 @@
 #include <DataType.h>
 #include <Sequence.h>
 #include <TableColumn.h>
+#include <PrimaryKeyConstraint.h>
+
 #include <XMLParser.h>
 
 DbModel::DbModel(QObject* p, const QString& n) :
 	ModelComponent(p), _d(0) {
 	_d = new DbModelData;
 	_parser = new XMLParser(this);
+	connect(_parser, SIGNAL(createPrimaryKeyConstraint(const QString&, const QString&, const QString&, const QStringList&)), this, SLOT(createPrimaryKeyConstraint(const QString&, const QString&, const QString&, const QStringList&)));
 	connect(_parser, SIGNAL(createDataType(const QString&, const QString&, const bool&)), this, SLOT(createDataType(const QString&, const QString&, const bool&)));
 	connect(_parser, SIGNAL(createSchema(const QString&)), this, SLOT(createSchema(const QString&)));
 	connect(_parser, SIGNAL(createSequence(const QString&, const QString&)), this, SLOT(createSequence(const QString&, const QString&)));
@@ -80,6 +83,15 @@ QStringList DbModel::createTableColumns() const {
 	return ret;
 }
 
+QStringList DbModel::createPrimaryKeyConstraints() const {
+	QStringList ret;
+	PrimaryKeyConstraintList lst = findChildren<PrimaryKeyConstraint*>();
+	for (PrimaryKeyConstraintList::const_iterator i = lst.begin(); i != lst.end(); i++) {
+		ret.append((*i)->create());
+	}
+	return ret;
+}
+
 QStringList DbModel::create() const {
 	QStringList ret;
 	ret.append(QString("-- CREATE DATABASE %1").arg(name()));
@@ -88,6 +100,7 @@ QStringList DbModel::create() const {
 	ret.append(createSequences());
 	ret.append(createTables());
 	ret.append(createTableColumns());
+	ret.append(createPrimaryKeyConstraints());
 	return ret;
 }
 
@@ -129,5 +142,12 @@ void DbModel::createTableColumn(const QString& schemaName, const QString& tableN
 }
 
 void DbModel::createDataType(const QString& name, const QString& sqlName, const bool& requiresQuoting) {
-	DataType* t = new DataType(this, name, sqlName, requiresQuoting);
+	(void) new DataType(this, name, sqlName, requiresQuoting);
+}
+
+void DbModel::createPrimaryKeyConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames) {
+	TableConstraint* c = new PrimaryKeyConstraint(schema(schemaName)->table(tableName), name);
+	for (QStringList::const_iterator i = columnNames.begin(); i != columnNames.end(); i++) {
+		c->appendColumn(schema(schemaName)->table(tableName)->column(*i));
+	}
 }

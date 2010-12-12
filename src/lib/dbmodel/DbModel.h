@@ -33,12 +33,15 @@ public slots:
 	void createSequence(const QString& schemaName, const QString& sequenceName);
 	void createTable(const QString& schemaName, const QString& tableName);
 	void createTableColumn(const QString& schemaName, const QString& tableName, const QString& colName, const QString& typeName);
+	void createPrimaryKeyConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames);
+	
 protected:
 	virtual QStringList createDataTypes() const;
 	virtual QStringList createSequences() const;
 	virtual QStringList createSchemas() const;
 	virtual QStringList createTables() const;
 	virtual QStringList createTableColumns() const;
+	virtual QStringList createPrimaryKeyConstraints() const;
 private:
 	QExplicitlySharedDataPointer<DbModelData> _d;
 	XMLParser* _parser;

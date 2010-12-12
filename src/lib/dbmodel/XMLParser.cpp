@@ -1,6 +1,7 @@
 #include <XMLParser.h>
 
 #include <QtCore/QFile>
+#include <QtCore/QStringList>
 #include <QtCore/QDebug>
 #include <QtGui/QApplication>
 
@@ -38,7 +39,8 @@ void XMLParser::createDataTypes(const QDomNodeList& types) const {
 		QDomElement e = types.item(i).toElement();
 		Q_ASSERT(e.hasAttribute("name"));
 		Q_ASSERT(e.hasAttribute("sql_name"));
-		emit createDataType(e.attribute("name"), e.attribute("sql_name"), stringToBool(e.attribute("requires_quoting", "false")));
+		emit createDataType(e.attribute("name"), e.attribute("sql_name"),
+				stringToBool(e.attribute("requires_quoting", "false")));
 	}
 }
 
@@ -49,12 +51,31 @@ void XMLParser::createSequences(const QString& schemaName,
 	}
 }
 
+QStringList XMLParser::constraintColumnNames(const QDomNode& constraintNode) const {
+	QStringList ret;
+	QDomNodeList lst = constraintNode.toElement().elementsByTagName("constraint_column");
+	for (int i = 0; i != lst.size(); i++) {
+		ret.append(nameAttribute(lst.item(i)));
+	}
+	return ret;
+}
+	
+void XMLParser::createPrimaryKeyConstraints(const QString& schemaName,
+		const QString& tableName, const QDomNodeList& pk) const {
+	Q_ASSERT(pk.size() <= 1);
+	for (int i = 0; i != pk.size(); i++) {
+		emit createPrimaryKeyConstraint(schemaName, tableName, 
+				nameAttribute(pk.item(i)), constraintColumnNames(pk.item(i)));
+	}
+}
+
 void XMLParser::createTables(const QString& schemaName,
 		const QDomNodeList& tables) const {
 	for (int i = 0; i != tables.size(); i++) {
 		QString tableName = nameAttribute(tables.item(i));
 		emit createTable(schemaName, tableName);
 		createTableColumns(schemaName, tableName, tables.item(i).toElement().elementsByTagName("column"));
+		createPrimaryKeyConstraints(schemaName, tableName, tables.item(i).toElement().elementsByTagName("primary_key_constraint"));
 	}
 }
 

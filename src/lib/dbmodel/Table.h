@@ -6,6 +6,8 @@
 #include <private/TableData.h>
 
 class Schema;
+class TableColumn;
+class PrimaryKeyConstraint;
 
 class Table : public InSchemaModelComponent {
 	Q_OBJECT
@@ -15,9 +17,13 @@ public:
 	virtual ~Table();
 
 	void setName(const QString& n);
+	PrimaryKeyConstraint* primaryKeyConstraint() const;
+	bool hasPrimaryKeyConstraint() const;
+	TableColumn* column(const QString& name);
 	QString name() const;
 	virtual QString qualifiedName() const;
 	QStringList create() const;
+	
 private:
 	QExplicitlySharedDataPointer<TableData> _d;
 };

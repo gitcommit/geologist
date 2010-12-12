@@ -15,9 +15,9 @@
 				<column name="code" type="code" nullable="true"/>
 				<column name="factor" type="numeric" nullable="false"/>
 				<column name="description" type="text" nullable="false" default_value=""/>
-				<constraint type="primary key">
+				<primary_key_constraint name="pk_si_prefixes">
 					<constraint_column name="id"/>
-				</constraint>
+				</primary_key_constraint>
 				<constraint type="unique">
 					<constraint_column name="name"/>
 				</constraint>
