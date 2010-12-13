@@ -9,6 +9,8 @@
 #include <Sequence.h>
 #include <TableColumn.h>
 #include <PrimaryKeyConstraint.h>
+#include <UniqueConstraint.h>
+#include <CheckConstraint.h>
 
 #include <XMLParser.h>
 
@@ -17,6 +19,8 @@ DbModel::DbModel(QObject* p, const QString& n) :
 	_d = new DbModelData;
 	_parser = new XMLParser(this);
 	connect(_parser, SIGNAL(createPrimaryKeyConstraint(const QString&, const QString&, const QString&, const QStringList&)), this, SLOT(createPrimaryKeyConstraint(const QString&, const QString&, const QString&, const QStringList&)));
+	connect(_parser, SIGNAL(createUniqueConstraint(const QString&, const QString&, const QString&, const QStringList&)), this, SLOT(createUniqueConstraint(const QString&, const QString&, const QString&, const QStringList&)));
+	connect(_parser, SIGNAL(createCheckConstraint(const QString&, const QString&, const QString&, const QStringList&, const QString&)), this, SLOT(createCheckConstraint(const QString&, const QString&, const QString&, const QStringList&, const QString&)));
 	connect(_parser, SIGNAL(createDataType(const QString&, const QString&, const bool&)), this, SLOT(createDataType(const QString&, const QString&, const bool&)));
 	connect(_parser, SIGNAL(createSchema(const QString&)), this, SLOT(createSchema(const QString&)));
 	connect(_parser, SIGNAL(createSequence(const QString&, const QString&)), this, SLOT(createSequence(const QString&, const QString&)));
@@ -92,6 +96,24 @@ QStringList DbModel::createPrimaryKeyConstraints() const {
 	return ret;
 }
 
+QStringList DbModel::createUniqueConstraints() const {
+	QStringList ret;
+	UniqueConstraintList lst = findChildren<UniqueConstraint*>();
+	for (UniqueConstraintList::const_iterator i = lst.begin(); i != lst.end(); i++) {
+		ret.append((*i)->create());
+	}
+	return ret;
+}
+
+QStringList DbModel::createCheckConstraints() const {
+	QStringList ret;
+	CheckConstraintList lst = findChildren<CheckConstraint*>();
+	for (CheckConstraintList::const_iterator i = lst.begin(); i != lst.end(); i++) {
+		ret.append((*i)->create());
+	}
+	return ret;
+}
+
 QStringList DbModel::create() const {
 	QStringList ret;
 	ret.append(QString("-- CREATE DATABASE %1").arg(name()));
@@ -101,6 +123,8 @@ QStringList DbModel::create() const {
 	ret.append(createTables());
 	ret.append(createTableColumns());
 	ret.append(createPrimaryKeyConstraints());
+	ret.append(createUniqueConstraints());
+	ret.append(createCheckConstraints());
 	return ret;
 }
 
@@ -147,6 +171,20 @@ void DbModel::createDataType(const QString& name, const QString& sqlName, const 
 
 void DbModel::createPrimaryKeyConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames) {
 	TableConstraint* c = new PrimaryKeyConstraint(schema(schemaName)->table(tableName), name);
+	for (QStringList::const_iterator i = columnNames.begin(); i != columnNames.end(); i++) {
+		c->appendColumn(schema(schemaName)->table(tableName)->column(*i));
+	}
+}
+
+void DbModel::createUniqueConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames) {
+	TableConstraint* c = new UniqueConstraint(schema(schemaName)->table(tableName), name);
+	for (QStringList::const_iterator i = columnNames.begin(); i != columnNames.end(); i++) {
+		c->appendColumn(schema(schemaName)->table(tableName)->column(*i));
+	}
+}
+
+void DbModel::createCheckConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames, const QString& definition) {
+	TableConstraint* c = new CheckConstraint(schema(schemaName)->table(tableName), name, definition);
 	for (QStringList::const_iterator i = columnNames.begin(); i != columnNames.end(); i++) {
 		c->appendColumn(schema(schemaName)->table(tableName)->column(*i));
 	}

@@ -14,12 +14,15 @@ XMLParser::~XMLParser() {
 
 void XMLParser::loadFromFile(const QString& fileName) {
 	QFile f(fileName);
+	QString msg;
+	int line;
+	int col;
 	if (!f.open(QIODevice::ReadOnly)) {
 		qFatal(tr("Could not open file %1 for reading.").arg(fileName).toLocal8Bit());
 	}
-	if (!_doc.setContent(&f)) {
+	if (!_doc.setContent(&f, &msg, &line, &col)) {
 		f.close();
-		qFatal(tr("Could not read XML from %1.").arg(fileName).toLocal8Bit());
+		qFatal(tr("Could not read XML from %1: %2 at %3:%4").arg(fileName).arg(msg).arg(line).arg(col).toLocal8Bit());
 	}
 	f.close();
 	parse();
@@ -69,6 +72,23 @@ void XMLParser::createPrimaryKeyConstraints(const QString& schemaName,
 	}
 }
 
+void XMLParser::createUniqueConstraints(const QString& schemaName,
+		const QString& tableName, const QDomNodeList& nodes) const {
+	for (int i = 0; i != nodes.size(); i++) {
+		emit createUniqueConstraint(schemaName, tableName, 
+				nameAttribute(nodes.item(i)), constraintColumnNames(nodes.item(i)));
+	}
+}
+
+void XMLParser::createCheckConstraints(const QString& schemaName,
+		const QString& tableName, const QDomNodeList& nodes) const {
+	for (int i = 0; i != nodes.size(); i++) {
+		emit createCheckConstraint(schemaName, tableName, 
+				nameAttribute(nodes.item(i)), constraintColumnNames(nodes.item(i)),
+				nodes.item(i).toElement().attribute("definition"));
+	}
+}
+
 void XMLParser::createTables(const QString& schemaName,
 		const QDomNodeList& tables) const {
 	for (int i = 0; i != tables.size(); i++) {
@@ -76,6 +96,8 @@ void XMLParser::createTables(const QString& schemaName,
 		emit createTable(schemaName, tableName);
 		createTableColumns(schemaName, tableName, tables.item(i).toElement().elementsByTagName("column"));
 		createPrimaryKeyConstraints(schemaName, tableName, tables.item(i).toElement().elementsByTagName("primary_key_constraint"));
+		createUniqueConstraints(schemaName, tableName, tables.item(i).toElement().elementsByTagName("unique_constraint"));
+		createCheckConstraints(schemaName, tableName, tables.item(i).toElement().elementsByTagName("check_constraint"));
 	}
 }
 

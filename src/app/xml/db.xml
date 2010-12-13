@@ -18,18 +18,18 @@
 				<primary_key_constraint name="pk_si_prefixes">
 					<constraint_column name="id"/>
 				</primary_key_constraint>
-				<constraint type="unique">
+				<unique_constraint name="u_si_prefixes_name">
 					<constraint_column name="name"/>
-				</constraint>
-				<constraint type="unique">
-					<constrant_column name="code"/>
-				</constraint>
-				<constraint type="prevent_value" value="0.0">
+				</unique_constraint>
+				<unique_constraint name="u_si_prefixes_code">
+					<constraint_column name="code"/>
+				</unique_constraint>
+				<check_constraint name="chk_si_prefixes_factor_non_neutral" definition="!= 0.0">
 					<constraint_column name="factor"/>
-				</constraint>
-				<constraint type="prevent_value" value="">
+				</check_constraint>
+				<check_constraint name="chk_si_prefixes_name_not_empty" definition="!=''">
 					<constraint_column name="name"/>
-				</constraint>
+				</check_constraint>
 			</table>
 			<table name="units">
 			</table>

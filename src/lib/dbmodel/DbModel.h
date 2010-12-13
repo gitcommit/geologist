@@ -34,6 +34,8 @@ public slots:
 	void createTable(const QString& schemaName, const QString& tableName);
 	void createTableColumn(const QString& schemaName, const QString& tableName, const QString& colName, const QString& typeName);
 	void createPrimaryKeyConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames);
+	void createUniqueConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames);
+	void createCheckConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames, const QString& definition);
 	
 protected:
 	virtual QStringList createDataTypes() const;
@@ -42,6 +44,8 @@ protected:
 	virtual QStringList createTables() const;
 	virtual QStringList createTableColumns() const;
 	virtual QStringList createPrimaryKeyConstraints() const;
+	virtual QStringList createUniqueConstraints() const;
+	virtual QStringList createCheckConstraints() const;
 private:
 	QExplicitlySharedDataPointer<DbModelData> _d;
 	XMLParser* _parser;
