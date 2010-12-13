@@ -33,7 +33,7 @@ public:
 		}
 		return QString("CLOSE %1;").arg(n);
 	}
-		
+	
 signals:
 	void queryRequest(const TypedQuery& q);
 public slots:

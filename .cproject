@@ -26,7 +26,7 @@
 </builder>
 <tool id="cdt.managedbuild.tool.macosx.c.linker.macosx.exe.debug.1434300087" name="MacOS X C Linker" superClass="cdt.managedbuild.tool.macosx.c.linker.macosx.exe.debug"/>
 <tool id="cdt.managedbuild.tool.macosx.cpp.linker.macosx.exe.debug.1467780156" name="MacOS X C++ Linker" superClass="cdt.managedbuild.tool.macosx.cpp.linker.macosx.exe.debug">
-<option id="macosx.cpp.link.option.paths.646811284" name="Library search path (-L)" superClass="macosx.cpp.link.option.paths" valueType="libPaths"/>
+<option id="macosx.cpp.link.option.paths.646811284" name="Library search path (-L)" superClass="macosx.cpp.link.option.paths"/>
 <inputType id="cdt.managedbuild.tool.macosx.cpp.linker.input.1765233338" superClass="cdt.managedbuild.tool.macosx.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -94,13 +94,14 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
+<entry excluding="private" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/model/core"/>
+<entry excluding="private" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/lib/dbmodel"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/app"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/db"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/model/core/private"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/orm"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/gui/widgets"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/gui/db"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/model/core"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/db"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/app"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/orm"/>
-<entry excluding="private" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/lib/dbmodel"/>
 <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/lib/dbmodel/private"/>
 </sourceEntries>
 </configuration>

@@ -31,7 +31,7 @@ Q_DECLARE_METATYPE(QSqlRecord)
 Q_DECLARE_METATYPE(QList<QSqlRecord>)
 
 App::App(int argc, char** argv)
-: QApplication(argc, argv), siPrefixMapper_(0), lastQueryId_(0), _dbModel(0)
+: QApplication(argc, argv), _siPrefixMapper(0), lastQueryId_(0), _dbModel(0)
 {
   setApplicationVersion(APP_VERSION);
   setApplicationName(APP_NAME);
@@ -54,7 +54,7 @@ void App::registerMetatypes() {
 void App::init() {
 	Settings s(this);
 	s.load(&cd_);
-	siPrefixMapper_ = new SIPrefixMapper(this);
+	_siPrefixMapper = new SIPrefixMapper(this);
 	_dbModel.setName(DB_NAME);
 	_dbModel.loadFromFile(DB_CONFIG_FILE);
 	  
@@ -115,7 +115,8 @@ void App::onConnected(const QString& msg) {
   */
   emit debugMessage(tr("\n-- CREATE DATABASE script --\n%1\n-- end of CREATE DATABASE script.\n")
 		  .arg(_dbModel.create().join("\n")));
-  //siPrefixMapper_->testLoad();
+  emit beginRequest();
+  _siPrefixMapper->testLoad();
 }
 
 void App::onDisconnected() {

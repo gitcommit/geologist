@@ -52,3 +52,7 @@ TableColumn* Table::column(const QString& name) {
 	}
 	return findChild<TableColumn*>(name);
 }
+
+TableColumnList Table::columns() const {
+	return findChildren<TableColumn*>();
+}

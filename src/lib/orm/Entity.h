@@ -4,6 +4,11 @@
 #include <QtCore/QMetaObject>
 #include <QtCore/QObject>
 
+class App;
+
+class Mapper;
+class EntityData;
+
 class Entity : public QObject {
 	Q_OBJECT
 	Q_PROPERTY(Entity::States status READ status WRITE setStatus)
@@ -14,6 +19,7 @@ public:
 		Clean
 	};
 	Entity(QObject* p = 0);
+	Entity(const Entity& other);
 	virtual ~Entity();
 
 	Entity::States status() const { return _status; }
@@ -32,8 +38,14 @@ signals:
 public slots:
 	virtual void onDataChanged();
 	virtual void setStatus(const Entity::States& s) { _status = s; }
+protected:
+	App* app() const;
+	virtual Mapper* mapper() const = 0;
+	EntityData* data() const { return _d; }
+	void setData(EntityData* d) { _d = d; }
+	bool hasData() const { return (0 != _d); }
+	EntityData* _d;
 private:
-	Entity(const Entity& other);
 	Entity::States _status;
 };
 

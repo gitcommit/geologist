@@ -22,7 +22,7 @@ class App: public QApplication {
 	virtual ~App();
 	void init();
 	SIPrefixMapper* siPrefixMapper() const {
-		return siPrefixMapper_;
+		return _siPrefixMapper;
 	}
 	qlonglong nextQueryId() { lastQueryId_++; return lastQueryId_; }
 	
@@ -54,7 +54,7 @@ class App: public QApplication {
 	QueryThread dbThread_;
 
 	ConnectionData cd_;
-	SIPrefixMapper* siPrefixMapper_;
+	SIPrefixMapper* _siPrefixMapper;
 	qlonglong lastQueryId_;
 	qlonglong currentUserQueryId_;
 	DbModel _dbModel;

@@ -137,6 +137,7 @@ QStringList DbModel::create() const {
 	ret.append(createUniqueConstraints());
 	ret.append(createCheckConstraints());
 	ret.append(createForeignKeyConstraints());
+	
 	return ret;
 }
 

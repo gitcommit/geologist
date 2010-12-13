@@ -66,13 +66,17 @@ SET(geo_SRCS_CXX
     app/tools.cpp
     
     lib/orm/Entity.cpp
+    lib/orm/EntityData.cpp
     lib/orm/IdentifiedEntity.cpp
+    lib/orm/IdentifiedEntityData.cpp
     lib/orm/StandardEntity.cpp
+    lib/orm/StandardEntityData.cpp
     lib/orm/Mapper.cpp
     
     lib/model/core/SIPrefix.cpp
     lib/model/core/SIPrefixMapper.cpp
-
+    lib/model/core/private/SIPrefixData.cpp
+    
     lib/db/ConnectionData.cpp
     lib/db/Connection.cpp
     lib/db/QueryThread.cpp

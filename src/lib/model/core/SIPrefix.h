@@ -6,6 +6,9 @@
 #include <QtCore/QString>
 #include <QtCore/QObject>
 
+class Mapper;
+class SIPrefixData;
+
 class SIPrefix : public StandardEntity {
 	Q_OBJECT
 	Q_PROPERTY(QString symbol READ symbol WRITE setSymbol NOTIFY symbolChanged)
@@ -16,14 +19,11 @@ public:
 			const QString& code = QString::null,
 			const QString& symbol = QString::null, const qreal& factor = 0.0,
 			const QString& description = QString::null);
+	SIPrefix(const SIPrefix& other);
 	virtual ~SIPrefix();
-	QString symbol() const {
-		return _symbol;
-	}
-	qreal factor() const {
-		return _factor;
-	}
-	QString toString() const {
+	QString symbol() const;
+	qreal factor() const;
+	virtual QString toString() const {
 		return QObject::tr("Name: %1, Symbol: %2, Code: %3, Factor: %4 [%5]")
 		.arg(name())
 		.arg(symbol())
@@ -31,22 +31,14 @@ public:
 		.arg(factor())
 		.arg(descriptiveStatus());
 	}
-	void setSymbol(const QString& s) {
-		_symbol = s;
-		emit symbolChanged();
-	}
-	void setFactor(const qreal& r) {
-		_factor = r;
-		emit factorChanged();
-	}
+	void setSymbol(const QString& s);
+	void setFactor(const qreal& r);
+	Mapper* mapper() const;
 signals:
-	void symbolChanged();
-	void factorChanged();
-private:
-	SIPrefix(const SIPrefix& other);
-
-	QString _symbol;
-	qreal _factor;
+	void symbolChanged(const QString& newSymbol);
+	void factorChanged(const qreal& newFacto);
+protected:
+	SIPrefixData* siPrefixData() const;
 };
 
 #endif SI_PREFIX_H

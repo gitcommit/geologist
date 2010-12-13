@@ -5,6 +5,8 @@
 
 #include <private/TableData.h>
 
+#include <TableColumn.h>
+
 class Schema;
 class TableColumn;
 class PrimaryKeyConstraint;
@@ -20,6 +22,7 @@ public:
 	PrimaryKeyConstraint* primaryKeyConstraint() const;
 	bool hasPrimaryKeyConstraint() const;
 	TableColumn* column(const QString& name);
+	TableColumnList columns() const;
 	QString name() const;
 	virtual QString qualifiedName() const;
 	QStringList create() const;

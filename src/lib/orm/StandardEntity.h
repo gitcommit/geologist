@@ -3,6 +3,8 @@
 
 #include <IdentifiedEntity.h>
 
+class StandardEntityData;
+
 class StandardEntity : public IdentifiedEntity
 {
 	Q_OBJECT
@@ -15,23 +17,20 @@ public:
 			const QString& name = QString::null,
 			const QString& code = QString::null,
 			const QString& description = QString::null);
-	virtual ~StandardEntity();
-	virtual void setName(const QString& n) { _name = n; emit nameChanged(); }
-	virtual void setCode(const QString& c) { _code = c; emit codeChanged(); }
-	virtual void setDescription(const QString& d) { _description = d; emit descriptionChanged(); }
-	QString name() const { return _name; }
-	QString code() const { return _code; }
-	QString description() const { return _description; }
-	
-signals:
-	void nameChanged();
-	void codeChanged();
-	void descriptionChanged();
-private:
 	StandardEntity(const StandardEntity& other);
-	QString _name;
-	QString _code;
-	QString _description;
+	virtual ~StandardEntity();
+	virtual void setName(const QString& n);
+	virtual void setCode(const QString& c);
+	virtual void setDescription(const QString& d);
+	QString name() const;
+	QString code() const;
+	QString description() const;
+protected:
+	StandardEntityData* standardEntityData() const;
+signals:
+	void nameChanged(const QString& newName);
+	void codeChanged(const QString& newCode);
+	void descriptionChanged(const QString& newDescription);
 };
 
 #endif /*STANDARDENTITY_H_*/
