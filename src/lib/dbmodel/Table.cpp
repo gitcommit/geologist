@@ -47,5 +47,8 @@ bool Table::hasPrimaryKeyConstraint() const {
 }
 
 TableColumn* Table::column(const QString& name) {
+	if (!findChild<TableColumn*>(name)) {
+		qFatal(tr("No Column %1 in Table %2").arg(name).arg(qualifiedName()).toLocal8Bit());
+	}
 	return findChild<TableColumn*>(name);
 }

@@ -23,7 +23,10 @@ public:
 	void createPrimaryKeyConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames) const;
 	void createUniqueConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames) const;
 	void createCheckConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames, const QString& check) const;
-
+	void createForeignKeyConstraint(const QString& name,
+									const QString& schemaName, const QString& tableName, const QStringList& columnNames,
+									const QString& referencedSchemaName, const QString& referencedTableName, const QStringList& referencedColumnNames) const;
+	
 protected:
 	virtual void parse();
 	virtual void createDataTypes(const QDomNodeList& types) const;
@@ -34,6 +37,7 @@ protected:
 	virtual void createPrimaryKeyConstraints(const QString& schemaName, const QString& tableName, const QDomNodeList& pk) const;
 	virtual void createUniqueConstraints(const QString& schemaName, const QString& tableName, const QDomNodeList& un) const;
 	virtual void createCheckConstraints(const QString& schemaName, const QString& tableName, const QDomNodeList& un) const;
+	virtual void createForeignKeyConstraints(const QString& schemaName, const QString& tableName, const QDomNodeList& un) const;
 	
 	QDomElement documentElement() const;
 	QDomElement dbElement() const;

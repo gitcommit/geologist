@@ -11,6 +11,7 @@
 #include <PrimaryKeyConstraint.h>
 #include <UniqueConstraint.h>
 #include <CheckConstraint.h>
+#include <ForeignKeyConstraint.h>
 
 #include <XMLParser.h>
 
@@ -21,6 +22,7 @@ DbModel::DbModel(QObject* p, const QString& n) :
 	connect(_parser, SIGNAL(createPrimaryKeyConstraint(const QString&, const QString&, const QString&, const QStringList&)), this, SLOT(createPrimaryKeyConstraint(const QString&, const QString&, const QString&, const QStringList&)));
 	connect(_parser, SIGNAL(createUniqueConstraint(const QString&, const QString&, const QString&, const QStringList&)), this, SLOT(createUniqueConstraint(const QString&, const QString&, const QString&, const QStringList&)));
 	connect(_parser, SIGNAL(createCheckConstraint(const QString&, const QString&, const QString&, const QStringList&, const QString&)), this, SLOT(createCheckConstraint(const QString&, const QString&, const QString&, const QStringList&, const QString&)));
+	connect(_parser, SIGNAL(createForeignKeyConstraint(const QString&, const QString&, const QString&, const QStringList&, const QString&, const QString&, const QStringList&)), this, SLOT(createForeignKeyConstraint(const QString&, const QString&, const QString&, const QStringList&, const QString&, const QString&, const QStringList&)));
 	connect(_parser, SIGNAL(createDataType(const QString&, const QString&, const bool&)), this, SLOT(createDataType(const QString&, const QString&, const bool&)));
 	connect(_parser, SIGNAL(createSchema(const QString&)), this, SLOT(createSchema(const QString&)));
 	connect(_parser, SIGNAL(createSequence(const QString&, const QString&)), this, SLOT(createSequence(const QString&, const QString&)));
@@ -96,6 +98,15 @@ QStringList DbModel::createPrimaryKeyConstraints() const {
 	return ret;
 }
 
+QStringList DbModel::createForeignKeyConstraints() const {
+	QStringList ret;
+	ForeignKeyConstraintList lst = findChildren<ForeignKeyConstraint*>();
+	for (ForeignKeyConstraintList::const_iterator i = lst.begin(); i != lst.end(); i++) {
+		ret.append((*i)->create());
+	}
+	return ret;
+}
+
 QStringList DbModel::createUniqueConstraints() const {
 	QStringList ret;
 	UniqueConstraintList lst = findChildren<UniqueConstraint*>();
@@ -125,6 +136,7 @@ QStringList DbModel::create() const {
 	ret.append(createPrimaryKeyConstraints());
 	ret.append(createUniqueConstraints());
 	ret.append(createCheckConstraints());
+	ret.append(createForeignKeyConstraints());
 	return ret;
 }
 
@@ -187,5 +199,16 @@ void DbModel::createCheckConstraint(const QString& schemaName, const QString& ta
 	TableConstraint* c = new CheckConstraint(schema(schemaName)->table(tableName), name, definition);
 	for (QStringList::const_iterator i = columnNames.begin(); i != columnNames.end(); i++) {
 		c->appendColumn(schema(schemaName)->table(tableName)->column(*i));
+	}
+}
+
+void DbModel::createForeignKeyConstraint(const QString& name, const QString& schemaName, const QString& tableName, const QStringList& columnNames, const QString& referencedSchemaName, const QString& referencedTableName, const QStringList& referencedColumnNames) {
+	Table* local = schema(schemaName)->table(tableName);
+	Table* referenced = schema(referencedSchemaName)->table(referencedTableName);
+	Q_CHECK_PTR(local);
+	Q_CHECK_PTR(referenced);
+	ForeignKeyConstraint* c = new ForeignKeyConstraint(name, local, referenced);
+	for (int i = 0; i != columnNames.size(); i++) {
+		c->appendColumnPair(local->column(columnNames.at(i)), referenced->column(referencedColumnNames.at(i)));
 	}
 }

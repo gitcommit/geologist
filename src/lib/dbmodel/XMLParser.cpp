@@ -62,12 +62,12 @@ QStringList XMLParser::constraintColumnNames(const QDomNode& constraintNode) con
 	}
 	return ret;
 }
-	
+
 void XMLParser::createPrimaryKeyConstraints(const QString& schemaName,
 		const QString& tableName, const QDomNodeList& pk) const {
 	Q_ASSERT(pk.size() <= 1);
 	for (int i = 0; i != pk.size(); i++) {
-		emit createPrimaryKeyConstraint(schemaName, tableName, 
+		emit createPrimaryKeyConstraint(schemaName, tableName,
 				nameAttribute(pk.item(i)), constraintColumnNames(pk.item(i)));
 	}
 }
@@ -75,17 +75,42 @@ void XMLParser::createPrimaryKeyConstraints(const QString& schemaName,
 void XMLParser::createUniqueConstraints(const QString& schemaName,
 		const QString& tableName, const QDomNodeList& nodes) const {
 	for (int i = 0; i != nodes.size(); i++) {
-		emit createUniqueConstraint(schemaName, tableName, 
-				nameAttribute(nodes.item(i)), constraintColumnNames(nodes.item(i)));
+		emit createUniqueConstraint(schemaName, tableName,
+				nameAttribute(nodes.item(i)),
+				constraintColumnNames(nodes.item(i)));
+	}
+}
+
+void XMLParser::createForeignKeyConstraints(const QString& schemaName,
+		const QString& tableName, const QDomNodeList& nodes) const {
+	for (int i = 0; i != nodes.size(); i++) {
+		QDomElement e = nodes.item(i).toElement();
+		QStringList lcn;
+		QStringList rcn;
+		QString referencedSchemaName = e.attribute("referenced_table_name").split(".")[0];
+		QString referencedTableName = e.attribute("referenced_table_name").split(".")[1];
+
+		QDomNodeList pairs = e.elementsByTagName("column_pair");
+		Q_ASSERT(0 != pairs.size());
+		for (int ii = 0; ii != pairs.size(); ii++) {
+			QDomElement ee = pairs.item(ii).toElement();
+			Q_ASSERT(ee.hasAttribute("local_column_name"));
+			Q_ASSERT(ee.hasAttribute("referenced_column_name"));
+			lcn.append(ee.attribute("local_column_name"));
+			rcn.append(ee.attribute("referenced_column_name")); 
+		}
+		emit createForeignKeyConstraint(nameAttribute(nodes.item(i)),
+				schemaName, tableName, lcn, referencedSchemaName,
+				referencedTableName, rcn);
 	}
 }
 
 void XMLParser::createCheckConstraints(const QString& schemaName,
 		const QString& tableName, const QDomNodeList& nodes) const {
 	for (int i = 0; i != nodes.size(); i++) {
-		emit createCheckConstraint(schemaName, tableName, 
-				nameAttribute(nodes.item(i)), constraintColumnNames(nodes.item(i)),
-				nodes.item(i).toElement().attribute("definition"));
+		emit createCheckConstraint(schemaName, tableName,
+				nameAttribute(nodes.item(i)),
+				constraintColumnNames(nodes.item(i)), nodes.item(i).toElement().attribute("definition"));
 	}
 }
 
@@ -151,6 +176,14 @@ void XMLParser::parse() {
 		QDomNode schemaN = schemata.item(schemaI);
 		QString schemaName = nameAttribute(schemaN);
 		createTables(schemaName, schemaN.toElement().elementsByTagName("table"));
+	}
+	for (int schemaI = 0; schemaI != schemata.size(); schemaI++) {
+		QDomNode schemaN = schemata.item(schemaI);
+		QString schemaName = nameAttribute(schemaN);
+		QDomNodeList tables = schemaN.toElement().elementsByTagName("table");
+		for (int i = 0; i != tables.size(); i++) {
+			createForeignKeyConstraints(schemaName, nameAttribute(tables.item(i)), tables.item(i).toElement().elementsByTagName("foreign_key_constraint"));
+		}
 	}
 }
 

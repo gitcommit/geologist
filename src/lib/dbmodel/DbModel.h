@@ -36,7 +36,9 @@ public slots:
 	void createPrimaryKeyConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames);
 	void createUniqueConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames);
 	void createCheckConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames, const QString& definition);
-	
+	void createForeignKeyConstraint(const QString& name,
+									const QString& schemaName, const QString& tableName, const QStringList& columnNames,
+									const QString& referencedSchemaName, const QString& referencedTableName, const QStringList& referencedColumnNames);
 protected:
 	virtual QStringList createDataTypes() const;
 	virtual QStringList createSequences() const;
@@ -46,6 +48,7 @@ protected:
 	virtual QStringList createPrimaryKeyConstraints() const;
 	virtual QStringList createUniqueConstraints() const;
 	virtual QStringList createCheckConstraints() const;
+	virtual QStringList createForeignKeyConstraints() const;
 private:
 	QExplicitlySharedDataPointer<DbModelData> _d;
 	XMLParser* _parser;

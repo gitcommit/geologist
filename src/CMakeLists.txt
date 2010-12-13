@@ -46,6 +46,8 @@ SET(geo_SRCS_CXX
     lib/dbmodel/PrimaryKeyConstraint.cpp
     lib/dbmodel/UniqueConstraint.cpp
     lib/dbmodel/CheckConstraint.cpp
+    lib/dbmodel/TableColumnPair.cpp
+    lib/dbmodel/ForeignKeyConstraint.cpp
     lib/dbmodel/private/Base.cpp
     lib/dbmodel/private/DbModelData.cpp
     lib/dbmodel/private/SchemaData.cpp
@@ -57,6 +59,7 @@ SET(geo_SRCS_CXX
     lib/dbmodel/private/PrimaryKeyConstraintData.cpp
     lib/dbmodel/private/UniqueConstraintData.cpp
     lib/dbmodel/private/CheckConstraintData.cpp
+    lib/dbmodel/private/ForeignKeyConstraintData.cpp
     
     app/main.cpp
     app/App.cpp
@@ -111,6 +114,7 @@ SET(geo_MOC_SRCS
     lib/dbmodel/PrimaryKeyConstraint.h
     lib/dbmodel/UniqueConstraint.h
     lib/dbmodel/CheckConstraint.h
+    lib/dbmodel/ForeignKeyConstraint.h
     
     lib/orm/Entity.h
     lib/orm/IdentifiedEntity.h
