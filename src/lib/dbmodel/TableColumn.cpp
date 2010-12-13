@@ -5,11 +5,12 @@
 #include <Table.h>
 #include <DataType.h>
 
-TableColumn::TableColumn(Table* table, const QString& name, DataType* dataType) :
+TableColumn::TableColumn(Table* table, const QString& name, DataType* dataType, const bool& nullable) :
 	InTableModelComponent(table), _d(0) {
 	_d = new TableColumnData;
 	setName(name);
 	setDataType(dataType);
+	setNullable(nullable);
 }
 
 TableColumn::TableColumn(const TableColumn& other) :
@@ -36,12 +37,25 @@ DataType* TableColumn::dataType() const {
 	return _d->dataType();
 }
 
+void TableColumn::setNullable(const bool& b) {
+	_d->setNullable(b);
+}
+
+bool TableColumn::nullable() const {
+	return _d->nullable();
+}
+
 QStringList TableColumn::create() const {
 	QStringList ret;
 	ret.append(QString("ALTER TABLE %1 ADD COLUMN %2 %3;")
 			.arg(table()->qualifiedName())
 			.arg(name())
 			.arg(dataType()->sqlName()));
+	if (!nullable()) {
+		ret.append(QString("ALTER TABLE %1 ALTER COLUMN %2 SET NOT NULL;").arg(table()->qualifiedName()).arg(name()));
+	} else {
+		ret.append(QString("ALTER TABLE %1 ALTER COLUMN %2 DROP NOT NULL;").arg(table()->qualifiedName()).arg(name()));
+	}
 	return ret;
 }
 

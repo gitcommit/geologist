@@ -27,7 +27,7 @@ DbModel::DbModel(QObject* p, const QString& n) :
 	connect(_parser, SIGNAL(createSchema(const QString&)), this, SLOT(createSchema(const QString&)));
 	connect(_parser, SIGNAL(createSequence(const QString&, const QString&)), this, SLOT(createSequence(const QString&, const QString&)));
 	connect(_parser, SIGNAL(createTable(const QString&, const QString&)), this, SLOT(createTable(const QString&, const QString&)));
-	connect(_parser, SIGNAL(createTableColumn(const QString&, const QString&, const QString&, const QString&)), this, SLOT(createTableColumn(const QString&, const QString&, const QString&, const QString&)));
+	connect(_parser, SIGNAL(createTableColumn(const QString&, const QString&, const QString&, const QString&, const bool&)), this, SLOT(createTableColumn(const QString&, const QString&, const QString&, const QString&, const bool&)));
 	setName(n);
 }
 
@@ -173,8 +173,8 @@ void DbModel::createTable(const QString& schemaName, const QString& tableName) {
 	(void) new Table(schema(schemaName), tableName);
 }
 
-void DbModel::createTableColumn(const QString& schemaName, const QString& tableName, const QString& colName, const QString& typeName) {
-	(void) new TableColumn(schema(schemaName)->table(tableName), colName, dataType(typeName));
+void DbModel::createTableColumn(const QString& schemaName, const QString& tableName, const QString& colName, const QString& typeName, const bool& nullable) {
+	(void) new TableColumn(schema(schemaName)->table(tableName), colName, dataType(typeName), nullable);
 }
 
 void DbModel::createDataType(const QString& name, const QString& sqlName, const bool& requiresQuoting) {

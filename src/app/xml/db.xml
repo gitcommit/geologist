@@ -2,6 +2,7 @@
 	<database name="test">
 		<data_type name="int" sql_name="INTEGER" requires_quoting="false"/>
 		<data_type name="text" sql_name="TEXT" requires_quoting="true"/>
+		<data_type name="name" sql_name="TEXT" requires_quoting="true"/>
 		<data_type name="code" sql_name="TEXT" requires_quoting="true"/>
 		<data_type name="date" sql_name="DATE" requires_quoting="true"/>
 		<data_type name="time" sql_name="TIME" requires_quoting="true"/>
@@ -11,10 +12,10 @@
 			<sequence name="seq_si_prefixes"/>
 			<table name="si_prefixes">
 				<column name="id" type="int" nullable="false" sequence="seq_si_prefixes"/>
-				<column name="name" type="text" nullable="false" default_value="New SI Prefix"/>
+				<column name="name" type="name" nullable="false" default_value="'New SI Prefix'"/>
 				<column name="code" type="code" nullable="true"/>
 				<column name="factor" type="numeric" nullable="false"/>
-				<column name="description" type="text" nullable="false" default_value=""/>
+				<column name="description" type="text" nullable="false" default_value="''"/>
 				<primary_key_constraint name="pk_si_prefixes">
 					<constraint_column name="id"/>
 				</primary_key_constraint>
@@ -27,18 +28,27 @@
 				<check_constraint name="chk_si_prefixes_factor_non_neutral" definition="!= 0.0">
 					<constraint_column name="factor"/>
 				</check_constraint>
-				<check_constraint name="chk_si_prefixes_name_not_empty" definition="!=''">
+				<check_constraint name="chk_si_prefixes_name_not_empty" definition=" != ''">
 					<constraint_column name="name"/>
 				</check_constraint>
 			</table>
 			<table name="units">
 				<column name="id" type="int" nullable="false" sequence="seq_units"/>
-				<column name="parent_id" type="int" nullable="true"/>
+				<column name="base_unit_id" type="int" nullable="true"/>
+				<column name="si_prefix_id" type="int" nullable="true"/>
+				<column name="name" type="name" nullable="false" default_value="'New Unit'"/>
+				<column name="code" type="code" nullable="true"/>
+				<column name="symbol" type="text" nullable="false"/>
+				<column name="factor" type="numeric" nullable="false" default_value="1"/>
+				<column name="description" type="text" nullable="false" default_value="''"/>
 				<primary_key_constraint name="pk_units">
 					<constraint_column name="id"/>
 				</primary_key_constraint>
 				<foreign_key_constraint name="fk_units_parent_exists" referenced_table_name="core.units">
-					<column_pair local_column_name="parent_id" referenced_column_name="id"/> 
+					<column_pair local_column_name="base_unit_id" referenced_column_name="id"/> 
+				</foreign_key_constraint>
+				<foreign_key_constraint name="fk_units_si_prefix_exists" referenced_table_name="core.si_prefixes">
+					<column_pair local_column_name="si_prefix_id" referenced_column_name="id"/>
 				</foreign_key_constraint>
 			</table>
 			<table name="unit_conversion">

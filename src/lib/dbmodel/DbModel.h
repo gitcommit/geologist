@@ -32,7 +32,7 @@ public slots:
 	void createSchema(const QString& name);
 	void createSequence(const QString& schemaName, const QString& sequenceName);
 	void createTable(const QString& schemaName, const QString& tableName);
-	void createTableColumn(const QString& schemaName, const QString& tableName, const QString& colName, const QString& typeName);
+	void createTableColumn(const QString& schemaName, const QString& tableName, const QString& colName, const QString& typeName, const bool& nullable);
 	void createPrimaryKeyConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames);
 	void createUniqueConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames);
 	void createCheckConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames, const QString& definition);

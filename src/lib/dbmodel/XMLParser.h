@@ -19,7 +19,7 @@ public:
 	void createSchema(const QString& name) const;
 	void createSequence(const QString& schema, const QString& name) const;
 	void createTable(const QString& schema, const QString& name) const;
-	void createTableColumn(const QString& schema, const QString& table, const QString& columnName, const QString& dataType) const;
+	void createTableColumn(const QString& schema, const QString& table, const QString& columnName, const QString& dataType, const bool& nullable) const;
 	void createPrimaryKeyConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames) const;
 	void createUniqueConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames) const;
 	void createCheckConstraint(const QString& schemaName, const QString& tableName, const QString& name, const QStringList& columnNames, const QString& check) const;

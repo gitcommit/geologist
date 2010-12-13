@@ -131,7 +131,8 @@ void XMLParser::createTableColumns(const QString& schemaName,
 	for (int i = 0; i != cols.size(); i++) {
 		emit createTableColumn(schemaName, tableName,
 				nameAttribute(cols.item(i)),
-				nameAttribute(dataTypeElementByName(cols.item(i).toElement().attribute("type"))));
+				nameAttribute(dataTypeElementByName(cols.item(i).toElement().attribute("type"))),
+				stringToBool(cols.item(i).toElement().attribute("nullable")));
 	}
 }
 
