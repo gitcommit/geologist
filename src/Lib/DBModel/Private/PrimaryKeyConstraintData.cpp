@@ -1,4 +1,4 @@
-#include <private/PrimaryKeyConstraintData.h>
+#include <Lib/DBModel/private/PrimaryKeyConstraintData.h>
 
 #include <QtCore/QStringList>
 

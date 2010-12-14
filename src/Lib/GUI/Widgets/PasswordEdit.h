@@ -1,7 +1,7 @@
 #ifndef PASSWORDEDIT_H_
 #define PASSWORDEDIT_H_
 
-#include <LineEdit.h>
+#include <Lib/GUI/Widgets/LineEdit.h>
 
 class PasswordEdit : public LineEdit {
 	Q_OBJECT

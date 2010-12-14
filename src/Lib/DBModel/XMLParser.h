@@ -2,8 +2,8 @@
 #define XMLPARSER_H_
 
 #include <QtCore/QObject>
-#include <QtCore/QString>
 
+#include <QtCore/QString>
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomElement>
 

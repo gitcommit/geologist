@@ -8,7 +8,7 @@
 #ifndef SMARTGROUPBOX_H
 #define	SMARTGROUPBOX_H
 
-#include <GroupBox.h>
+#include <Lib/GUI/Widgets/GroupBox.h>
 
 class LineEdit;
 

@@ -1,7 +1,7 @@
 #ifndef SEQUENCEDATA_H_
 #define SEQUENCEDATA_H_
 
-#include <private/Base.h>
+#include <Lib/DBModel/private/Base.h>
 
 class SequenceData : public Base {
 public:

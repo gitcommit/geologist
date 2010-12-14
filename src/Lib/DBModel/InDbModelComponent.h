@@ -1,7 +1,7 @@
 #ifndef INDBMODELCOMPONENT_H_
 #define INDBMODELCOMPONENT_H_
 
-#include <ModelComponent.h>
+#include <Lib/DBModel/ModelComponent.h>
 
 class DbModel;
 

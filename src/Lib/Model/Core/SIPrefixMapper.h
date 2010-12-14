@@ -1,8 +1,8 @@
 #ifndef SIPREFIXMAPPER_H_
 #define SIPREFIXMAPPER_H_
 
-#include <Mapper.h>
-#include <SIPrefix.h>
+#include <Lib/ORM/Mapper.h>
+#include <Lib/Model/Core/SIPrefix.h>
 
 class SIPrefixMapper: public Mapper
 {

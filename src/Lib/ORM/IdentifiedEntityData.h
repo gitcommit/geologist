@@ -1,7 +1,7 @@
 #ifndef IDENTIFIEDENTITYDATA_H_
 #define IDENTIFIEDENTITYDATA_H_
 
-#include <EntityData.h>
+#include <Lib/ORM/EntityData.h>
 
 class IdentifiedEntityData : public EntityData {
 public:

@@ -1,4 +1,4 @@
-#include <private/Base.h>
+#include <Lib/DBModel/private/Base.h>
 
 Base::Base(const QString& name) :
 	_name(name) {

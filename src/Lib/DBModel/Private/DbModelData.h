@@ -1,7 +1,7 @@
 #ifndef DBMODELDATA_H_
 #define DBMODELDATA_H_
 
-#include <private/Base.h>
+#include <Lib/DBModel/private/Base.h>
 
 class DbModelData: public Base {
 public:

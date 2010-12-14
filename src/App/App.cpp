@@ -7,20 +7,20 @@
 #include <QtCore/QList>
 #include <QtSql/QSqlRecord>
 
-#include <config.h>
+#include <App/config.h>
 
-#include <QueryThread.h>
-#include <ConnectionData.h>
-#include <TypedQuery.h>
+#include <Lib/DB/QueryThread.h>
+#include <Lib/DB/ConnectionData.h>
+#include <Lib/DB/TypedQuery.h>
 
-#include <DatabaseConnectionDialog.h>
+#include <Lib/GUI/DB/DatabaseConnectionDialog.h>
 
-#include <SIPrefix.h>
-#include <SIPrefixMapper.h>
+#include <Lib/Model/Core/SIPrefix.h>
+#include <Lib/Model/Core/SIPrefixMapper.h>
 
-#include <Entity.h>
-#include <Settings.h>
-#include <DbModel.h>
+#include <Lib/ORM/Entity.h>
+#include <Lib/Settings/Settings.h>
+#include <Lib/DBModel/DbModel.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(TypedQuery)

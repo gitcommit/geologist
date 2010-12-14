@@ -3,15 +3,8 @@ PROJECT(geo)
 SET(EXECUTABLE_OUTPUT_PATH ../bin)
 
 SET(geo_INCLUDE_DIRS
-	app
-	lib
-	lib/gui/widgets
-	lib/gui/db
-	lib/model/core
-	lib/orm
-	lib/db
-	lib/dbmodel
-	lib/settings
+	App
+	Lib
 )
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR} ${geo_SOURCE_DIR} ${geo_BINARY_DIR} ${geo_INCLUDE_DIRS})
@@ -31,122 +24,123 @@ INCLUDE_DIRECTORIES(${QT_QTSQL_INCLUDE_DIR} ${QT_QTSVG_INCLUDE_DIR} ${QT_QTXML_I
 
 # .cxx sources
 SET(geo_SRCS_CXX
-    lib/dbmodel/XMLParser.cpp
-    lib/dbmodel/ModelComponent.cpp
-    lib/dbmodel/DbModel.cpp
-    lib/dbmodel/InDbModelComponent.cpp
-    lib/dbmodel/InSchemaModelComponent.cpp
-    lib/dbmodel/InTableModelComponent.cpp
-    lib/dbmodel/Schema.cpp
-    lib/dbmodel/Table.cpp
-    lib/dbmodel/Sequence.cpp
-    lib/dbmodel/DataType.cpp
-    lib/dbmodel/TableColumn.cpp
-    lib/dbmodel/TableConstraint.cpp
-    lib/dbmodel/PrimaryKeyConstraint.cpp
-    lib/dbmodel/UniqueConstraint.cpp
-    lib/dbmodel/CheckConstraint.cpp
-    lib/dbmodel/TableColumnPair.cpp
-    lib/dbmodel/ForeignKeyConstraint.cpp
-    lib/dbmodel/private/Base.cpp
-    lib/dbmodel/private/DbModelData.cpp
-    lib/dbmodel/private/SchemaData.cpp
-    lib/dbmodel/private/TableData.cpp
-    lib/dbmodel/private/DataTypeData.cpp
-    lib/dbmodel/private/SequenceData.cpp
-    lib/dbmodel/private/TableColumnData.cpp
-    lib/dbmodel/private/ConstraintData.cpp
-    lib/dbmodel/private/PrimaryKeyConstraintData.cpp
-    lib/dbmodel/private/UniqueConstraintData.cpp
-    lib/dbmodel/private/CheckConstraintData.cpp
-    lib/dbmodel/private/ForeignKeyConstraintData.cpp
+    Lib/DBModel/XMLParser.cpp
+    Lib/DBModel/ModelComponent.cpp
+    Lib/DBModel/DBModel.cpp
+    Lib/DBModel/InDBModelComponent.cpp
+    Lib/DBModel/InSchemaModelComponent.cpp
+    Lib/DBModel/InTableModelComponent.cpp
+    Lib/DBModel/Schema.cpp
+    Lib/DBModel/Table.cpp
+    Lib/DBModel/Sequence.cpp
+    Lib/DBModel/DataType.cpp
+    Lib/DBModel/TableColumn.cpp
+    Lib/DBModel/TableConstraint.cpp
+    Lib/DBModel/PrimaryKeyConstraint.cpp
+    Lib/DBModel/UniqueConstraint.cpp
+    Lib/DBModel/CheckConstraint.cpp
+    Lib/DBModel/TableColumnPair.cpp
+    Lib/DBModel/ForeignKeyConstraint.cpp
+    Lib/DBModel/private/Base.cpp
+    Lib/DBModel/private/DBModelData.cpp
+    Lib/DBModel/private/SchemaData.cpp
+    Lib/DBModel/private/TableData.cpp
+    Lib/DBModel/private/DataTypeData.cpp
+    Lib/DBModel/private/SequenceData.cpp
+    Lib/DBModel/private/TableColumnData.cpp
+    Lib/DBModel/private/ConstraintData.cpp
+    Lib/DBModel/private/PrimaryKeyConstraintData.cpp
+    Lib/DBModel/private/UniqueConstraintData.cpp
+    Lib/DBModel/private/CheckConstraintData.cpp
+    Lib/DBModel/private/ForeignKeyConstraintData.cpp
     
-    app/main.cpp
-    app/App.cpp
-    app/tools.cpp
+    Lib/Tools/tools.cpp
     
-    lib/orm/Entity.cpp
-    lib/orm/EntityData.cpp
-    lib/orm/IdentifiedEntity.cpp
-    lib/orm/IdentifiedEntityData.cpp
-    lib/orm/StandardEntity.cpp
-    lib/orm/StandardEntityData.cpp
-    lib/orm/Mapper.cpp
+    App/main.cpp
+    App/App.cpp
     
-    lib/model/core/SIPrefix.cpp
-    lib/model/core/SIPrefixMapper.cpp
-    lib/model/core/private/SIPrefixData.cpp
+    Lib/ORM/Entity.cpp
+    Lib/ORM/EntityData.cpp
+    Lib/ORM/IdentifiedEntity.cpp
+    Lib/ORM/IdentifiedEntityData.cpp
+    Lib/ORM/StandardEntity.cpp
+    Lib/ORM/StandardEntityData.cpp
+    Lib/ORM/Mapper.cpp
     
-    lib/db/ConnectionData.cpp
-    lib/db/Connection.cpp
-    lib/db/QueryThread.cpp
-    lib/db/TypedQuery.cpp
+    Lib/Model/core/SIPrefix.cpp
+    Lib/Model/core/SIPrefixMapper.cpp
+    Lib/Model/core/private/SIPrefixData.cpp
+    
+    Lib/DB/ConnectionData.cpp
+    Lib/DB/Connection.cpp
+    Lib/DB/QueryThread.cpp
+    Lib/DB/TypedQuery.cpp
 
-    lib/settings/Settings.cpp
+    Lib/Settings/Settings.cpp
 
-    lib/gui/widgets/MainWindow.cpp
-    lib/gui/widgets/LogDisplay.cpp
-    lib/gui/widgets/LogWidget.cpp
-    lib/gui/widgets/Dialog.cpp
-    lib/gui/widgets/Label.cpp
-    lib/gui/widgets/FieldLabel.cpp
-    lib/gui/widgets/LineEdit.cpp
-    lib/gui/widgets/GroupBox.cpp
-    lib/gui/widgets/SmartGroupBox.cpp
-    lib/gui/widgets/Editor.cpp
-    lib/gui/widgets/PasswordEdit.cpp
+    Lib/GUI/Widgets/MainWindow.cpp
+    Lib/GUI/Widgets/LogDisplay.cpp
+    Lib/GUI/Widgets/LogWidget.cpp
+    Lib/GUI/Widgets/Dialog.cpp
+    Lib/GUI/Widgets/Label.cpp
+    Lib/GUI/Widgets/FieldLabel.cpp
+    Lib/GUI/Widgets/LineEdit.cpp
+    Lib/GUI/Widgets/GroupBox.cpp
+    Lib/GUI/Widgets/SmartGroupBox.cpp
+    Lib/GUI/Widgets/Editor.cpp
+    Lib/GUI/Widgets/PasswordEdit.cpp
     
-    lib/gui/db/DatabaseConnectionDialog.cpp
+    Lib/Gui/DB/DatabaseConnectionDialog.cpp
 )
 
 # files which need to be moc'd by Qt (headers)
 SET(geo_MOC_SRCS    
-    app/App.h
+    App/App.h
     
-    lib/dbmodel/XMLParser.h
-    lib/dbmodel/ModelComponent.h
-    lib/dbmodel/DbModel.h
-    lib/dbmodel/InDbModelComponent.h
-    lib/dbmodel/InSchemaModelComponent.h
-    lib/dbmodel/InTableModelComponent.h
-    lib/dbmodel/TableConstraint.h
-    lib/dbmodel/Schema.h
-    lib/dbmodel/Table.h
-    lib/dbmodel/TableColumn.h
-    lib/dbmodel/DataType.h
-    lib/dbmodel/Sequence.h
-    lib/dbmodel/PrimaryKeyConstraint.h
-    lib/dbmodel/UniqueConstraint.h
-    lib/dbmodel/CheckConstraint.h
-    lib/dbmodel/ForeignKeyConstraint.h
+    Lib/DBModel/XMLParser.h
+    Lib/DBModel/ModelComponent.h
+    Lib/DBModel/DBModel.h
+    Lib/DBModel/InDBModelComponent.h
+    Lib/DBModel/InSchemaModelComponent.h
+    Lib/DBModel/InTableModelComponent.h
+    Lib/DBModel/TableConstraint.h
+    Lib/DBModel/Schema.h
+    Lib/DBModel/Table.h
+    Lib/DBModel/TableColumn.h
+    Lib/DBModel/DataType.h
+    Lib/DBModel/Sequence.h
+    Lib/DBModel/PrimaryKeyConstraint.h
+    Lib/DBModel/UniqueConstraint.h
+    Lib/DBModel/CheckConstraint.h
+    Lib/DBModel/ForeignKeyConstraint.h
     
-    lib/orm/Entity.h
-    lib/orm/IdentifiedEntity.h
-    lib/orm/StandardEntity.h
+    Lib/ORM/Entity.h
+    Lib/ORM/IdentifiedEntity.h
+    Lib/ORM/StandardEntity.h
+    Lib/ORM/Mapper.h
     
-    lib/model/core/SIPrefix.h
+    Lib/Model/core/SIPrefix.h
    
-    lib/orm/Mapper.h
-    lib/model/core/SIPrefixMapper.h
+   Lib/Model/core/SIPrefixMapper.h
     
-    lib/db/Connection.h
-    lib/db/QueryThread.h
+    Lib/DB/Connection.h
+    Lib/DB/QueryThread.h
 
-    lib/settings/Settings.h
+    Lib/Settings/Settings.h
 
-    lib/gui/widgets/MainWindow.h
-    lib/gui/widgets/LogDisplay.h
-    lib/gui/widgets/LogWidget.h
-    lib/gui/widgets/Dialog.h
-    lib/gui/widgets/Label.h
-    lib/gui/widgets/FieldLabel.h
-    lib/gui/widgets/LineEdit.h
-    lib/gui/widgets/GroupBox.h
-    lib/gui/widgets/SmartGroupBox.h
-    lib/gui/widgets/Editor.h
-    lib/gui/widgets/PasswordEdit.h
+    Lib/GUI/Widgets/MainWindow.h
+    Lib/GUI/Widgets/LogDisplay.h
+    Lib/GUI/Widgets/LogWidget.h
+    Lib/GUI/Widgets/Dialog.h
+    Lib/GUI/Widgets/Label.h
+    Lib/GUI/Widgets/FieldLabel.h
+    Lib/GUI/Widgets/LineEdit.h
+    Lib/GUI/Widgets/GroupBox.h
+    Lib/GUI/Widgets/SmartGroupBox.h
+    Lib/GUI/Widgets/Editor.h
+    Lib/GUI/Widgets/PasswordEdit.h
     
-    lib/gui/db/DatabaseConnectionDialog.h
+    Lib/Gui/DB/DatabaseConnectionDialog.h
 )
 
 # client UI files

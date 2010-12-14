@@ -1,4 +1,4 @@
-#include <EntityData.h>
+#include <Lib/ORM/EntityData.h>
 
 EntityData::EntityData() :
 	QSharedData() {

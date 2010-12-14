@@ -5,7 +5,7 @@
  * Created on 2. Dezember 2010, 13:23
  */
 
-#include "GroupBox.h"
+#include <Lib/GUI/Widgets/GroupBox.h>
 
 GroupBox::GroupBox(QWidget* p, const QString& txt)
 : QGroupBox(txt, p) {

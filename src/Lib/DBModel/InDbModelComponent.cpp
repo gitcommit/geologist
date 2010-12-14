@@ -1,6 +1,6 @@
-#include <InDbModelComponent.h>
+#include <Lib/DBModel/InDbModelComponent.h>
 
-#include <DbModel.h>
+#include <Lib/DBModel/DbModel.h>
 
 InDbModelComponent::InDbModelComponent(DbModel* m) :
 	ModelComponent(m) {

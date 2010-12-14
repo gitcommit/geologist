@@ -1,9 +1,9 @@
 #ifndef FOREIGNKEYCONSTRAINT_H_
 #define FOREIGNKEYCONSTRAINT_H_
 
-#include <TableConstraint.h>
+#include <Lib/DBModel/TableConstraint.h>
 
-#include <private/ForeignKeyConstraintData.h>
+#include <Lib/DBModel/Private/ForeignKeyConstraintData.h>
 
 class ForeignKeyConstraint : public TableConstraint {
 	Q_OBJECT

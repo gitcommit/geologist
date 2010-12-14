@@ -1,4 +1,4 @@
-#include <private/UniqueConstraintData.h>
+#include <Lib/DBModel/private/UniqueConstraintData.h>
 
 #include <QtCore/QStringList>
 

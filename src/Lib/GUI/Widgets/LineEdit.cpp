@@ -5,10 +5,10 @@
  * Created on 2. Dezember 2010, 13:10
  */
 
-#include <LineEdit.h>
+#include <Lib/GUI/Widgets/LineEdit.h>
 
-#include <FieldLabel.h>
-#include <SmartGroupBox.h>
+#include <Lib/GUI/Widgets/FieldLabel.h>
+#include <Lib/GUI/Widgets/SmartGroupBox.h>
 
 LineEdit::LineEdit(QWidget* p, const QString& lbl, const QString& txt)
 : QLineEdit(p),

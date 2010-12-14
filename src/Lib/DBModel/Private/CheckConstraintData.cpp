@@ -1,4 +1,4 @@
-#include <private/CheckConstraintData.h>
+#include <Lib/DBModel/private/CheckConstraintData.h>
 
 #include <QtCore/QStringList>
 

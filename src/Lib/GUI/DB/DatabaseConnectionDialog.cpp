@@ -1,13 +1,13 @@
-#include "DatabaseConnectionDialog.h"
+#include "Lib/GUI/DB/DatabaseConnectionDialog.h"
 
 #include <QtGui/QLayout>
 #include <QtGui/QDialogButtonBox>
 
-#include <SmartGroupBox.h>
-#include <LineEdit.h>
-#include <PasswordEdit.h>
+#include <Lib/GUI/Widgets/SmartGroupBox.h>
+#include <Lib/GUI/Widgets/LineEdit.h>
+#include <Lib/GUI/Widgets/PasswordEdit.h>
 
-#include <ConnectionData.h>
+#include <Lib/DB/ConnectionData.h>
 
 DatabaseConnectionDialog::DatabaseConnectionDialog(QWidget* p,
 		ConnectionData* cd) :

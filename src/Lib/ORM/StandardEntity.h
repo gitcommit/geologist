@@ -1,7 +1,7 @@
 #ifndef STANDARDENTITY_H_
 #define STANDARDENTITY_H_
 
-#include <IdentifiedEntity.h>
+#include <Lib/ORM/IdentifiedEntity.h>
 
 class StandardEntityData;
 

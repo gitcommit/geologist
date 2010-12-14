@@ -1,4 +1,4 @@
-#include <private/DbModelData.h>
+#include <Lib/DBModel/private/DbModelData.h>
 
 DbModelData::DbModelData(const QString& name) :
 	Base(name) {

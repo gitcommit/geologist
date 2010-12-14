@@ -3,7 +3,7 @@
 
 #include <QtGui/QApplication>
 
-#include <App.h>
+#include <App/App.h>
 
 App* getApp();
 

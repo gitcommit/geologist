@@ -1,7 +1,7 @@
 #ifndef EDITOR_H_
 #define EDITOR_H_
 
-#include <SmartGroupBox.h>
+#include <Lib/GUI/Widgets/SmartGroupBox.h>
 
 class Editor : public SmartGroupBox {
 	Q_OBJECT

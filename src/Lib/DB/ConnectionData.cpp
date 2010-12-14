@@ -1,4 +1,4 @@
-#include <ConnectionData.h>
+#include <Lib/DB/ConnectionData.h>
 
 ConnectionData::ConnectionData(const QString& driver, const QString& host,
 		const QString& port, const QString& db, const QString& login,

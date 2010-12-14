@@ -1,9 +1,9 @@
 #ifndef CHECKCONSTRAINTDATA_H_
 #define CHECKCONSTRAINTDATA_H_
 
-#include <private/ConstraintData.h>
+#include <Lib/DBModel/private/ConstraintData.h>
 
-#include <TableColumn.h>
+#include <Lib/DBModel/TableColumn.h>
 
 class CheckConstraintData : public ConstraintData {
 public:

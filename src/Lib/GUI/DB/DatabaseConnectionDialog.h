@@ -1,7 +1,7 @@
 #ifndef DATABASECONNECTIONDIALOG_H_
 #define DATABASECONNECTIONDIALOG_H_
 
-#include <Dialog.h>
+#include <Lib/GUI/Widgets/Dialog.h>
 
 class QDialogButtonBox;
 

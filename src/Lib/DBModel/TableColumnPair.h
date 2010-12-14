@@ -1,7 +1,7 @@
 #ifndef TABLECOLUMNPAIR_H_
 #define TABLECOLUMNPAIR_H_
 
-#include <ModelComponent.h>
+#include <Lib/DBModel/ModelComponent.h>
 
 class TableColumn;
 

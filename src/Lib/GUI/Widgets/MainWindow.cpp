@@ -1,12 +1,12 @@
-#include <MainWindow.h>
+#include <Lib/GUI/Widgets/MainWindow.h>
 
 #include <QtGui/QAction>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QApplication>
 
-#include <LogWidget.h>
-#include <App.h>
+#include <Lib/GUI/Widgets/LogWidget.h>
+#include <App/App.h>
 
 MainWindow::MainWindow(QWidget* p)
   : QMainWindow(p)

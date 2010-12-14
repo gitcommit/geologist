@@ -1,8 +1,8 @@
-#include <Mapper.h>
+#include <Lib/ORM/Mapper.h>
 
 #include <QtGui/QApplication>
 
-#include <App.h>
+#include <App/App.h>
 
 Mapper::Mapper(QObject* p, const QString& selectAllCursorName,
 		const QString& selectAllProcedureName) :

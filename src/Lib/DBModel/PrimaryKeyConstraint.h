@@ -1,9 +1,9 @@
 #ifndef PRIMARYKEYCONSTRAINT_H_
 #define PRIMARYKEYCONSTRAINT_H_
 
-#include <TableConstraint.h>
+#include <Lib/DBModel/TableConstraint.h>
 
-#include <private/PrimaryKeyConstraintData.h>
+#include <Lib/DBModel/private/PrimaryKeyConstraintData.h>
 
 class PrimaryKeyConstraint : public TableConstraint {
 	Q_OBJECT

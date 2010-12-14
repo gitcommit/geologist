@@ -1,7 +1,7 @@
 #ifndef DATATYPEDATA_H_
 #define DATATYPEDATA_H_
 
-#include <private/Base.h>
+#include <Lib/DBModel/private/Base.h>
 
 class DataTypeData : public Base {
 public:

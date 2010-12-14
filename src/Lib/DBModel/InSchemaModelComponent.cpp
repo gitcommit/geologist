@@ -1,6 +1,6 @@
-#include <InSchemaModelComponent.h>
+#include <Lib/DBModel/InSchemaModelComponent.h>
 
-#include <Schema.h>
+#include <Lib/DBModel/Schema.h>
 
 InSchemaModelComponent::InSchemaModelComponent(Schema* schema) :
 	ModelComponent(schema) {

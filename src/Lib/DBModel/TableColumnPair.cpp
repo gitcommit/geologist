@@ -1,6 +1,6 @@
-#include <TableColumnPair.h>
+#include <Lib/DBModel/TableColumnPair.h>
 
-#include <TableColumn.h>
+#include <Lib/DBModel/TableColumn.h>
 
 TableColumnPair::TableColumnPair(TableColumn* l, TableColumn* r) :
 	_left(l), _right(r) {

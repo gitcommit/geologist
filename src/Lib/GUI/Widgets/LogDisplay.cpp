@@ -1,4 +1,4 @@
-#include <LogDisplay.h>
+#include <Lib/GUI/Widgets/LogDisplay.h>
 
 #include <QtCore/QDateTime>
 

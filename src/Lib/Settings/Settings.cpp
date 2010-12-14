@@ -1,6 +1,6 @@
-#include <Settings.h>
+#include <Lib/Settings/Settings.h>
 
-#include <ConnectionData.h>
+#include <Lib/DB/ConnectionData.h>
 
 Settings::Settings(QObject* p)
   : QSettings(p)

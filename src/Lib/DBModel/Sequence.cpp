@@ -1,8 +1,8 @@
-#include <Sequence.h>
+#include <Lib/DBModel/Sequence.h>
 
 #include <QtCore/QStringList>
 
-#include <Schema.h>
+#include <Lib/DBModel/Schema.h>
 
 Sequence::Sequence(Schema* schema, const QString& name) :
 	InSchemaModelComponent(schema), _d(0) {

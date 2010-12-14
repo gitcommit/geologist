@@ -1,7 +1,7 @@
 #ifndef SCHEMADATA_H_
 #define SCHEMADATA_H_
 
-#include <private/Base.h>
+#include <Lib/DBModel/private/Base.h>
 
 class SchemaData : public Base {
 public:

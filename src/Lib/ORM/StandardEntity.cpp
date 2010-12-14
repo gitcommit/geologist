@@ -1,6 +1,6 @@
-#include <StandardEntity.h>
+#include <Lib/ORM/StandardEntity.h>
 
-#include <StandardEntityData.h>
+#include <Lib/ORM/StandardEntityData.h>
 
 StandardEntity::StandardEntity(QObject* p, const qulonglong& id,
 		const QString& name, const QString& code, const QString& description) :

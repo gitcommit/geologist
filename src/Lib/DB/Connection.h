@@ -8,8 +8,8 @@
 #include <QtSql/QSqlRecord>
 #include <QtSql/QSqlQuery>
 
-#include <ConnectionData.h>
-#include <TypedQuery.h>
+#include <Lib/DB/ConnectionData.h>
+#include <Lib/DB/TypedQuery.h>
 
 class Connection: public QObject {
 	Q_OBJECT;

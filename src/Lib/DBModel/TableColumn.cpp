@@ -1,9 +1,9 @@
-#include <TableColumn.h>
+#include <Lib/DBModel/TableColumn.h>
 
 #include <QtCore/QStringList>
 
-#include <Table.h>
-#include <DataType.h>
+#include <Lib/DBModel/Table.h>
+#include <Lib/DBModel/DataType.h>
 
 TableColumn::TableColumn(Table* table, const QString& name, DataType* dataType, const bool& nullable) :
 	InTableModelComponent(table), _d(0) {

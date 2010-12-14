@@ -1,4 +1,4 @@
-#include <Connection.h>
+#include <Lib/DB/Connection.h>
 
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlError>
@@ -9,7 +9,7 @@
 #include <QtCore/QDateTime>
 #include <QtGui/QApplication>
 
-#include <ConnectionData.h>
+#include <Lib/DB/ConnectionData.h>
 
 Connection::Connection(QObject* p) :
 	QObject(p) {

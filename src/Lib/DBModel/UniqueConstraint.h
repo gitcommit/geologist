@@ -1,9 +1,9 @@
 #ifndef UNIQUECONSTRAINT_H_
 #define UNIQUECONSTRAINT_H_
 
-#include <TableConstraint.h>
+#include <Lib/DBModel/TableConstraint.h>
 
-#include <private/UniqueConstraintData.h>
+#include <Lib/DBModel/private/UniqueConstraintData.h>
 
 class UniqueConstraint : public TableConstraint {
 	Q_OBJECT

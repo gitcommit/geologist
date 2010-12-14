@@ -1,8 +1,8 @@
-#include <CheckConstraint.h>
+#include <Lib/DBModel/CheckConstraint.h>
 
 #include <QtCore/QStringList>
 
-#include <Table.h>
+#include <Lib/DBModel/Table.h>
 
 CheckConstraint::CheckConstraint(Table* table, const QString& name, const QString& definition) :
 	TableConstraint(table), _d(0) {

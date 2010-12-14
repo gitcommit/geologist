@@ -1,4 +1,4 @@
-#include "ModelComponent.h"
+#include <Lib/DBModel/ModelComponent.h>
 
 ModelComponent::ModelComponent(QObject* p) :
 	QObject(p) {

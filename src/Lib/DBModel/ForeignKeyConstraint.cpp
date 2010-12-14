@@ -1,9 +1,8 @@
-
-#include <ForeignKeyConstraint.h>
+#include <Lib/DBModel/ForeignKeyConstraint.h>
 
 #include <QtCore/QStringList>
 
-#include <Table.h>
+#include <Lib/DBModel/Table.h>
 
 ForeignKeyConstraint::ForeignKeyConstraint(const QString& name, Table* localTable, Table* referencedTable) :
 	TableConstraint(localTable), _d(0) {

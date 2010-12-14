@@ -1,10 +1,10 @@
 #ifndef FOREIGNKEYCONSTRAINTDATA_H_
 #define FOREIGNKEYCONSTRAINTDATA_H_
 
-#include <private/Base.h>
+#include <Lib/DBModel/private/Base.h>
 
-#include <TableColumn.h>
-#include <TableColumnPair.h>
+#include <Lib/DBModel/TableColumn.h>
+#include <Lib/DBModel/TableColumnPair.h>
 
 class ForeignKeyConstraintData : public Base {
 public:

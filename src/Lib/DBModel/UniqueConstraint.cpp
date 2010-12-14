@@ -1,8 +1,8 @@
-#include <UniqueConstraint.h>
+#include <Lib/DBModel/UniqueConstraint.h>
 
 #include <QtCore/QStringList>
 
-#include <Table.h>
+#include <Lib/DBModel/Table.h>
 
 UniqueConstraint::UniqueConstraint(Table* table, const QString& name) :
 	TableConstraint(table), _d(0) {

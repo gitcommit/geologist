@@ -1,7 +1,7 @@
 #ifndef SIPREFIXDATA_H_
 #define SIPREFIXDATA_H_
 
-#include <StandardEntityData.h>
+#include <Lib/ORM/StandardEntityData.h>
 
 class SIPrefixData: public StandardEntityData
 {

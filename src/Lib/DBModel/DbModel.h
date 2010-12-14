@@ -1,12 +1,12 @@
 #ifndef DBMODEL_H_
 #define DBMODEL_H_
 
-#include <ModelComponent.h>
+#include <Lib/DBModel/ModelComponent.h>
 
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QString>
 
-#include <private/DbModelData.h>
+#include <Lib/DBModel/private/DbModelData.h>
 
 class Schema;
 class DataType;

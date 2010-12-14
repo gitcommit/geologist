@@ -1,4 +1,4 @@
-#include <private/SIPrefixData.h>
+#include <Lib/Model/Core/Private/SIPrefixData.h>
 
 SIPrefixData::SIPrefixData(const qulonglong& id, const QString& name,
 		const QString& code, const QString& symbol, const qreal& factor,

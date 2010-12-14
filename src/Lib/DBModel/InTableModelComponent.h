@@ -1,7 +1,7 @@
 #ifndef INTABLEMODELCOMPONENT_H_
 #define INTABLEMODELCOMPONENT_H_
 
-#include <ModelComponent.h>
+#include <Lib/DBModel/ModelComponent.h>
 
 class Table;
 

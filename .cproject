@@ -41,12 +41,7 @@
 <listOptionValue builtIn="false" value="/Users/jolo/usr/qt/lib/QtXml.framework/Versions/4/Headers"/>
 <listOptionValue builtIn="false" value="/Users/jolo/usr/qt/lib/QtOpenGL.framework/Versions/4/Headers"/>
 <listOptionValue builtIn="false" value="/Users/jolo/data/coding/geologist/src/app"/>
-<listOptionValue builtIn="false" value="/Users/jolo/data/coding/geologist/src/lib/db"/>
-<listOptionValue builtIn="false" value="/Users/jolo/data/coding/geologist/src/lib/gui/db"/>
-<listOptionValue builtIn="false" value="/Users/jolo/data/coding/geologist/src/lib/gui/widgets"/>
-<listOptionValue builtIn="false" value="/Users/jolo/data/coding/geologist/src/lib/model/core"/>
-<listOptionValue builtIn="false" value="/Users/jolo/data/coding/geologist/src/lib/orm"/>
-<listOptionValue builtIn="false" value="/Users/jolo/data/coding/geologist/src/lib/settings"/>
+<listOptionValue builtIn="false" value="/Users/jolo/data/coding/geologist/src/lib"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.275105441" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
@@ -94,15 +89,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="private" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/model/core"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/orm"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/dbmodel/private"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/gui/widgets"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/db"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/gui/db"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/app"/>
-<entry excluding="private" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/dbmodel"/>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/lib/model/core/private"/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/Lib/Tools"/>
 </sourceEntries>
 </configuration>
 </storageModule>

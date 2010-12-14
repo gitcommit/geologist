@@ -1,9 +1,9 @@
 #ifndef SEQUENCE_H_
 #define SEQUENCE_H_
 
-#include <InSchemaModelComponent.h>
+#include <Lib/DBModel/InSchemaModelComponent.h>
 
-#include <private/SequenceData.h>
+#include <Lib/DBModel/private/SequenceData.h>
 
 class Schema;
 

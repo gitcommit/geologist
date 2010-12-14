@@ -1,10 +1,10 @@
-#include <LogWidget.h>
+#include <Lib/GUI/Widgets/LogWidget.h>
 
 #include <QtGui/QApplication>
 
-#include <LogDisplay.h>
-#include <App.h>
-#include <tools.h>
+#include <Lib/GUI/Widgets/LogDisplay.h>
+#include <App/App.h>
+#include <Lib/Tools/tools.h>
 
 LogWidget::LogWidget(QWidget* p) :
 	QSplitter(p) {

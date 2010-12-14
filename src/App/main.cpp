@@ -1,7 +1,7 @@
 #include <QtCore/QObject>
 
-#include <App.h>
-#include <MainWindow.h>
+#include <App/App.h>
+#include <Lib/GUI/Widgets/MainWindow.h>
 
 int main(int argc, char** argv) {
   App* a = new App(argc, argv);

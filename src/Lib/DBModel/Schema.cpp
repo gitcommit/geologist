@@ -1,9 +1,9 @@
-#include <Schema.h>
+#include <Lib/DBModel/Schema.h>
 
 #include <QtCore/QStringList>
 
-#include <DbModel.h>
-#include <Table.h>
+#include <Lib/DBModel/DbModel.h>
+#include <Lib/DBModel/Table.h>
 
 Schema::Schema(DbModel* dbM, const QString& name) :
 	InDbModelComponent(dbM), _d(0) {

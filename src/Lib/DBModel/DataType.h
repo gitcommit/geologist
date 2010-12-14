@@ -1,9 +1,9 @@
 #ifndef DATATYPE_H_
 #define DATATYPE_H_
 
-#include <InDbModelComponent.h>
+#include <Lib/DBModel/InDbModelComponent.h>
 
-#include <private/DataTypeData.h>
+#include <Lib/DBModel/private/DataTypeData.h>
 
 class DbModel;
 

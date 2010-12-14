@@ -1,9 +1,9 @@
 #ifndef CHECKCONSTRAINT_H_
 #define CHECKCONSTRAINT_H_
 
-#include <TableConstraint.h>
+#include <Lib/DBModel/TableConstraint.h>
 
-#include <private/CheckConstraintData.h>
+#include <Lib/DBModel/private/CheckConstraintData.h>
 
 class CheckConstraint : public TableConstraint {
 	Q_OBJECT

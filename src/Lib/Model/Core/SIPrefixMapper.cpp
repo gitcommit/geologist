@@ -1,4 +1,4 @@
-#include "SIPrefixMapper.h"
+#include <Lib/Model/Core/SIPrefixMapper.h>
 
 #include <QtGui/QApplication>
 #include <QtSql/QSqlRecord>

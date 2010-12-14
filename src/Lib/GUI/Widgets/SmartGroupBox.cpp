@@ -5,12 +5,12 @@
  * Created on 2. Dezember 2010, 13:31
  */
 
-#include <SmartGroupBox.h>
+#include <Lib/GUI/Widgets/SmartGroupBox.h>
 
 #include <QtGui/QLayout>
 
-#include <LineEdit.h>
-#include <FieldLabel.h>
+#include <Lib/GUI/Widgets/LineEdit.h>
+#include <Lib/GUI/Widgets/FieldLabel.h>
 
 SmartGroupBox::SmartGroupBox(QWidget* p, const QString& title) :
 	GroupBox(p, title), lblCol_(0), wCol_(1), r_(0) {

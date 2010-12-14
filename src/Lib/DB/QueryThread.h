@@ -9,9 +9,9 @@
 #include <QtSql/QSqlRecord>
 #include <QtSql/QSqlField>
 
-#include <ConnectionData.h>
-#include <Connection.h>
-#include <TypedQuery.h>
+#include <Lib/DB/ConnectionData.h>
+#include <Lib/DB/Connection.h>
+#include <Lib/DB/TypedQuery.h>
 
 class QueryThread: public QThread {
 	Q_OBJECT;

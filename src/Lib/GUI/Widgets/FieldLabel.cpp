@@ -5,7 +5,7 @@
  * Created on 2. Dezember 2010, 13:12
  */
 
-#include "FieldLabel.h"
+#include <Lib/GUI/Widgets/FieldLabel.h>
 
 FieldLabel::FieldLabel(QWidget* p, const QString& lbl)
 : Label(p, lbl) {

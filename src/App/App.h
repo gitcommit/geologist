@@ -4,14 +4,13 @@
 #include <QtGui/QApplication>
 #include <QtCore/QString>
 
-#include <DbModel.h>
+#include <Lib/DBModel/DbModel.h>
+#include <Lib/DB/ConnectionData.h>
 
-#include <ConnectionData.h>
+#include <Lib/DB/QueryThread.h>
+#include <Lib/DB/TypedQuery.h>
 
-#include <QueryThread.h>
-#include <TypedQuery.h>
-
-#include <SIPrefix.h>
+#include <Lib/Model/Core/SIPrefix.h>
  
 class SIPrefixMapper;
 

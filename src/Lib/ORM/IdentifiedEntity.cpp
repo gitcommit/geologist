@@ -1,6 +1,6 @@
-#include <IdentifiedEntity.h>
+#include <Lib/ORM/IdentifiedEntity.h>
 
-#include <IdentifiedEntityData.h>
+#include <Lib/ORM/IdentifiedEntityData.h>
 
 IdentifiedEntity::IdentifiedEntity(QObject* p, const qulonglong& id) :
 	Entity(p) {

@@ -1,4 +1,4 @@
-#include <XMLParser.h>
+#include <Lib/DBModel/XMLParser.h>
 
 #include <QtCore/QFile>
 #include <QtCore/QStringList>

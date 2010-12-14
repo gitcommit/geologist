@@ -1,6 +1,6 @@
-#include <Mapping.h>
+#include <Lib/ORM/Mapping.h>
 
-#include <private/MappingData.h>
+#include <Lib/ORM/Private/MappingData.h>
 
 Mapping::Mapping(QObject* p) :
 	QObject(p), _d(0) {

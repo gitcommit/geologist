@@ -8,7 +8,7 @@
 #ifndef FIELDLABEL_H
 #define	FIELDLABEL_H
 
-#include <Label.h>
+#include <Lib/GUI/Widgets/Label.h>
 
 class FieldLabel: public Label {
     Q_OBJECT

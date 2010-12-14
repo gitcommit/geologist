@@ -1,9 +1,9 @@
 #ifndef TABLECOLUMN_H_
 #define TABLECOLUMN_H_
 
-#include <InTableModelComponent.h>
+#include <Lib/DBModel/InTableModelComponent.h>
 
-#include <private/TableColumnData.h>
+#include <Lib/DBModel/private/TableColumnData.h>
 
 class DataType;
 

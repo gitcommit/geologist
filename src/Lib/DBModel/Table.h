@@ -1,11 +1,10 @@
 #ifndef TABLE_H_
 #define TABLE_H_
 
-#include <InSchemaModelComponent.h>
+#include <Lib/DBModel/InSchemaModelComponent.h>
 
-#include <private/TableData.h>
-
-#include <TableColumn.h>
+#include <Lib/DBModel/private/TableData.h>
+#include <Lib/DBModel/TableColumn.h>
 
 class Schema;
 class TableColumn;

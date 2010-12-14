@@ -1,8 +1,8 @@
-#include <Entity.h>
+#include <Lib/ORM/Entity.h>
 
 #include <QtCore/QCoreApplication>
 
-#include <App.h>
+#include <App/App.h>
 
 Entity::Entity(QObject* p) :
 	QObject(p), _d(0) {

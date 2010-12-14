@@ -1,9 +1,9 @@
 #ifndef CONSTRAINTDATA_H_
 #define CONSTRAINTDATA_H_
 
-#include <private/Base.h>
+#include <Lib/DBModel/private/Base.h>
 
-#include <TableColumn.h>
+#include <Lib/DBModel/TableColumn.h>
 
 class ConstraintData : public Base {
 public:

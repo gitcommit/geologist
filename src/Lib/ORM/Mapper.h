@@ -5,7 +5,7 @@
 #include <QtCore/QList>
 #include <QtSql/QSqlRecord>
 
-#include <TypedQuery.h>
+#include <Lib/DB/TypedQuery.h>
 
 class Mapper : public QObject {
 	Q_OBJECT

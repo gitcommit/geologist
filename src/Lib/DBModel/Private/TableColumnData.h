@@ -1,7 +1,7 @@
 #ifndef TABLECOLUMNDATA_H_
 #define TABLECOLUMNDATA_H_
 
-#include <private/Base.h>
+#include <Lib/DBModel/private/Base.h>
 
 class DataType;
 

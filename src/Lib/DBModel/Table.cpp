@@ -1,10 +1,10 @@
-#include <Table.h>
+#include <Lib/DBModel/Table.h>
 
 #include <QtCore/QStringList>
 
-#include <Schema.h>
-#include <TableColumn.h>
-#include <PrimaryKeyConstraint.h>
+#include <Lib/DBModel/Schema.h>
+#include <Lib/DBModel/TableColumn.h>
+#include <Lib/DBModel/PrimaryKeyConstraint.h>
 
 Table::Table(Schema* schema, const QString& name) :
 	InSchemaModelComponent(schema), _d(0) {

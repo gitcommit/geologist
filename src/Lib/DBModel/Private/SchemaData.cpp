@@ -1,4 +1,4 @@
-#include <private/SchemaData.h>
+#include <Lib/DBModel/private/SchemaData.h>
 
 SchemaData::SchemaData(const QString& name) :
 	Base(name) {

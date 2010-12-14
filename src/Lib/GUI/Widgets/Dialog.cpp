@@ -5,7 +5,7 @@
  * Created on 2. Dezember 2010, 13:05
  */
 
-#include <Dialog.h>
+#include <Lib/GUI/Widgets/Dialog.h>
 
 #include <QtGui/QLayout>
 

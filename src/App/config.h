@@ -7,6 +7,6 @@
 #define ORG_NAME "LochiSoft"
 
 #define DB_NAME "test"
-#define DB_CONFIG_FILE "/Users/jolo/data/coding/geologist/src/app/xml/db.xml"
+#define DB_CONFIG_FILE "/Users/jolo/data/coding/geologist/src/App/XML/db.xml"
 
 #endif

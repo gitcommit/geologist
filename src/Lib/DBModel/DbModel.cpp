@@ -1,19 +1,19 @@
-#include <DbModel.h>
+#include <Lib/DBModel/DbModel.h>
 
 #include <QtCore/QStringList>
 #include <QtCore/QDebug>
 
-#include <Schema.h>
-#include <Table.h>
-#include <DataType.h>
-#include <Sequence.h>
-#include <TableColumn.h>
-#include <PrimaryKeyConstraint.h>
-#include <UniqueConstraint.h>
-#include <CheckConstraint.h>
-#include <ForeignKeyConstraint.h>
+#include <Lib/DBModel/Schema.h>
+#include <Lib/DBModel/Table.h>
+#include <Lib/DBModel/DataType.h>
+#include <Lib/DBModel/Sequence.h>
+#include <Lib/DBModel/TableColumn.h>
+#include <Lib/DBModel/PrimaryKeyConstraint.h>
+#include <Lib/DBModel/UniqueConstraint.h>
+#include <Lib/DBModel/CheckConstraint.h>
+#include <Lib/DBModel/ForeignKeyConstraint.h>
 
-#include <XMLParser.h>
+#include <Lib/DBModel/XMLParser.h>
 
 DbModel::DbModel(QObject* p, const QString& n) :
 	ModelComponent(p), _d(0) {

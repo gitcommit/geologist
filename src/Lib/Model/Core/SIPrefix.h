@@ -1,7 +1,7 @@
 #ifndef SI_PREFIX_H
 #define SI_PREFIX_H
 
-#include <StandardEntity.h>
+#include <Lib/ORM/StandardEntity.h>
 
 #include <QtCore/QString>
 #include <QtCore/QObject>

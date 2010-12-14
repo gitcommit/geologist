@@ -1,8 +1,8 @@
-#include <QueryThread.h>
+#include <Lib/DB/QueryThread.h>
 
 #include <QtCore/QDebug>
 
-#include "Connection.h"
+#include <Lib/DB/Connection.h>
 
 QueryThread::QueryThread(QObject* p)
   : QThread(p),

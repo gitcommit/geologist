@@ -1,4 +1,4 @@
-#include <private/SequenceData.h>
+#include <Lib/DBModel/private/SequenceData.h>
 
 SequenceData::SequenceData(const QString& name) :
 	Base(name) {

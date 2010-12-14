@@ -1,7 +1,7 @@
 #ifndef IDENTIFIEDENTITY_H_
 #define IDENTIFIEDENTITY_H_
 
-#include <Entity.h>
+#include <Lib/ORM/Entity.h>
 
 class IdentifiedEntityData;
 

@@ -1,9 +1,9 @@
 #ifndef SCHEMA_H_
 #define SCHEMA_H_
 
-#include <InDbModelComponent.h>
+#include <Lib/DBModel/InDbModelComponent.h>
 
-#include <private/SchemaData.h>
+#include <Lib/DBModel/private/SchemaData.h>
 
 class DbModel;
 class Table;

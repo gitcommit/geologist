@@ -1,4 +1,4 @@
-#include <private/TableColumnData.h>
+#include <Lib/DBModel/private/TableColumnData.h>
 
 TableColumnData::TableColumnData(const QString& name, DataType* dataType, const bool& nullable) :
 	Base(name), _dataType(dataType), _nullable(nullable) {

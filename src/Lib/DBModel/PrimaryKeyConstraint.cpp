@@ -1,8 +1,8 @@
-#include <PrimaryKeyConstraint.h>
+#include <Lib/DBModel/PrimaryKeyConstraint.h>
 
 #include <QtCore/QStringList>
 
-#include <Table.h>
+#include <Lib/DBModel/Table.h>
 
 PrimaryKeyConstraint::PrimaryKeyConstraint(Table* table, const QString& name) :
 	TableConstraint(table), _d(0) {

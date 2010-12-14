@@ -1,7 +1,7 @@
 #ifndef TABLECONSTRAINT_H_
 #define TABLECONSTRAINT_H_
 
-#include <InTableModelComponent.h>
+#include <Lib/DBModel/InTableModelComponent.h>
 
 class TableColumn;
 
