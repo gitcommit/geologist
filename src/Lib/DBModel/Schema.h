@@ -1,17 +1,17 @@
 #ifndef SCHEMA_H_
 #define SCHEMA_H_
 
-#include <Lib/DBModel/InDbModelComponent.h>
+#include <Lib/DBModel/InDBModelComponent.h>
 
-#include <Lib/DBModel/private/SchemaData.h>
+#include <Lib/DBModel/Private/SchemaData.h>
 
-class DbModel;
+class DBModel;
 class Table;
 
-class Schema : public InDbModelComponent {
+class Schema : public InDBModelComponent {
 	Q_OBJECT
 public:
-	Schema(DbModel* dbM = 0, const QString& name = QString::null);
+	Schema(DBModel* dbM = 0, const QString& name = QString::null);
 	Schema(const Schema& other);
 	virtual ~Schema();
 

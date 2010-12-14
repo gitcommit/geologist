@@ -33,10 +33,10 @@ void MainWindow::setupMenu() {
   dbM_ = new QMenu(tr("&Database"), this);
   connectA_ = new QAction(tr("&Open..."), this);
   connectA_->setShortcut(QKeySequence("Ctrl+o"));
-  connect(connectA_, SIGNAL(triggered()), (qobject_cast<App*>(QApplication::instance())), SLOT(onOpenDb()));
+  connect(connectA_, SIGNAL(triggered()), (qobject_cast<App*>(QApplication::instance())), SLOT(onOpenDB()));
   disconnectA_ = new QAction(tr("&Close"), this);
   disconnectA_->setShortcut(QKeySequence("Ctrl+d"));
-  connect(disconnectA_, SIGNAL(triggered()), (qobject_cast<App*>(QApplication::instance())), SLOT(onCloseDb()));
+  connect(disconnectA_, SIGNAL(triggered()), (qobject_cast<App*>(QApplication::instance())), SLOT(onCloseDB()));
   dbM_->addAction(connectA_);
   dbM_->addAction(disconnectA_);
   menuBar()->addMenu(dbM_);

@@ -3,7 +3,7 @@
 
 #include <Lib/DBModel/TableConstraint.h>
 
-#include <Lib/DBModel/private/UniqueConstraintData.h>
+#include <Lib/DBModel/Private/UniqueConstraintData.h>
 
 class UniqueConstraint : public TableConstraint {
 	Q_OBJECT

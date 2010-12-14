@@ -2,11 +2,11 @@
 
 #include <QtCore/QStringList>
 
-#include <Lib/DBModel/DbModel.h>
+#include <Lib/DBModel/DBModel.h>
 #include <Lib/DBModel/Table.h>
 
-Schema::Schema(DbModel* dbM, const QString& name) :
-	InDbModelComponent(dbM), _d(0) {
+Schema::Schema(DBModel* dbM, const QString& name) :
+	InDBModelComponent(dbM), _d(0) {
 	_d = new SchemaData;
 	setName(name);
 }

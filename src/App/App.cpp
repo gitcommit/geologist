@@ -20,7 +20,7 @@
 
 #include <Lib/ORM/Entity.h>
 #include <Lib/Settings/Settings.h>
-#include <Lib/DBModel/DbModel.h>
+#include <Lib/DBModel/DBModel.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(TypedQuery)
@@ -87,7 +87,7 @@ void App::debug(const QString& msg) {
   emit debugMessage(tr("Debug: %1").arg(msg));
 }
 
-void App::onOpenDb() {
+void App::onOpenDB() {
 	Settings s(this);
 	DatabaseConnectionDialog* d = new DatabaseConnectionDialog(activeWindow(), &cd_);
 	if (QDialog::Accepted != d->exec()) {
@@ -98,7 +98,7 @@ void App::onOpenDb() {
   emit connectRequest(cd_);
 }
 
-void App::onCloseDb() {
+void App::onCloseDB() {
   emit disconnectRequest();
 }
 

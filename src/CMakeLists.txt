@@ -41,18 +41,18 @@ SET(geo_SRCS_CXX
     Lib/DBModel/CheckConstraint.cpp
     Lib/DBModel/TableColumnPair.cpp
     Lib/DBModel/ForeignKeyConstraint.cpp
-    Lib/DBModel/private/Base.cpp
-    Lib/DBModel/private/DBModelData.cpp
-    Lib/DBModel/private/SchemaData.cpp
-    Lib/DBModel/private/TableData.cpp
-    Lib/DBModel/private/DataTypeData.cpp
-    Lib/DBModel/private/SequenceData.cpp
-    Lib/DBModel/private/TableColumnData.cpp
-    Lib/DBModel/private/ConstraintData.cpp
-    Lib/DBModel/private/PrimaryKeyConstraintData.cpp
-    Lib/DBModel/private/UniqueConstraintData.cpp
-    Lib/DBModel/private/CheckConstraintData.cpp
-    Lib/DBModel/private/ForeignKeyConstraintData.cpp
+    Lib/DBModel/Private/Base.cpp
+    Lib/DBModel/Private/DBModelData.cpp
+    Lib/DBModel/Private/SchemaData.cpp
+    Lib/DBModel/Private/TableData.cpp
+    Lib/DBModel/Private/DataTypeData.cpp
+    Lib/DBModel/Private/SequenceData.cpp
+    Lib/DBModel/Private/TableColumnData.cpp
+    Lib/DBModel/Private/ConstraintData.cpp
+    Lib/DBModel/Private/PrimaryKeyConstraintData.cpp
+    Lib/DBModel/Private/UniqueConstraintData.cpp
+    Lib/DBModel/Private/CheckConstraintData.cpp
+    Lib/DBModel/Private/ForeignKeyConstraintData.cpp
     
     Lib/Tools/tools.cpp
     
@@ -67,9 +67,9 @@ SET(geo_SRCS_CXX
     Lib/ORM/StandardEntityData.cpp
     Lib/ORM/Mapper.cpp
     
-    Lib/Model/core/SIPrefix.cpp
-    Lib/Model/core/SIPrefixMapper.cpp
-    Lib/Model/core/private/SIPrefixData.cpp
+    Lib/Model/Core/SIPrefix.cpp
+    Lib/Model/Core/SIPrefixMapper.cpp
+    Lib/Model/Core/Private/SIPrefixData.cpp
     
     Lib/DB/ConnectionData.cpp
     Lib/DB/Connection.cpp
@@ -90,7 +90,7 @@ SET(geo_SRCS_CXX
     Lib/GUI/Widgets/Editor.cpp
     Lib/GUI/Widgets/PasswordEdit.cpp
     
-    Lib/Gui/DB/DatabaseConnectionDialog.cpp
+    Lib/GUI/DB/DatabaseConnectionDialog.cpp
 )
 
 # files which need to be moc'd by Qt (headers)
@@ -119,9 +119,8 @@ SET(geo_MOC_SRCS
     Lib/ORM/StandardEntity.h
     Lib/ORM/Mapper.h
     
-    Lib/Model/core/SIPrefix.h
-   
-   Lib/Model/core/SIPrefixMapper.h
+    Lib/Model/Core/SIPrefix.h
+    Lib/Model/Core/SIPrefixMapper.h
     
     Lib/DB/Connection.h
     Lib/DB/QueryThread.h
@@ -140,7 +139,7 @@ SET(geo_MOC_SRCS
     Lib/GUI/Widgets/Editor.h
     Lib/GUI/Widgets/PasswordEdit.h
     
-    Lib/Gui/DB/DatabaseConnectionDialog.h
+    Lib/GUI/DB/DatabaseConnectionDialog.h
 )
 
 # client UI files

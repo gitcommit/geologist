@@ -1,7 +1,7 @@
 #ifndef TABLEDATA_H_
 #define TABLEDATA_H_
 
-#include <Lib/DBModel/private/Base.h>
+#include <Lib/DBModel/Private/Base.h>
 
 class TableData : public Base {
 public:

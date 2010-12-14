@@ -4,7 +4,7 @@
 #include <QtGui/QApplication>
 #include <QtCore/QString>
 
-#include <Lib/DBModel/DbModel.h>
+#include <Lib/DBModel/DBModel.h>
 #include <Lib/DB/ConnectionData.h>
 
 #include <Lib/DB/QueryThread.h>
@@ -41,8 +41,8 @@ class App: public QApplication {
  	void debugMessage(const QString& msg);
  public slots:
   	virtual void debug(const QString& msg);
-  	virtual void onOpenDb();
-  	virtual void onCloseDb();
+  	virtual void onOpenDB();
+  	virtual void onCloseDB();
   	void onDatabaseMessage(const QString& msg);
   	void onConnected(const QString& msg);
   	void onDisconnected();
@@ -56,7 +56,7 @@ class App: public QApplication {
 	SIPrefixMapper* _siPrefixMapper;
 	qlonglong lastQueryId_;
 	qlonglong currentUserQueryId_;
-	DbModel _dbModel;
+	DBModel _dbModel;
 };
 
 #endif

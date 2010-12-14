@@ -3,7 +3,7 @@
 
 #include <Lib/DBModel/TableConstraint.h>
 
-#include <Lib/DBModel/private/PrimaryKeyConstraintData.h>
+#include <Lib/DBModel/Private/PrimaryKeyConstraintData.h>
 
 class PrimaryKeyConstraint : public TableConstraint {
 	Q_OBJECT

@@ -1,7 +1,7 @@
 #ifndef UNIQUECONSTRAINTDATA_H_
 #define UNIQUECONSTRAINTDATA_H_
 
-#include <Lib/DBModel/private/ConstraintData.h>
+#include <Lib/DBModel/Private/ConstraintData.h>
 
 #include <Lib/DBModel/TableColumn.h>
 

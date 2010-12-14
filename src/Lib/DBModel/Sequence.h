@@ -3,7 +3,7 @@
 
 #include <Lib/DBModel/InSchemaModelComponent.h>
 
-#include <Lib/DBModel/private/SequenceData.h>
+#include <Lib/DBModel/Private/SequenceData.h>
 
 class Schema;
 

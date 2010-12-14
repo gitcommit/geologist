@@ -1,7 +1,7 @@
 #ifndef PRIMARYKEYCONSTRAINTDATA_H_
 #define PRIMARYKEYCONSTRAINTDATA_H_
 
-#include <Lib/DBModel/private/ConstraintData.h>
+#include <Lib/DBModel/Private/ConstraintData.h>
 
 #include <Lib/DBModel/TableColumn.h>
 

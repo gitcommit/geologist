@@ -1,7 +1,7 @@
 #ifndef CHECKCONSTRAINTDATA_H_
 #define CHECKCONSTRAINTDATA_H_
 
-#include <Lib/DBModel/private/ConstraintData.h>
+#include <Lib/DBModel/Private/ConstraintData.h>
 
 #include <Lib/DBModel/TableColumn.h>
 

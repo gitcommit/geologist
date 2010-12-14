@@ -1,7 +1,7 @@
 #ifndef FOREIGNKEYCONSTRAINTDATA_H_
 #define FOREIGNKEYCONSTRAINTDATA_H_
 
-#include <Lib/DBModel/private/Base.h>
+#include <Lib/DBModel/Private/Base.h>
 
 #include <Lib/DBModel/TableColumn.h>
 #include <Lib/DBModel/TableColumnPair.h>

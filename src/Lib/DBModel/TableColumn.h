@@ -3,7 +3,7 @@
 
 #include <Lib/DBModel/InTableModelComponent.h>
 
-#include <Lib/DBModel/private/TableColumnData.h>
+#include <Lib/DBModel/Private/TableColumnData.h>
 
 class DataType;
 

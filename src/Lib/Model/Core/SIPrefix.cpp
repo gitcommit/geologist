@@ -2,7 +2,7 @@
 
 #include <App/App.h>
 
-#include <Lib/Model/Core/SiPrefixMapper.h>
+#include <Lib/Model/Core/SIPrefixMapper.h>
 #include <Lib/Model/Core/Private/SIPrefixData.h>
 
 SIPrefix::SIPrefix(QObject* p, const qulonglong& id, const QString& name,

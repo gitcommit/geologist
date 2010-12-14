@@ -1,16 +1,16 @@
 #ifndef DATATYPE_H_
 #define DATATYPE_H_
 
-#include <Lib/DBModel/InDbModelComponent.h>
+#include <Lib/DBModel/InDBModelComponent.h>
 
-#include <Lib/DBModel/private/DataTypeData.h>
+#include <Lib/DBModel/Private/DataTypeData.h>
 
-class DbModel;
+class DBModel;
 
-class DataType : public InDbModelComponent {
+class DataType : public InDBModelComponent {
 	Q_OBJECT
 public:
-	DataType(DbModel* dbM = 0, const QString& name = QString::null, const QString& sqlName = QString::null,
+	DataType(DBModel* dbM = 0, const QString& name = QString::null, const QString& sqlName = QString::null,
 			const bool& requiresQuoting = false);
 	DataType(const DataType& other);
 	virtual ~DataType();

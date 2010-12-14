@@ -3,7 +3,7 @@
 
 #include <Lib/DBModel/TableConstraint.h>
 
-#include <Lib/DBModel/private/CheckConstraintData.h>
+#include <Lib/DBModel/Private/CheckConstraintData.h>
 
 class CheckConstraint : public TableConstraint {
 	Q_OBJECT

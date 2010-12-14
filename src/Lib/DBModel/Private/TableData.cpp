@@ -1,4 +1,4 @@
-#include <Lib/DBModel/private/TableData.h>
+#include <Lib/DBModel/Private/TableData.h>
 
 TableData::TableData(const QString& name) :
 	Base(name) {

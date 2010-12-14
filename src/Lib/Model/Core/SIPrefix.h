@@ -41,4 +41,4 @@ protected:
 	SIPrefixData* siPrefixData() const;
 };
 
-#endif SI_PREFIX_H
+#endif // SI_PREFIX_H

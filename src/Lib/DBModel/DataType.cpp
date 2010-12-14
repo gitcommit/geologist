@@ -1,10 +1,10 @@
 #include <Lib/DBModel/DataType.h>
 
 #include <QtCore/QStringList>
-#include <Lib/DBModel/DbModel.h>
+#include <Lib/DBModel/DBModel.h>
 
-DataType::DataType(DbModel* dbM, const QString& name, const QString& sqlName, const bool& requiresQuoting) :
-	InDbModelComponent(dbM), _d(0) {
+DataType::DataType(DBModel* dbM, const QString& name, const QString& sqlName, const bool& requiresQuoting) :
+	InDBModelComponent(dbM), _d(0) {
 	_d = new DataTypeData;
 	setName(name);
 	setSqlName(sqlName);

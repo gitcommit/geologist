@@ -1,4 +1,4 @@
-#include <Lib/DBModel/private/ForeignKeyConstraintData.h>
+#include <Lib/DBModel/Private/ForeignKeyConstraintData.h>
 
 #include <QtCore/QStringList>
 

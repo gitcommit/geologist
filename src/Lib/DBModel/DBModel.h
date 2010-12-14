@@ -6,19 +6,19 @@
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QString>
 
-#include <Lib/DBModel/private/DbModelData.h>
+#include <Lib/DBModel/Private/DBModelData.h>
 
 class Schema;
 class DataType;
 
 class XMLParser;
 
-class DbModel: public ModelComponent {
+class DBModel: public ModelComponent {
 	Q_OBJECT
 public:
-	DbModel(QObject* p = 0, const QString& name = QString::null);
-	DbModel(const DbModel& other);
-	virtual ~DbModel();
+	DBModel(QObject* p = 0, const QString& name = QString::null);
+	DBModel(const DBModel& other);
+	virtual ~DBModel();
 	
 	QString name() const;
 	QString qualifiedName() const;
@@ -50,7 +50,7 @@ protected:
 	virtual QStringList createCheckConstraints() const;
 	virtual QStringList createForeignKeyConstraints() const;
 private:
-	QExplicitlySharedDataPointer<DbModelData> _d;
+	QExplicitlySharedDataPointer<DBModelData> _d;
 	XMLParser* _parser;
 };
 
