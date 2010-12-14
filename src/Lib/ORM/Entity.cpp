@@ -5,13 +5,12 @@
 #include <App/App.h>
 
 Entity::Entity(QObject* p) :
-	QObject(p), _d(0) {
+	QObject(p) {
 	connect(this, SIGNAL(dataChanged()), this, SLOT(onDataChanged()));
 	setStatus(Entity::New);
 }
 
-Entity::Entity(const Entity& other) :
-	_d(other._d) {
+Entity::Entity(const Entity& other) {
 }
 
 Entity::~Entity() {

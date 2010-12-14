@@ -1,7 +1,7 @@
 #ifndef STANDARDENTITYDATA_H_
 #define STANDARDENTITYDATA_H_
 
-#include <Lib/ORM/IdentifiedEntityData.h>
+#include <Lib/ORM/Private/IdentifiedEntityData.h>
 
 #include <QtCore/QString>
 

@@ -59,13 +59,16 @@ SET(geo_SRCS_CXX
     App/main.cpp
     App/App.cpp
     
-    Lib/ORM/Entity.cpp
-    Lib/ORM/EntityData.cpp
-    Lib/ORM/IdentifiedEntity.cpp
-    Lib/ORM/IdentifiedEntityData.cpp
-    Lib/ORM/StandardEntity.cpp
-    Lib/ORM/StandardEntityData.cpp
     Lib/ORM/Mapper.cpp
+    
+    Lib/ORM/Entity.cpp
+    Lib/ORM/IdentifiedEntity.cpp
+    Lib/ORM/StandardEntity.cpp
+    Lib/ORM/Private/EntityData.cpp
+    Lib/ORM/Private/IdentifiedEntityData.cpp
+    Lib/ORM/Private/StandardEntityData.cpp
+    
+    Lib/ORM/EntityStatus.cpp
     lib/ORM/Mapping.cpp
     Lib/ORM/Private/MappingData.cpp
     

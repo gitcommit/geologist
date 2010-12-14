@@ -1,4 +1,4 @@
-#include <Lib/ORM/IdentifiedEntityData.h>
+#include <Lib/ORM/Private/IdentifiedEntityData.h>
 
 IdentifiedEntityData::IdentifiedEntityData(const qulonglong& id) :
 	EntityData(), _id(id) {

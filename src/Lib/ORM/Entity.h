@@ -7,7 +7,6 @@
 class App;
 
 class Mapper;
-class EntityData;
 
 class Entity : public QObject {
 	Q_OBJECT
@@ -23,7 +22,7 @@ public:
 	virtual ~Entity();
 
 	Entity::States status() const { return _status; }
-	virtual QString const toString() { return tr("Entity [%1]").arg(descriptiveStatus()); } 
+	virtual QString toString() const = 0; 
 	
 	QString descriptiveStatus() const {
 		switch(status()) {
@@ -41,10 +40,6 @@ public slots:
 protected:
 	App* app() const;
 	virtual Mapper* mapper() const = 0;
-	EntityData* data() const { return _d; }
-	void setData(EntityData* d) { _d = d; }
-	bool hasData() const { return (0 != _d); }
-	EntityData* _d;
 private:
 	Entity::States _status;
 };

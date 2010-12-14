@@ -5,6 +5,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QObject>
+#include <QtCore/QExplicitlySharedDataPointer>
 
 class Mapper;
 class SIPrefixData;
@@ -21,24 +22,30 @@ public:
 			const QString& description = QString::null);
 	SIPrefix(const SIPrefix& other);
 	virtual ~SIPrefix();
-	QString symbol() const;
-	qreal factor() const;
-	virtual QString toString() const {
-		return QObject::tr("Name: %1, Symbol: %2, Code: %3, Factor: %4 [%5]")
-		.arg(name())
-		.arg(symbol())
-		.arg(code())
-		.arg(factor())
-		.arg(descriptiveStatus());
-	}
-	void setSymbol(const QString& s);
-	void setFactor(const qreal& r);
+
+	virtual void setId(const qulonglong& id);
+	virtual void setName(const QString& name);
+	virtual void setCode(const QString& code);
+	virtual void setSymbol(const QString& s);
+	virtual void setFactor(const qreal& r);
+	virtual void setDescription(const QString& d);
+
+	virtual qulonglong id() const;
+	virtual QString name() const;
+	virtual QString code() const;
+	virtual QString symbol() const;
+	virtual qreal factor() const;
+	virtual QString description() const;
+
+	virtual bool hasId() const;
+	virtual QString toString() const;
+	
 	Mapper* mapper() const;
-signals:
+	signals:
 	void symbolChanged(const QString& newSymbol);
 	void factorChanged(const qreal& newFacto);
 protected:
-	SIPrefixData* siPrefixData() const;
+	QExplicitlySharedDataPointer<SIPrefixData> _d;
 };
 
 #endif // SI_PREFIX_H
