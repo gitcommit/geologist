@@ -66,6 +66,8 @@ SET(geo_SRCS_CXX
     Lib/ORM/StandardEntity.cpp
     Lib/ORM/StandardEntityData.cpp
     Lib/ORM/Mapper.cpp
+    lib/ORM/Mapping.cpp
+    Lib/ORM/Private/MappingData.cpp
     
     Lib/Model/Core/SIPrefix.cpp
     Lib/Model/Core/SIPrefixMapper.cpp
@@ -118,6 +120,7 @@ SET(geo_MOC_SRCS
     Lib/ORM/IdentifiedEntity.h
     Lib/ORM/StandardEntity.h
     Lib/ORM/Mapper.h
+    Lib/ORM/Mapping.h
     
     Lib/Model/Core/SIPrefix.h
     Lib/Model/Core/SIPrefixMapper.h

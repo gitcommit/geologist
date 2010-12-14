@@ -94,15 +94,19 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="XML" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/App"/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/App/XML"/>
+<entry excluding="src/Lib|src/Lib/ORM|src/Lib/ORM/Private|src/Lib/Model/Core|src/Lib/GUI/Widgets|src/Lib/GUI/DB|src/Lib/DBModel|src/Lib/DB|src/App" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/App"/>
 <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/DB"/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/DBModel"/>
+<entry excluding="Private" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/DBModel"/>
 <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/GUI/DB"/>
 <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/GUI/Widgets"/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/Model/Core"/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/ORM"/>
+<entry excluding="Private" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/Model/Core"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/Model/Core/Private"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/DBModel/Private"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/ORM/Private"/>
+<entry excluding="Private" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/ORM"/>
 <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/Settings"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src/Lib/Tools"/>
 </sourceEntries>
 </configuration>
 </storageModule>
