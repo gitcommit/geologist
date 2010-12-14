@@ -2,24 +2,19 @@
 
 #include <QtCore/QCoreApplication>
 
-#include <App/App.h>
-
 Entity::Entity(QObject* p) :
 	QObject(p) {
 	connect(this, SIGNAL(dataChanged()), this, SLOT(onDataChanged()));
-	setStatus(Entity::New);
+	setStatus(EntityStatus(EntityStatus::New));
 }
 
-Entity::Entity(const Entity& other) {
+Entity::Entity(const Entity& other) :
+	_status(other._status) {
 }
 
 Entity::~Entity() {
 }
 
 void Entity::onDataChanged() {
-	setStatus(Entity::Dirty);
-}
-
-App* Entity::app() const {
-	return qobject_cast<App*>(QApplication::instance());
+	setStatus(EntityStatus(EntityStatus::Dirty));
 }

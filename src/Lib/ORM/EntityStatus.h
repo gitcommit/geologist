@@ -13,6 +13,7 @@ public:
 	};
 	
 	EntityStatus(const EntityStatus::States& s = EntityStatus::Unknown);
+	EntityStatus(const EntityStatus& other);
 	virtual ~EntityStatus();
 	EntityStatus::States status() const {
 		return _status;

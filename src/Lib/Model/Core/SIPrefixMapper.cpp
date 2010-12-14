@@ -43,6 +43,6 @@ SIPrefix* SIPrefixMapper::fromRecord(const QSqlRecord& rec) {
 	ret->setProperty("symbol", rec.field("SYMBOL").value());
 	ret->setProperty("factor", rec.field("FACTOR").value());
 	ret->setProperty("description", rec.field("DESCRIPTION").value());
-	ret->setStatus(Entity::Clean);
+	ret->setStatus(EntityStatus(EntityStatus::Clean));
 	return ret;
 }

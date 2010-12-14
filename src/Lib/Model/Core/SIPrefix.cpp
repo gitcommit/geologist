@@ -2,6 +2,7 @@
 
 #include <App/App.h>
 
+#include <Lib/Tools/tools.h>
 #include <Lib/Model/Core/SIPrefixMapper.h>
 #include <Lib/Model/Core/Private/SIPrefixData.h>
 
@@ -24,7 +25,7 @@ SIPrefix::~SIPrefix() {
 }
 
 Mapper* SIPrefix::mapper() const {
-	return app()->siPrefixMapper();
+	return getApp()->siPrefixMapper();
 }
 
 void SIPrefix::setSymbol(const QString& s) {
