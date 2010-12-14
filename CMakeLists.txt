@@ -1,5 +1,5 @@
 # project name
-PROJECT(geo)
+PROJECT(geologist)
 
 IF(NOT CMAKE_BUILD_TYPE)
   SET(CMAKE_BUILD_TYPE Debug CACHE STRING

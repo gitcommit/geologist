@@ -1,13 +1,13 @@
-PROJECT(geo)
+PROJECT(geologist)
 
 SET(EXECUTABLE_OUTPUT_PATH ../bin)
 
-SET(geo_INCLUDE_DIRS
+SET(geologist_INCLUDE_DIRS
 	App
 	Lib
 )
 
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR} ${geo_SOURCE_DIR} ${geo_BINARY_DIR} ${geo_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR} ${geologist_SOURCE_DIR} ${geologist_BINARY_DIR} ${geologist_INCLUDE_DIRS})
 
 IF(WIN32)
   FIND_LIBRARY(QT_GIF_PLUGIN qgif PATHS ${QT_PLUGINS_DIR} PATH_SUFFIXES imageformats)
@@ -23,7 +23,7 @@ INCLUDE(${QT_USE_FILE})
 INCLUDE_DIRECTORIES(${QT_QTSQL_INCLUDE_DIR} ${QT_QTSVG_INCLUDE_DIR} ${QT_QTXML_INCLUDE_DIR}) 
 
 # .cxx sources
-SET(geo_SRCS_CXX
+SET(geologist_SRCS_CXX
     Lib/DBModel/XMLParser.cpp
     Lib/DBModel/ModelComponent.cpp
     Lib/DBModel/DBModel.cpp
@@ -69,7 +69,7 @@ SET(geo_SRCS_CXX
     Lib/ORM/Private/StandardEntityData.cpp
     
     Lib/ORM/EntityStatus.cpp
-    lib/ORM/Mapping.cpp
+    Lib/ORM/Mapping.cpp
     Lib/ORM/Private/MappingData.cpp
     
     Lib/Model/Core/SIPrefix.cpp
@@ -99,7 +99,7 @@ SET(geo_SRCS_CXX
 )
 
 # files which need to be moc'd by Qt (headers)
-SET(geo_MOC_SRCS    
+SET(geologist_MOC_SRCS    
     App/App.h
     
     Lib/DBModel/XMLParser.h
@@ -149,25 +149,25 @@ SET(geo_MOC_SRCS
 )
 
 # client UI files
-SET(geo_UI)
+SET(geologist_UI)
 
 # build ui_XXX files from the XML-style .ui files
-QT4_WRAP_UI(geo_SRCS_CXX ${geo_UI})
+QT4_WRAP_UI(geologist_SRCS_CXX ${geologist_UI})
 
 # this moc's the above variable and appends to the cxx sources
-QT4_WRAP_CPP(geo_SRCS_CXX ${geo_MOC_SRCS})
+QT4_WRAP_CPP(geologist_SRCS_CXX ${geologist_MOC_SRCS})
 
 IF(UNIX)
-  ADD_EXECUTABLE(geo ${geo_SRCS_CXX})
+  ADD_EXECUTABLE(geologist ${geologist_SRCS_CXX})
 ELSEIF(APPLE)
-  ADD_EXECUTABLE(geo MACOSX_BUNDLE ${geo_SRCS_CXX})
+  ADD_EXECUTABLE(geologist MACOSX_BUNDLE ${geologist_SRCS_CXX})
 ELSEIF(WIN32)
-  ADD_EXECUTABLE(geo WIN32 ${geo_SRCS_CXX})
+  ADD_EXECUTABLE(geologist WIN32 ${geologist_SRCS_CXX})
 ENDIF()
 
 IF(WIN32)
-  TARGET_LINK_LIBRARIES(geo ${QT_LIBRARIES} ${QT_GIF_PLUGIN} ${QT_JPEG_PLUGIN})
+  TARGET_LINK_LIBRARIES(geologist ${QT_LIBRARIES} ${QT_GIF_PLUGIN} ${QT_JPEG_PLUGIN})
 ELSE()
-  TARGET_LINK_LIBRARIES(geo ${QT_LIBRARIES})
+  TARGET_LINK_LIBRARIES(geologist ${QT_LIBRARIES})
 ENDIF()
 
