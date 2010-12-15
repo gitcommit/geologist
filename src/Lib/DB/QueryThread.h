@@ -11,61 +11,56 @@
 
 #include <Lib/DB/ConnectionData.h>
 #include <Lib/DB/Connection.h>
-#include <Lib/DB/TypedQuery.h>
 
-class QueryThread: public QThread {
-	Q_OBJECT;
+class QueryThread : public QThread {
+    Q_OBJECT;
 
 public:
-	QueryThread(QObject* p = 0);
-	virtual ~QueryThread();
+    QueryThread(QObject* p = 0);
+    virtual ~QueryThread();
 
 public slots:
-	virtual void open(const ConnectionData& cd);
-	virtual void close();
-	virtual void abort();
+    virtual void open(const ConnectionData& cd);
+    virtual void close();
+    virtual void abort();
 
-	virtual void onExecRequest(const QList<TypedQuery>& lst);
-	virtual void onExecRequest(const TypedQuery& q);
-	virtual void onQueryCompleted(const TypedQuery& q);
+    void onBeginRequest();
+    void onCommitRequest();
+    void onRollbackRequest();
+    void onSavepointRequest(const QString& name);
+    void onRollbackToSavepointRequest(const QString& name);
 
-	void onBeginRequest();
-	void onCommitRequest();
-	void onRollbackRequest();
-	void onSavepointRequest(const QString& name);
-	void onRollbackToSavepointRequest(const QString& name);
+    void onConnectionMessage(const QString& msg);
+    void onConnected(const QString& msg);
+    void onDisconnected();
 
-	void onConnectionMessage(const QString& msg);
-	void onConnected(const QString& msg);
-	void onDisconnected();
-	
 signals:
-	void beginRequest();
-	void commitRequest();
-	void rollbackRequest();
-	void savepointRequest(const QString& name);
-	void rollbackToSavepointRequest(const QString& name);
+    void beginRequest();
+    void commitRequest();
+    void rollbackRequest();
+    void savepointRequest(const QString& name);
+    void rollbackToSavepointRequest(const QString& name);
 
-	void execRequest(const QList<TypedQuery>& lst);
-	void execRequest(const TypedQuery& q);
-	void queryCompleted(const TypedQuery& q);
-	
-	void message(const QString& msg);
-	void connected(const QString& info);	
-	void disconnected();
-	void connectRequest(const ConnectionData& cd, const QString& connectionName);
-	void disconnectRequest();
+    void message(const QString& msg);
+    void connected(const QString& info);
+    void disconnected();
+    void connectRequest(const ConnectionData& cd, const QString& connectionName);
+    void disconnectRequest();
 protected:
-	virtual void run();
-	QString connectionName() const {
-		return connectionName_;
-	}
+    virtual void run();
+
+    QString connectionName() const {
+        return connectionName_;
+    }
 private:
-	void setConnectionName(const QString& n) {connectionName_ = n;}
-	Connection conn_;
-	QString connectionName_;
-	bool abort_;
-	QMutex mutex_;
+
+    void setConnectionName(const QString& n) {
+        connectionName_ = n;
+    }
+    Connection conn_;
+    QString connectionName_;
+    bool abort_;
+    QMutex mutex_;
 };
 
 #endif

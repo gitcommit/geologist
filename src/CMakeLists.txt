@@ -87,18 +87,22 @@ SET(geologist_App_MOC_SRCS
 )
 
 SET(geologist_Lib_ORM_SRCS_CXX
-    Lib/ORM/Mapper.cpp
-
     Lib/ORM/Entity.cpp
     Lib/ORM/IdentifiedEntity.cpp
     Lib/ORM/StandardEntity.cpp
+    Lib/ORM/Query.cpp
+    Lib/ORM/CursorQuery.cpp
+    Lib/ORM/DeclareCursorQuery.cpp
+    Lib/ORM/DeclareSelectCursorQuery.cpp
+    Lib/ORM/CloseCursorQuery.cpp
+    Lib/ORM/FetchAllInCursorQuery.cpp
+
     Lib/ORM/Private/EntityData.cpp
     Lib/ORM/Private/IdentifiedEntityData.cpp
     Lib/ORM/Private/StandardEntityData.cpp
 
     Lib/ORM/EntityStatus.cpp
     Lib/ORM/Mapping.cpp
-    Lib/ORM/TableMapping.cpp
     Lib/ORM/Private/MappingData.cpp
 )
 
@@ -106,27 +110,22 @@ SET(geologist_Lib_ORM_MOC_SRCS
     Lib/ORM/Entity.h
     Lib/ORM/IdentifiedEntity.h
     Lib/ORM/StandardEntity.h
-    Lib/ORM/Mapper.h
     Lib/ORM/Mapping.h
-    Lib/ORM/TableMapping.h
 )
 
 SET(geologist_Lib_Model_Core_SRCS_CXX
     Lib/Model/Core/SIPrefix.cpp
-    Lib/Model/Core/SIPrefixMapper.cpp
     Lib/Model/Core/Private/SIPrefixData.cpp
 )
 
 SET(geologist_Lib_Model_Core_MOC_SRCS
     Lib/Model/Core/SIPrefix.h
-    Lib/Model/Core/SIPrefixMapper.h
 )
 
 SET(geologist_Lib_DB_SRCS_CXX
     Lib/DB/ConnectionData.cpp
     Lib/DB/Connection.cpp
     Lib/DB/QueryThread.cpp
-    Lib/DB/TypedQuery.cpp
 )
 
 SET(geologist_Lib_DB_MOC_SRCS

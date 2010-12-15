@@ -11,126 +11,112 @@
 
 #include <Lib/DB/QueryThread.h>
 #include <Lib/DB/ConnectionData.h>
-#include <Lib/DB/TypedQuery.h>
 
 #include <Lib/GUI/DB/DatabaseConnectionDialog.h>
 
 #include <Lib/Model/Core/SIPrefix.h>
-#include <Lib/Model/Core/SIPrefixMapper.h>
 
 #include <Lib/ORM/Entity.h>
-#include <Lib/ORM/TableMapping.h>
 
 #include <Lib/Settings/Settings.h>
 #include <Lib/DBModel/DBModel.h>
 #include <Lib/DBModel/Schema.h>
 #include <Lib/DBModel/Table.h>
 
+#include <Lib/ORM/Mapping.h>
+
 Q_DECLARE_METATYPE(ConnectionData)
-Q_DECLARE_METATYPE(TypedQuery)
-Q_DECLARE_METATYPE(QList<TypedQuery>)
 Q_DECLARE_METATYPE(QDateTime)
 Q_DECLARE_METATYPE(QString)
 Q_DECLARE_METATYPE(QSqlRecord)
 Q_DECLARE_METATYPE(QList<QSqlRecord>)
 
 App::App(int argc, char** argv)
-: QApplication(argc, argv), _siPrefixMapper(0), lastQueryId_(0), _dbModel(0)
-{
-  setApplicationVersion(APP_VERSION);
-  setApplicationName(APP_NAME);
-  setOrganizationDomain(ORG_DOMAIN);
-  setOrganizationName(ORG_NAME);
-  registerMetatypes();
-  init();
+: QApplication(argc, argv), _lastQueryId(0), _dbModel(0) {
+    setApplicationVersion(APP_VERSION);
+    setApplicationName(APP_NAME);
+    setOrganizationDomain(ORG_DOMAIN);
+    setOrganizationName(ORG_NAME);
+    registerMetatypes();
+    init();
 }
 
 void App::registerMetatypes() {
-  qRegisterMetaType<ConnectionData>("ConnectionData");
-  qRegisterMetaType<QList<QSqlRecord> >("QList<QSqlRecord>");
-  qRegisterMetaType<TypedQuery>("TypedQuery");
-  qRegisterMetaType<QList<TypedQuery> >("QList<TypedQuery>"); 
-  qRegisterMetaType<QDateTime>("QDateTime");
-  qRegisterMetaType<QString>("QString>");
-  qRegisterMetaType<QList<QSqlRecord> >("QList<QSqlRecord>");
+    qRegisterMetaType<ConnectionData > ("ConnectionData");
+    qRegisterMetaType<QList<QSqlRecord> >("QList<QSqlRecord>");
+    qRegisterMetaType<QDateTime > ("QDateTime");
+    qRegisterMetaType<QString > ("QString>");
+    qRegisterMetaType<QList<QSqlRecord> >("QList<QSqlRecord>");
 }
 
 void App::init() {
-	Settings s(this);
-	s.load(&cd_);
-	_siPrefixMapper = new SIPrefixMapper(this);
-	_dbModel.setName(DB_NAME);
-	_dbModel.loadFromFile(DB_CONFIG_FILE);
-	 _siPrefixMapping = new TableMapping(this, _dbModel.schema("core")->table("si_prefixes"));
-	 
-	connect(&dbThread_, SIGNAL(queryCompleted(const TypedQuery&)), siPrefixMapper(), SLOT(onQueryCompleted(const TypedQuery&)));
-	connect(siPrefixMapper(), SIGNAL(loaded(const QList<SIPrefix*>&)), this, SLOT(onSIPrefixesLoaded(const QList<SIPrefix*>&)));
-	connect(siPrefixMapper(), SIGNAL(queryRequest(const TypedQuery&)), &dbThread_, SLOT(onExecRequest(const TypedQuery&)));
-	
-	connect(&dbThread_, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
-	connect(&dbThread_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
-	connect(&dbThread_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-	
-	connect(this, SIGNAL(connectRequest(const ConnectionData&)), &dbThread_, SLOT(open(const ConnectionData&)));
-	connect(this, SIGNAL(disconnectRequest()), &dbThread_, SLOT(close()));
-	connect(this, SIGNAL(beginRequest()), &dbThread_, SLOT(onBeginRequest()));
-	connect(this, SIGNAL(commitRequest()), &dbThread_, SLOT(onCommitRequest()));
-	connect(this, SIGNAL(rollbackRequest()), &dbThread_, SLOT(onRollbackRequest()));
-	connect(this, SIGNAL(savepointRequest(const QString&)), &dbThread_, SLOT(onSavepointRequest(const QString&)));
-	connect(this, SIGNAL(rollbackToSavepointRequest(const QString&)), &dbThread_, SLOT(onRollbackToSavepointRequest(const QString&)));
-	connect(this, SIGNAL(queryRequest(const QList<TypedQuery>&)), &dbThread_, SLOT(onExecRequest(const QList<TypedQuery>&)));
-	connect(this, SIGNAL(queryRequest(const TypedQuery&)), &dbThread_, SLOT(onExecRequest(const TypedQuery&)));
+    Settings s(this);
+    s.load(&_cd);
+    _dbModel.setName(DB_NAME);
+    _dbModel.loadFromFile(DB_CONFIG_FILE);
+    _siPrefixMapping = new Mapping(this, _dbModel.schema("core")->table("si_prefixes"));
+
+    connect(&_dbThread, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
+    connect(&_dbThread, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
+    connect(&_dbThread, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+
+    connect(this, SIGNAL(connectRequest(const ConnectionData&)), &_dbThread, SLOT(open(const ConnectionData&)));
+    connect(this, SIGNAL(disconnectRequest()), &_dbThread, SLOT(close()));
+    connect(this, SIGNAL(beginRequest()), &_dbThread, SLOT(onBeginRequest()));
+    connect(this, SIGNAL(commitRequest()), &_dbThread, SLOT(onCommitRequest()));
+    connect(this, SIGNAL(rollbackRequest()), &_dbThread, SLOT(onRollbackRequest()));
+    connect(this, SIGNAL(savepointRequest(const QString&)), &_dbThread, SLOT(onSavepointRequest(const QString&)));
+    connect(this, SIGNAL(rollbackToSavepointRequest(const QString&)), &_dbThread, SLOT(onRollbackToSavepointRequest(const QString&)));
 }
 
-App::~App()
-{
-  dbThread_.quit();
-  dbThread_.wait();
+App::~App() {
+    _dbThread.quit();
+    _dbThread.wait();
 }
 
 void App::debug(const QString& msg) {
-  emit debugMessage(tr("Debug: %1").arg(msg));
+    emit debugMessage(tr("Debug: %1").arg(msg));
 }
 
 void App::onOpenDB() {
-	Settings s(this);
-	DatabaseConnectionDialog* d = new DatabaseConnectionDialog(activeWindow(), &cd_);
-	if (QDialog::Accepted != d->exec()) {
-		s.load(&cd_);
-		return;
-	}
-	s.save(&cd_);
-  emit connectRequest(cd_);
+    Settings s(this);
+    DatabaseConnectionDialog* d = new DatabaseConnectionDialog(activeWindow(), &_cd);
+    if (QDialog::Accepted != d->exec()) {
+        s.load(&_cd);
+        return;
+    }
+    s.save(&_cd);
+    emit connectRequest(_cd);
 }
 
 void App::onCloseDB() {
-  emit disconnectRequest();
+    emit disconnectRequest();
 }
 
 void App::onDatabaseMessage(const QString& msg) {
-  emit databaseMessage(msg);
+    emit databaseMessage(msg);
 }
 
 void App::onConnected(const QString& msg) {
-  emit databaseMessage(tr("Connected: %1").arg(msg));
-  emit databaseOpened(msg);
-  /*currentUserQueryId_ = nextQueryId();
-  emit beginRequest();
-  emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
-  */
-  emit debugMessage(tr("\n-- CREATE DATABASE script --\n%1\n-- end of CREATE DATABASE script.\n")
-		  .arg(_dbModel.create().join("\n")));
-  emit beginRequest();
-  _siPrefixMapper->testLoad();
+    emit databaseMessage(tr("Connected: %1").arg(msg));
+    emit databaseOpened(msg);
+    /*currentUserQueryId_ = nextQueryId();
+    emit beginRequest();
+    emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
+     */
+    emit debugMessage(tr("\n-- CREATE DATABASE script --\n%1\n-- end of CREATE DATABASE script.\n")
+            .arg(_dbModel.create().join("\n")));
+    emit beginRequest();
 }
 
 void App::onDisconnected() {
-  emit databaseMessage(tr("Disconnected."));
-  emit databaseClosed();
+    emit databaseMessage(tr("Disconnected."));
+    emit databaseClosed();
 }
+
 void App::onSIPrefixesLoaded(const QList<SIPrefix*>& lst) {
-	emit debugMessage(tr("App::onSIPrefixesLoaded(...)"));
-	for (QList<SIPrefix*>::const_iterator it = lst.begin(); it != lst.end(); it++) {
-		emit debugMessage(tr("Loaded SI Prefix: %1").arg((*it)->toString()));
-	}
+    emit debugMessage(tr("App::onSIPrefixesLoaded(...)"));
+    for (QList<SIPrefix*>::const_iterator it = lst.begin(); it != lst.end(); it++) {
+        emit debugMessage(tr("Loaded SI Prefix: %1").arg((*it)->toString()));
+    }
 }

@@ -8,25 +8,28 @@ class QMenu;
 
 class LogWidget;
 
-class MainWindow: public QMainWindow {
-  Q_OBJECT;
- public:
-  MainWindow(QWidget* p = 0);
-  virtual ~MainWindow();
+class MainWindow : public QMainWindow {
+    Q_OBJECT;
+public:
+    MainWindow(QWidget* p = 0);
+    virtual ~MainWindow();
 
- signals:
-  void databaseMessage(const QString& msg);
-  public slots:
-  void onDatabaseMessage(const QString& msg);
-  void onDatabaseOpened(const QString& info);
-  void onDatabaseClosed();
- private:
-  void setupMenu();
+signals:
+    void databaseMessage(const QString& msg);
+public slots:
+    void onDatabaseMessage(const QString& msg);
+    void onDatabaseOpened(const QString& info);
+    void onDatabaseClosed();
+private:
+    void setupMenu();
 
-  LogWidget* logW_;
-  QMenu* dbM_;
-  QAction* connectA_;
-  QAction* disconnectA_;
+    LogWidget* _logW;
+    QMenu* _fM;
+    QMenu* _dbM;
+
+    QAction* _quitA;
+    QAction* _connectA;
+    QAction* _disconnectA;
 };
 
 #endif

@@ -21,8 +21,6 @@
             <in>ConnectionData.h</in>
             <in>QueryThread.cpp</in>
             <in>QueryThread.h</in>
-            <in>TypedQuery.cpp</in>
-            <in>TypedQuery.h</in>
           </df>
           <df name="DBModel" kind="SOURCE_LOGICAL_FOLDER">
             <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
@@ -124,8 +122,6 @@
               </df>
               <in>SIPrefix.cpp</in>
               <in>SIPrefix.h</in>
-              <in>SIPrefixMapper.cpp</in>
-              <in>SIPrefixMapper.h</in>
             </df>
           </df>
           <df name="ORM" kind="SOURCE_LOGICAL_FOLDER">
@@ -139,20 +135,29 @@
               <in>StandardEntityData.cpp</in>
               <in>StandardEntityData.h</in>
             </df>
+            <in>CloseCursorQuery.cpp</in>
+            <in>CloseCursorQuery.h</in>
+            <in>CursorQuery.cpp</in>
+            <in>CursorQuery.h</in>
+            <in>DeclareCursorQuery.cpp</in>
+            <in>DeclareCursorQuery.h</in>
+            <in>DeclareSelectCursorQuery.cpp</in>
+            <in>DeclareSelectCursorQuery.h</in>
             <in>Entity.cpp</in>
             <in>Entity.h</in>
             <in>EntityStatus.cpp</in>
             <in>EntityStatus.h</in>
+            <in>FetchAllInCursorQuery.cpp</in>
+            <in>FetchAllInCursorQuery.h</in>
             <in>IdentifiedEntity.cpp</in>
             <in>IdentifiedEntity.h</in>
-            <in>Mapper.cpp</in>
             <in>Mapper.h</in>
             <in>Mapping.cpp</in>
             <in>Mapping.h</in>
+            <in>Query.cpp</in>
+            <in>Query.h</in>
             <in>StandardEntity.cpp</in>
             <in>StandardEntity.h</in>
-            <in>TableMapping.cpp</in>
-            <in>TableMapping.h</in>
           </df>
           <df name="Settings" kind="SOURCE_LOGICAL_FOLDER">
             <in>Settings.cpp</in>
@@ -324,13 +329,6 @@
         </ccTool>
       </item>
       <item path="src/Lib/DB/QueryThread.cpp" ex="false" tool="1">
-        <ccTool>
-          <incDir>
-            <pElem>../../../usr/qt/include/QtSql</pElem>
-          </incDir>
-        </ccTool>
-      </item>
-      <item path="src/Lib/DB/TypedQuery.cpp" ex="false" tool="1">
         <ccTool>
           <incDir>
             <pElem>../../../usr/qt/include/QtSql</pElem>
@@ -551,16 +549,6 @@
           </incDir>
         </ccTool>
       </item>
-      <item path="src/Lib/Model/Core/SIPrefixMapper.cpp" ex="false" tool="1">
-        <ccTool>
-          <incDir>
-            <pElem>../../../usr/qt/include/QtSql</pElem>
-            <pElem>src/Lib/DB</pElem>
-            <pElem>src/Lib/ORM</pElem>
-            <pElem>src/Lib/Model/Core</pElem>
-          </incDir>
-        </ccTool>
-      </item>
       <item path="src/Lib/ORM/Entity.cpp" ex="false" tool="1">
         <ccTool>
           <incDir>
@@ -586,17 +574,6 @@
           <incDir>
             <pElem>../../../usr/qt/include</pElem>
             <pElem>src/Lib/ORM</pElem>
-          </incDir>
-        </ccTool>
-      </item>
-      <item path="src/Lib/ORM/Mapper.cpp" ex="false" tool="1">
-        <ccTool>
-          <incDir>
-            <pElem>src/App</pElem>
-            <pElem>../../../usr/qt/include</pElem>
-            <pElem>../../../usr/qt/include/QtSql</pElem>
-            <pElem>src/Lib/ORM</pElem>
-            <pElem>src</pElem>
           </incDir>
         </ccTool>
       </item>
@@ -634,15 +611,6 @@
           <incDir>
             <pElem>../../../usr/qt/include</pElem>
             <pElem>src/Lib/ORM</pElem>
-          </incDir>
-        </ccTool>
-      </item>
-      <item path="src/Lib/ORM/TableMapping.cpp" ex="false" tool="1">
-        <ccTool>
-          <incDir>
-            <pElem>src/Lib/ORM</pElem>
-            <pElem>src/Lib/ORM/Private</pElem>
-            <pElem>src</pElem>
           </incDir>
         </ccTool>
       </item>
