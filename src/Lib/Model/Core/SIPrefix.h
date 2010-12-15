@@ -41,6 +41,7 @@ public:
 	virtual QString toString() const;
 	
 	Mapper* mapper() const;
+	virtual Mapping* mapping() const;
 	signals:
 	void symbolChanged(const QString& newSymbol);
 	void factorChanged(const qreal& newFacto);

@@ -22,8 +22,7 @@ SET(QT_USE_QTSQL TRUE)
 INCLUDE(${QT_USE_FILE})
 INCLUDE_DIRECTORIES(${QT_QTSQL_INCLUDE_DIR} ${QT_QTSVG_INCLUDE_DIR} ${QT_QTXML_INCLUDE_DIR}) 
 
-# .cxx sources
-SET(geologist_SRCS_CXX
+SET(geologist_Lib_DBModel_SRCS_CXX
     Lib/DBModel/XMLParser.cpp
     Lib/DBModel/ModelComponent.cpp
     Lib/DBModel/DBModel.cpp
@@ -53,55 +52,9 @@ SET(geologist_SRCS_CXX
     Lib/DBModel/Private/UniqueConstraintData.cpp
     Lib/DBModel/Private/CheckConstraintData.cpp
     Lib/DBModel/Private/ForeignKeyConstraintData.cpp
-    
-    Lib/Tools/tools.cpp
-    
-    App/main.cpp
-    App/App.cpp
-    
-    Lib/ORM/Mapper.cpp
-    
-    Lib/ORM/Entity.cpp
-    Lib/ORM/IdentifiedEntity.cpp
-    Lib/ORM/StandardEntity.cpp
-    Lib/ORM/Private/EntityData.cpp
-    Lib/ORM/Private/IdentifiedEntityData.cpp
-    Lib/ORM/Private/StandardEntityData.cpp
-    
-    Lib/ORM/EntityStatus.cpp
-    Lib/ORM/Mapping.cpp
-    Lib/ORM/Private/MappingData.cpp
-    
-    Lib/Model/Core/SIPrefix.cpp
-    Lib/Model/Core/SIPrefixMapper.cpp
-    Lib/Model/Core/Private/SIPrefixData.cpp
-    
-    Lib/DB/ConnectionData.cpp
-    Lib/DB/Connection.cpp
-    Lib/DB/QueryThread.cpp
-    Lib/DB/TypedQuery.cpp
-
-    Lib/Settings/Settings.cpp
-
-    Lib/GUI/Widgets/MainWindow.cpp
-    Lib/GUI/Widgets/LogDisplay.cpp
-    Lib/GUI/Widgets/LogWidget.cpp
-    Lib/GUI/Widgets/Dialog.cpp
-    Lib/GUI/Widgets/Label.cpp
-    Lib/GUI/Widgets/FieldLabel.cpp
-    Lib/GUI/Widgets/LineEdit.cpp
-    Lib/GUI/Widgets/GroupBox.cpp
-    Lib/GUI/Widgets/SmartGroupBox.cpp
-    Lib/GUI/Widgets/Editor.cpp
-    Lib/GUI/Widgets/PasswordEdit.cpp
-    
-    Lib/GUI/DB/DatabaseConnectionDialog.cpp
 )
 
-# files which need to be moc'd by Qt (headers)
-SET(geologist_MOC_SRCS    
-    App/App.h
-    
+SET(geologist_Lib_DBModel_MOC_SRCS
     Lib/DBModel/XMLParser.h
     Lib/DBModel/ModelComponent.h
     Lib/DBModel/DBModel.h
@@ -118,21 +71,93 @@ SET(geologist_MOC_SRCS
     Lib/DBModel/UniqueConstraint.h
     Lib/DBModel/CheckConstraint.h
     Lib/DBModel/ForeignKeyConstraint.h
-    
+)
+
+SET(geologist_Lib_Tools_SRCS_CXX
+    Lib/Tools/tools.cpp
+)
+
+SET(geologist_App_SRCS_CXX
+    App/main.cpp
+    App/App.cpp
+)
+
+SET(geologist_App_MOC_SRCS
+    App/App.h
+)
+
+SET(geologist_Lib_ORM_SRCS_CXX
+    Lib/ORM/Mapper.cpp
+
+    Lib/ORM/Entity.cpp
+    Lib/ORM/IdentifiedEntity.cpp
+    Lib/ORM/StandardEntity.cpp
+    Lib/ORM/Private/EntityData.cpp
+    Lib/ORM/Private/IdentifiedEntityData.cpp
+    Lib/ORM/Private/StandardEntityData.cpp
+
+    Lib/ORM/EntityStatus.cpp
+    Lib/ORM/Mapping.cpp
+    Lib/ORM/TableMapping.cpp
+    Lib/ORM/Private/MappingData.cpp
+)
+
+SET(geologist_Lib_ORM_MOC_SRCS
     Lib/ORM/Entity.h
     Lib/ORM/IdentifiedEntity.h
     Lib/ORM/StandardEntity.h
     Lib/ORM/Mapper.h
     Lib/ORM/Mapping.h
-    
+    Lib/ORM/TableMapping.h
+)
+
+SET(geologist_Lib_Model_Core_SRCS_CXX
+    Lib/Model/Core/SIPrefix.cpp
+    Lib/Model/Core/SIPrefixMapper.cpp
+    Lib/Model/Core/Private/SIPrefixData.cpp
+)
+
+SET(geologist_Lib_Model_Core_MOC_SRCS
     Lib/Model/Core/SIPrefix.h
     Lib/Model/Core/SIPrefixMapper.h
-    
+)
+
+SET(geologist_Lib_DB_SRCS_CXX
+    Lib/DB/ConnectionData.cpp
+    Lib/DB/Connection.cpp
+    Lib/DB/QueryThread.cpp
+    Lib/DB/TypedQuery.cpp
+)
+
+SET(geologist_Lib_DB_MOC_SRCS
     Lib/DB/Connection.h
     Lib/DB/QueryThread.h
+)
 
+SET(geologist_Lib_Settings_SRCS_CXX
+    Lib/Settings/Settings.cpp
+)
+
+SET(geologist_Lib_Settings_MOC_SRCS
     Lib/Settings/Settings.h
+)
 
+SET(geologist_Lib_GUI_Widgets_SRCS_CXX
+    Lib/GUI/Widgets/MainWindow.cpp
+    Lib/GUI/Widgets/LogDisplay.cpp
+    Lib/GUI/Widgets/LogWidget.cpp
+    Lib/GUI/Widgets/Dialog.cpp
+    Lib/GUI/Widgets/Label.cpp
+    Lib/GUI/Widgets/FieldLabel.cpp
+    Lib/GUI/Widgets/LineEdit.cpp
+    Lib/GUI/Widgets/GroupBox.cpp
+    Lib/GUI/Widgets/SmartGroupBox.cpp
+    Lib/GUI/Widgets/Editor.cpp
+    Lib/GUI/Widgets/PasswordEdit.cpp
+)
+
+
+SET(geologist_Lib_GUI_Widgets_MOC_SRCS
     Lib/GUI/Widgets/MainWindow.h
     Lib/GUI/Widgets/LogDisplay.h
     Lib/GUI/Widgets/LogWidget.h
@@ -144,8 +169,39 @@ SET(geologist_MOC_SRCS
     Lib/GUI/Widgets/SmartGroupBox.h
     Lib/GUI/Widgets/Editor.h
     Lib/GUI/Widgets/PasswordEdit.h
-    
+)
+
+SET(geologist_Lib_GUI_DB_SRCS_CXX
+    Lib/GUI/DB/DatabaseConnectionDialog.cpp
+)
+
+SET(geologist_Lib_GUI_DB_MOC_SRCS
     Lib/GUI/DB/DatabaseConnectionDialog.h
+)
+
+# .cxx sources
+SET(geologist_SRCS_CXX
+    ${geologist_Lib_Tools_SRCS_CXX}
+    ${geologist_Lib_Settings_SRCS_CXX}
+    ${geologist_Lib_DBModel_SRCS_CXX}
+    ${geologist_Lib_ORM_SRCS_CXX}
+    ${geologist_Lib_DB_SRCS_CXX}
+    ${geologist_Lib_Model_Core_SRCS_CXX}
+    ${geologist_Lib_GUI_Widgets_SRCS_CXX}
+    ${geologist_Lib_GUI_DB_SRCS_CXX}
+    ${geologist_App_SRCS_CXX}
+)
+
+# files which need to be moc'd by Qt (headers)
+SET(geologist_MOC_SRCS
+    ${geologist_App_MOC_SRCS}
+    ${geologist_Lib_DBModel_MOC_SRCS}
+    ${geologist_Lib_ORM_MOC_SRCS}
+    ${geologist_Lib_Model_Core_MOC_SRCS}
+    ${geologist_Lib_DB_MOC_SRCS}
+    ${geologist_Lib_Settings_MOC_SRCS}
+    ${geologist_Lib_GUI_Widgets_MOC_SRCS}
+    ${geologist_Lib_GUI_DB_MOC_SRCS}
 )
 
 # client UI files
@@ -170,4 +226,3 @@ IF(WIN32)
 ELSE()
   TARGET_LINK_LIBRARIES(geologist ${QT_LIBRARIES})
 ENDIF()
-

@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="69">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <df name="geologist" root=".">
+      <df name="bin">
+      </df>
+      <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+        <df name="App" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="XML" kind="SOURCE_LOGICAL_FOLDER">
+          </df>
+          <in>App.cpp</in>
+          <in>App.h</in>
+          <in>config.h</in>
+          <in>main.cpp</in>
+        </df>
+        <df name="CMakeFiles">
+          <df name="geologist.dir" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="App" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+            <df name="Lib" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="DB" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="DBModel" kind="SOURCE_LOGICAL_FOLDER">
+                <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+              </df>
+              <df name="GUI" kind="SOURCE_LOGICAL_FOLDER">
+                <df name="DB" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+                <df name="Widgets" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+              </df>
+              <df name="Model" kind="SOURCE_LOGICAL_FOLDER">
+                <df name="Core" kind="SOURCE_LOGICAL_FOLDER">
+                  <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
+                  </df>
+                </df>
+              </df>
+              <df name="ORM" kind="SOURCE_LOGICAL_FOLDER">
+                <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
+                </df>
+              </df>
+              <df name="Settings" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+              <df name="Tools" kind="SOURCE_LOGICAL_FOLDER">
+              </df>
+            </df>
+          </df>
+        </df>
+        <df name="Lib" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="DB" kind="SOURCE_LOGICAL_FOLDER">
+            <in>Connection.cpp</in>
+            <in>Connection.h</in>
+            <in>ConnectionData.cpp</in>
+            <in>ConnectionData.h</in>
+            <in>QueryThread.cpp</in>
+            <in>QueryThread.h</in>
+            <in>TypedQuery.cpp</in>
+            <in>TypedQuery.h</in>
+          </df>
+          <df name="DBModel" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
+              <in>Base.cpp</in>
+              <in>Base.h</in>
+              <in>CheckConstraintData.cpp</in>
+              <in>CheckConstraintData.h</in>
+              <in>ConstraintData.cpp</in>
+              <in>ConstraintData.h</in>
+              <in>DBModelData.cpp</in>
+              <in>DBModelData.h</in>
+              <in>DataTypeData.cpp</in>
+              <in>DataTypeData.h</in>
+              <in>ForeignKeyConstraintData.cpp</in>
+              <in>ForeignKeyConstraintData.h</in>
+              <in>PrimaryKeyConstraintData.cpp</in>
+              <in>PrimaryKeyConstraintData.h</in>
+              <in>SchemaData.cpp</in>
+              <in>SchemaData.h</in>
+              <in>SequenceData.cpp</in>
+              <in>SequenceData.h</in>
+              <in>TableColumnData.cpp</in>
+              <in>TableColumnData.h</in>
+              <in>TableData.cpp</in>
+              <in>TableData.h</in>
+              <in>UniqueConstraintData.cpp</in>
+              <in>UniqueConstraintData.h</in>
+            </df>
+            <in>CheckConstraint.cpp</in>
+            <in>CheckConstraint.h</in>
+            <in>DBModel.cpp</in>
+            <in>DBModel.h</in>
+            <in>DataType.cpp</in>
+            <in>DataType.h</in>
+            <in>ForeignKeyConstraint.cpp</in>
+            <in>ForeignKeyConstraint.h</in>
+            <in>InDBModelComponent.cpp</in>
+            <in>InDBModelComponent.h</in>
+            <in>InSchemaModelComponent.cpp</in>
+            <in>InSchemaModelComponent.h</in>
+            <in>InTableModelComponent.cpp</in>
+            <in>InTableModelComponent.h</in>
+            <in>ModelComponent.cpp</in>
+            <in>ModelComponent.h</in>
+            <in>PrimaryKeyConstraint.cpp</in>
+            <in>PrimaryKeyConstraint.h</in>
+            <in>Schema.cpp</in>
+            <in>Schema.h</in>
+            <in>Sequence.cpp</in>
+            <in>Sequence.h</in>
+            <in>Table.cpp</in>
+            <in>Table.h</in>
+            <in>TableColumn.cpp</in>
+            <in>TableColumn.h</in>
+            <in>TableColumnPair.cpp</in>
+            <in>TableColumnPair.h</in>
+            <in>TableConstraint.cpp</in>
+            <in>TableConstraint.h</in>
+            <in>UniqueConstraint.cpp</in>
+            <in>UniqueConstraint.h</in>
+            <in>XMLParser.cpp</in>
+            <in>XMLParser.h</in>
+          </df>
+          <df name="GUI" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="DB" kind="SOURCE_LOGICAL_FOLDER">
+              <in>DatabaseConnectionDialog.cpp</in>
+              <in>DatabaseConnectionDialog.h</in>
+            </df>
+            <df name="Widgets" kind="SOURCE_LOGICAL_FOLDER">
+              <in>Dialog.cpp</in>
+              <in>Dialog.h</in>
+              <in>Editor.cpp</in>
+              <in>Editor.h</in>
+              <in>FieldLabel.cpp</in>
+              <in>FieldLabel.h</in>
+              <in>GroupBox.cpp</in>
+              <in>GroupBox.h</in>
+              <in>Label.cpp</in>
+              <in>Label.h</in>
+              <in>LineEdit.cpp</in>
+              <in>LineEdit.h</in>
+              <in>LogDisplay.cpp</in>
+              <in>LogDisplay.h</in>
+              <in>LogWidget.cpp</in>
+              <in>LogWidget.h</in>
+              <in>MainWindow.cpp</in>
+              <in>MainWindow.h</in>
+              <in>PasswordEdit.cpp</in>
+              <in>PasswordEdit.h</in>
+              <in>SmartGroupBox.cpp</in>
+              <in>SmartGroupBox.h</in>
+            </df>
+          </df>
+          <df name="Model" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="Core" kind="SOURCE_LOGICAL_FOLDER">
+              <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
+                <in>SIPrefixData.cpp</in>
+                <in>SIPrefixData.h</in>
+              </df>
+              <in>SIPrefix.cpp</in>
+              <in>SIPrefix.h</in>
+              <in>SIPrefixMapper.cpp</in>
+              <in>SIPrefixMapper.h</in>
+            </df>
+          </df>
+          <df name="ORM" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
+              <in>EntityData.cpp</in>
+              <in>EntityData.h</in>
+              <in>IdentifiedEntityData.cpp</in>
+              <in>IdentifiedEntityData.h</in>
+              <in>MappingData.cpp</in>
+              <in>MappingData.h</in>
+              <in>StandardEntityData.cpp</in>
+              <in>StandardEntityData.h</in>
+            </df>
+            <in>Entity.cpp</in>
+            <in>Entity.h</in>
+            <in>EntityStatus.cpp</in>
+            <in>EntityStatus.h</in>
+            <in>IdentifiedEntity.cpp</in>
+            <in>IdentifiedEntity.h</in>
+            <in>Mapper.cpp</in>
+            <in>Mapper.h</in>
+            <in>Mapping.cpp</in>
+            <in>Mapping.h</in>
+            <in>StandardEntity.cpp</in>
+            <in>StandardEntity.h</in>
+            <in>TableMapping.cpp</in>
+            <in>TableMapping.h</in>
+          </df>
+          <df name="Settings" kind="SOURCE_LOGICAL_FOLDER">
+            <in>Settings.cpp</in>
+            <in>Settings.h</in>
+          </df>
+          <df name="Tools" kind="SOURCE_LOGICAL_FOLDER">
+            <in>tools.cpp</in>
+            <in>tools.h</in>
+          </df>
+        </df>
+        <df name="tools" kind="SOURCE_LOGICAL_FOLDER">
+          <df name="schemagen" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="src" kind="SOURCE_LOGICAL_FOLDER">
+            </df>
+          </df>
+        </df>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>CMakeLists.txt</itemPath>
+      <itemPath>Makefile</itemPath>
+      <itemPath>Makefile-geologist.mk</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile-geologist.mk</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <compilerSet>GNU|GNU</compilerSet>
+        <platform>4</platform>
+      </toolsSet>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>build/debug</buildCommandWorkingDir>
+          <buildCommand>$(MAKE) -f Makefile</buildCommand>
+          <cleanCommand>$(MAKE) -f Makefile clean</cleanCommand>
+          <executablePath>build/debug/bin/geo</executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>./src</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <folder path="geologist/src/App">
+        <ccTool>
+          <incDir>
+            <pElem>src/App</pElem>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/DB">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DB</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/DBModel/Private">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/GUI">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/GUI/DB">
+        <ccTool>
+          <incDir>
+            <pElem>src/Lib/GUI/DB</pElem>
+            <pElem>src/Lib/DB</pElem>
+            <pElem>../../../usr/qt/include/QtGui</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/GUI/Widgets">
+        <ccTool>
+          <incDir>
+            <pElem>src/Lib/GUI/Widgets</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/Model">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/Model/Core/Private">
+        <ccTool>
+          <incDir>
+            <pElem>src/Lib/Model/Core/Private</pElem>
+            <pElem>src/Lib/ORM/Private</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/ORM/Private">
+        <ccTool>
+          <incDir>
+            <pElem>src/Lib/ORM/Private</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/Settings">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/Settings</pElem>
+            <pElem>src/Lib/DB</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="geologist/src/Lib/Tools">
+        <ccTool>
+          <incDir>
+            <pElem>src/App</pElem>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+            <pElem>src/Lib/Tools</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <item path="src/App/App.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DB</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/App/config.h" ex="true" tool="3">
+      </item>
+      <item path="src/App/main.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include/QtGui</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DB/Connection.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DB/QueryThread.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DB/TypedQuery.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/CheckConstraint.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/DBModel.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/DataType.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/ForeignKeyConstraint.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/InDBModelComponent.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/InSchemaModelComponent.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/InTableModelComponent.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/ModelComponent.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>src/Lib/DBModel</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/PrimaryKeyConstraint.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/Private/ConstraintData.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>src/Lib/DBModel</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/Private/ForeignKeyConstraintData.cpp"
+            ex="false"
+            tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>src/Lib/DBModel</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/Schema.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/Sequence.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/Table.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/TableColumn.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/TableColumnPair.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/TableConstraint.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/UniqueConstraint.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src/Lib/DBModel/Private</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/DBModel/XMLParser.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>../../../usr/qt/include/QtXml</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/GUI/Widgets/LineEdit.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include/QtGui</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/GUI/Widgets/LogWidget.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/GUI/Widgets/MainWindow.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>src/App</pElem>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/GUI/Widgets/SmartGroupBox.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include/QtGui</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/Model/Core/SIPrefix.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>src/App</pElem>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+            <pElem>src/Lib/Model/Core/Private</pElem>
+            <pElem>src/Lib/Model/Core</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/Model/Core/SIPrefixMapper.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+            <pElem>src/Lib/DB</pElem>
+            <pElem>src/Lib/ORM</pElem>
+            <pElem>src/Lib/Model/Core</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/Entity.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>src/App</pElem>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+            <pElem>src/Lib/ORM</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/EntityStatus.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/ORM</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/IdentifiedEntity.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/ORM</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/Mapper.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>src/App</pElem>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>../../../usr/qt/include/QtSql</pElem>
+            <pElem>src/Lib/ORM</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/Mapping.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>src/Lib/ORM</pElem>
+            <pElem>src/lib/ORM</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/Private/EntityData.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/Private/MappingData.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/Private/StandardEntityData.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/StandardEntity.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>src/Lib/ORM</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/ORM/TableMapping.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>src/Lib/ORM</pElem>
+            <pElem>src/Lib/ORM/Private</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="src/Lib/Tools/tools.h" ex="true" tool="3">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

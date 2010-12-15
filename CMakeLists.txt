@@ -1,4 +1,3 @@
-# project name
 PROJECT(geologist)
 
 IF(NOT CMAKE_BUILD_TYPE)

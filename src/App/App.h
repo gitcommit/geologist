@@ -13,6 +13,7 @@
 #include <Lib/Model/Core/SIPrefix.h>
  
 class SIPrefixMapper;
+class Mapping;
 
 class App: public QApplication {
 	Q_OBJECT;
@@ -22,6 +23,9 @@ class App: public QApplication {
 	void init();
 	SIPrefixMapper* siPrefixMapper() const {
 		return _siPrefixMapper;
+	}
+	Mapping* siPrefixMapping() const {
+		return _siPrefixMapping;
 	}
 	qlonglong nextQueryId() { lastQueryId_++; return lastQueryId_; }
 	
@@ -54,6 +58,7 @@ class App: public QApplication {
 
 	ConnectionData cd_;
 	SIPrefixMapper* _siPrefixMapper;
+	Mapping* _siPrefixMapping;
 	qlonglong lastQueryId_;
 	qlonglong currentUserQueryId_;
 	DBModel _dbModel;

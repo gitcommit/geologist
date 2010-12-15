@@ -13,3 +13,11 @@ Mapping::Mapping(const Mapping& other) :
 
 Mapping::~Mapping() {
 }
+
+void Mapping::setTable(Table* t) {
+	_d->setTable(t);
+}
+
+Table* Mapping::table() const {
+	return _d->table();
+}

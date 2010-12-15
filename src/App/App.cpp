@@ -19,8 +19,12 @@
 #include <Lib/Model/Core/SIPrefixMapper.h>
 
 #include <Lib/ORM/Entity.h>
+#include <Lib/ORM/TableMapping.h>
+
 #include <Lib/Settings/Settings.h>
 #include <Lib/DBModel/DBModel.h>
+#include <Lib/DBModel/Schema.h>
+#include <Lib/DBModel/Table.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(TypedQuery)
@@ -57,7 +61,8 @@ void App::init() {
 	_siPrefixMapper = new SIPrefixMapper(this);
 	_dbModel.setName(DB_NAME);
 	_dbModel.loadFromFile(DB_CONFIG_FILE);
-	  
+	 _siPrefixMapping = new TableMapping(this, _dbModel.schema("core")->table("si_prefixes"));
+	 
 	connect(&dbThread_, SIGNAL(queryCompleted(const TypedQuery&)), siPrefixMapper(), SLOT(onQueryCompleted(const TypedQuery&)));
 	connect(siPrefixMapper(), SIGNAL(loaded(const QList<SIPrefix*>&)), this, SLOT(onSIPrefixesLoaded(const QList<SIPrefix*>&)));
 	connect(siPrefixMapper(), SIGNAL(queryRequest(const TypedQuery&)), &dbThread_, SLOT(onExecRequest(const TypedQuery&)));

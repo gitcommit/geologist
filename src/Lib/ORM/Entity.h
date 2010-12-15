@@ -7,6 +7,7 @@
 #include <Lib/ORM/EntityStatus.h>
 
 class Mapper;
+class Mapping;
 
 class Entity : public QObject {
 	Q_OBJECT
@@ -16,9 +17,9 @@ public:
 	Entity(const Entity& other);
 	virtual ~Entity();
 
-	virtual EntityStatus status() const {return _status;}
-	virtual void setStatus(const EntityStatus& s) {emit statusChanged(s); _status = s;}
-	virtual QString statusText() const {return _status.toString();}
+	virtual EntityStatus status() const;
+	virtual void setStatus(const EntityStatus& s);
+	virtual QString statusText() const;
 
 	virtual QString toString() const = 0;
 signals:
@@ -28,8 +29,9 @@ public slots:
 	virtual void onDataChanged();
 protected:
 	virtual Mapper* mapper() const = 0;
+	virtual Mapping* mapping() const = 0;
 private:
-	EntityStatus _status;
+EntityStatus _status;
 };
 
 #endif /*ENTITY_H_*/

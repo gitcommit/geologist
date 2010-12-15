@@ -28,6 +28,10 @@ Mapper* SIPrefix::mapper() const {
 	return getApp()->siPrefixMapper();
 }
 
+Mapping* SIPrefix::mapping() const {
+	return getApp()->siPrefixMapping();
+}
+
 void SIPrefix::setSymbol(const QString& s) {
 	emit symbolChanged(s);
 	_d->setSymbol(s);
