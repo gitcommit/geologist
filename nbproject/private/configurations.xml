@@ -9,7 +9,7 @@
       </gizmo_options>
       <runprofile version="6">
         <args></args>
-        <rundir>/Users/jolo/data/coding/geologist/build/debug/bin</rundir>
+        <rundir>build/debug/bin</rundir>
         <buildfirst>true</buildfirst>
         <console-type>3</console-type>
         <terminal-type>0</terminal-type>

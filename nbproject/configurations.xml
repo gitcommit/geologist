@@ -13,40 +13,6 @@
           <in>config.h</in>
           <in>main.cpp</in>
         </df>
-        <df name="CMakeFiles">
-          <df name="geologist.dir" kind="SOURCE_LOGICAL_FOLDER">
-            <df name="App" kind="SOURCE_LOGICAL_FOLDER">
-            </df>
-            <df name="Lib" kind="SOURCE_LOGICAL_FOLDER">
-              <df name="DB" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="DBModel" kind="SOURCE_LOGICAL_FOLDER">
-                <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-              </df>
-              <df name="GUI" kind="SOURCE_LOGICAL_FOLDER">
-                <df name="DB" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-                <df name="Widgets" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-              </df>
-              <df name="Model" kind="SOURCE_LOGICAL_FOLDER">
-                <df name="Core" kind="SOURCE_LOGICAL_FOLDER">
-                  <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
-                  </df>
-                </df>
-              </df>
-              <df name="ORM" kind="SOURCE_LOGICAL_FOLDER">
-                <df name="Private" kind="SOURCE_LOGICAL_FOLDER">
-                </df>
-              </df>
-              <df name="Settings" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-              <df name="Tools" kind="SOURCE_LOGICAL_FOLDER">
-              </df>
-            </df>
-          </df>
-        </df>
         <df name="Lib" kind="SOURCE_LOGICAL_FOLDER">
           <df name="DB" kind="SOURCE_LOGICAL_FOLDER">
             <in>Connection.cpp</in>
@@ -230,7 +196,7 @@
           <buildCommandWorkingDir>build/debug</buildCommandWorkingDir>
           <buildCommand>$(MAKE) -f Makefile</buildCommand>
           <cleanCommand>$(MAKE) -f Makefile clean</cleanCommand>
-          <executablePath>build/debug/bin/geo</executablePath>
+          <executablePath>build/debug/bin/geologist</executablePath>
           <ccTool>
             <incDir>
               <pElem>./src</pElem>

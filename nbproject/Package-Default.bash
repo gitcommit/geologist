@@ -11,8 +11,8 @@ CND_CONF=Default
 CND_DISTDIR=dist
 NBTMPDIR=build/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=build/debug/bin/geo
-OUTPUT_BASENAME=geo
+OUTPUT_PATH=build/debug/bin/geologist
+OUTPUT_BASENAME=geologist
 PACKAGE_TOP_DIR=geologist/
 
 # Functions
