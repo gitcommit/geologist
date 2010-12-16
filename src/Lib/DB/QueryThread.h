@@ -11,6 +11,7 @@
 
 #include <Lib/DB/ConnectionData.h>
 #include <Lib/DB/Connection.h>
+#include <Lib/DB/DatabaseError.h>
 
 #include <Lib/ORM/DeclareSelectCursorQuery.h>
 #include <Lib/ORM/FetchAllInCursorQuery.h>
@@ -41,7 +42,7 @@ public slots:
     void onConnectionMessage(const QString& msg);
     void onConnected(const QString& msg);
     void onDisconnected();
-
+    
 signals:
     void beginRequest();
     void commitRequest();
@@ -53,6 +54,7 @@ signals:
     void queryRequest(const CloseCursorQuery& q);
     
     void message(const QString& msg);
+    void error(const DatabaseError& e);
     void connected(const QString& info);
     void disconnected();
     void connectRequest(const ConnectionData& cd, const QString& connectionName);

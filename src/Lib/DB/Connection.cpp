@@ -84,7 +84,7 @@ void Connection::onCommitRequest() {
     emit message(tr("COMMIT requested."));
     QSqlQuery q = exec("COMMIT;");
     if (!q.isActive()) {
-        qFatal("COMMIT FAILED");
+        emit error(DatabaseError(q.lastError()));
     }
     emit message(tr("Transaction commited."));
     emit commit();
@@ -94,7 +94,7 @@ void Connection::onRollbackRequest() {
     emit message(tr("ROLLBACK requested."));
     QSqlQuery q = exec("ROLLBACK;");
     if (!q.isActive()) {
-        qFatal("ROLLBACK FAILED");
+        emit error(DatabaseError(q.lastError()));
     }
     emit message(tr("Transaction rolled back."));
     emit rollback();
@@ -104,7 +104,7 @@ void Connection::onSavepointRequest(const QString& name) {
     emit message(tr("SAVEPOINT %1 requested.").arg(name));
     QSqlQuery q = exec(QString("SAVEPOINT %1").arg(name));
     if (!q.isActive()) {
-        qFatal(tr("SAVEPOINT %1 failed.").arg(name).toLocal8Bit());
+        emit error(DatabaseError(q.lastError()));
     }
     emit message(tr("Savepoint %1 created.").arg(name));
     emit savepoint(name);
@@ -114,7 +114,7 @@ void Connection::onRollbackToSavepointRequest(const QString& name) {
     emit message(tr("ROLLBACK TO %1 requested.").arg(name));
     QSqlQuery q = exec(QString("ROLLBACK TO %1").arg(name));
     if (!q.isActive()) {
-        qFatal(tr("ROLLBACK TO %1 failed.").arg(name).toLocal8Bit());
+        emit error(DatabaseError(q.lastError()));
     }
     emit message(tr("Rollback to %1 completed.").arg(name));
     emit rollbackToSavepoint(name);
@@ -124,13 +124,13 @@ void Connection::log(const QString& sql) {
     logStrm_ << sql << endl;
 }
 
-void Connection::onQueryRequest(const DeclareCursorQuery& qry) {
-    emit message(tr("Declaration of cursor requested: %1").arg(qry.sql()));
+void Connection::onQueryRequest(const DeclareSelectCursorQuery& qry) {
+    emit message(tr("Declaration of select cursor requested: %1").arg(qry.sql()));
     QSqlQuery q = exec(qry.sql());
     if (!q.isActive()) {
-        qFatal(tr("Cursor declaration failed: %1").arg(q.lastError().text()).toLocal8Bit());
+        emit error(DatabaseError(q.lastError()));
     }
-    emit message(tr("Cursor %1 declared.").arg(qry.cursorName()));
+    emit message(tr("select Cursor %1 declared.").arg(qry.cursorName()));
     emit queryCompleted(qry);
 
 
@@ -140,7 +140,7 @@ void Connection::onQueryRequest(const FetchAllInCursorQuery& qry) {
     emit message(tr("Fetch all in cursor requested for cursor: %1").arg(qry.cursorName()));
     QSqlQuery q = exec(qry.sql());
     if (!q.isActive()) {
-        qFatal(tr("Cursor fetch failed: %1").arg(q.lastError().text()).toLocal8Bit());
+        emit error(DatabaseError(q.lastError()));
     }
     FetchAllInCursorQuery res(qry);
     res.loadRecordsFromQuery(&q);
@@ -152,7 +152,7 @@ void Connection::onQueryRequest(const CloseCursorQuery& qry) {
     emit message(tr("Closing of cursor requested: %1").arg(qry.cursorName()));
     QSqlQuery q = exec(qry.sql());
     if (!q.isActive()) {
-        qFatal(tr("Cursor closing failed: %1").arg(q.lastError().text()).toLocal8Bit());
+        emit error(DatabaseError(q.lastError()));
     }
     emit message(tr("Cursor %1 closed.").arg(qry.cursorName()));
     emit queryCompleted(qry);

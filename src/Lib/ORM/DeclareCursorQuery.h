@@ -12,7 +12,9 @@
 
 class DeclareCursorQuery : public CursorQuery {
 public:
-    DeclareCursorQuery(const QString& cursorName = QString::null, const QString& sql = QString::null, const qulonglong& id = 0);
+    DeclareCursorQuery(const QString& cursorName = QString::null, 
+            const QString& sql = QString::null,
+            const qulonglong& id = 0);
     DeclareCursorQuery(const DeclareCursorQuery& orig);
     virtual ~DeclareCursorQuery();
 };

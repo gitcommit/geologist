@@ -12,6 +12,7 @@
 #include <Lib/Model/Core/SIPrefix.h>
 
 class SIPrefixMapper;
+class SIPrefixManager;
 class Mapping;
 
 class App : public QApplication {
@@ -30,6 +31,8 @@ public:
         return _lastQueryId;
     }
 
+    QueryThread* databaseThread() { return &_dbThread; }
+    
 signals:
     void beginRequest();
     void commitRequest();
@@ -57,6 +60,7 @@ private:
 
     ConnectionData _cd;
     Mapping* _siPrefixMapping;
+    SIPrefixManager* _siPrefixManager;
     qlonglong _lastQueryId;
     DBModel _dbModel;
 };

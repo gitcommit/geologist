@@ -8,7 +8,7 @@
 #include <Lib/ORM/DeclareCursorQuery.h>
 
 DeclareCursorQuery::DeclareCursorQuery(const QString& cn, const QString& sql, const qulonglong& id)
-: CursorQuery(sql, QString::null, id) {
+: CursorQuery(cn, sql, id) {
     setSql(QString("DECLARE %1 CURSOR FOR %2;").arg(cursorName()).arg(sql));
 }
 

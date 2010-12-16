@@ -8,8 +8,8 @@
 #include <Lib/ORM/CloseCursorQuery.h>
 
 CloseCursorQuery::CloseCursorQuery(const QString& cn, const qulonglong& id)
-: CursorQuery(cn, QString::null, id) {
-    setSql(QString("CLOSE %1;").arg(cursorName()));
+: CursorQuery(cn, QString::null, id ) {
+    setSql(QString("CLOSE %1;").arg(cn));
 }
 
 CloseCursorQuery::CloseCursorQuery(const CloseCursorQuery& orig) {

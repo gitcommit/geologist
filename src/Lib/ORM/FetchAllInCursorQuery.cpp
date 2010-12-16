@@ -9,7 +9,7 @@
 
 FetchAllInCursorQuery::FetchAllInCursorQuery(const QString& cn, const qulonglong& id)
 : CursorQuery(cn, QString::null, id) {
-    setSql(QString("FETCH ALL IN %1;").arg(cursorName()));
+    setSql(QString("FETCH ALL IN %1;").arg(cn));
 }
 
 FetchAllInCursorQuery::FetchAllInCursorQuery(const FetchAllInCursorQuery& orig)

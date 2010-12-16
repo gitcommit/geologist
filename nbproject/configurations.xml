@@ -85,6 +85,10 @@
             <in>XMLParser.h</in>
           </df>
           <df name="GUI" kind="SOURCE_LOGICAL_FOLDER">
+            <df name="Core">
+              <df name="Managers">
+              </df>
+            </df>
             <df name="DB" kind="SOURCE_LOGICAL_FOLDER">
               <in>DatabaseConnectionDialog.cpp</in>
               <in>DatabaseConnectionDialog.h</in>
@@ -112,6 +116,12 @@
               <in>PasswordEdit.h</in>
               <in>SmartGroupBox.cpp</in>
               <in>SmartGroupBox.h</in>
+            </df>
+          </df>
+          <df name="Managers">
+            <df name="Base">
+              <in>DataManager.cpp</in>
+              <in>DataManager.h</in>
             </df>
           </df>
           <df name="Model" kind="SOURCE_LOGICAL_FOLDER">

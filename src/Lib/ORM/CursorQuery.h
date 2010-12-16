@@ -10,13 +10,21 @@
 
 #include <Lib/ORM/Query.h>
 
-class CursorQuery: public Query {
+class CursorQuery : public Query {
 public:
-    CursorQuery(const QString& cursorName = QString::null, const QString& sql = QString::null, const qulonglong& id = 0);
+    CursorQuery(const QString& cursorName = QString::null,
+            const QString& sql = QString::null,
+            const qulonglong& id = 0);
     CursorQuery(const CursorQuery& orig);
     virtual ~CursorQuery();
-    void setCursorName(const QString& n) { _cursorName = n; }
-    QString cursorName() const { return _cursorName; }
+
+    void setCursorName(const QString& n) {
+        _cursorName = n;
+    }
+
+    QString cursorName() const {
+        return _cursorName;
+    }
 private:
     QString _cursorName;
 };

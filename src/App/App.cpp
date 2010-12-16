@@ -24,6 +24,7 @@
 #include <Lib/DBModel/Table.h>
 
 #include <Lib/ORM/Mapping.h>
+#include <Lib/Managers/Core/SIPrefixManager.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(QDateTime)
@@ -32,7 +33,7 @@ Q_DECLARE_METATYPE(QSqlRecord)
 Q_DECLARE_METATYPE(QList<QSqlRecord>)
 
 App::App(int argc, char** argv)
-: QApplication(argc, argv), _lastQueryId(0), _dbModel(0) {
+: QApplication(argc, argv), _lastQueryId(0), _dbModel(0), _siPrefixManager(0) {
     setApplicationVersion(APP_VERSION);
     setApplicationName(APP_NAME);
     setOrganizationDomain(ORG_DOMAIN);
@@ -55,11 +56,13 @@ void App::init() {
     _dbModel.setName(DB_NAME);
     _dbModel.loadFromFile(DB_CONFIG_FILE);
     _siPrefixMapping = new Mapping(this, _dbModel.schema("core")->table("si_prefixes"));
+    _siPrefixManager = new SIPrefixManager(this);
 
     connect(&_dbThread, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
     connect(&_dbThread, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
     connect(&_dbThread, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-
+    connect(&_dbThread, SIGNAL(connected(const QString&)), _siPrefixManager, SLOT(loadAll()));
+    
     connect(this, SIGNAL(connectRequest(const ConnectionData&)), &_dbThread, SLOT(open(const ConnectionData&)));
     connect(this, SIGNAL(disconnectRequest()), &_dbThread, SLOT(close()));
     connect(this, SIGNAL(beginRequest()), &_dbThread, SLOT(onBeginRequest()));

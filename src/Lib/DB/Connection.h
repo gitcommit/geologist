@@ -9,6 +9,7 @@
 #include <QtSql/QSqlQuery>
 
 #include <Lib/DB/ConnectionData.h>
+#include <Lib/DB/DatabaseError.h>
 
 #include <Lib/ORM/DeclareSelectCursorQuery.h>
 #include <Lib/ORM/FetchAllInCursorQuery.h>
@@ -56,6 +57,7 @@ signals:
     void queryCompleted(const CloseCursorQuery& q);
     
     void logQuery(const QString& sql);
+    void error(const DatabaseError& e);
 protected slots:
     void log(const QString& sql);
 protected:

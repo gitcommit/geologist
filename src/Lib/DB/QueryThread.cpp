@@ -21,9 +21,10 @@ QueryThread::~QueryThread() {
 void QueryThread::run() {
     emit message(tr("Query Thread Running..."));
     connect(&conn_, SIGNAL(message(const QString&)), this, SLOT(onConnectionMessage(const QString&)));
+    connect(&conn_, SIGNAL(error(const DatabaseError&)), this, SIGNAL(error(const DatabaseError&)));
     connect(&conn_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
     connect(&conn_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-    connect(&conn_, SIGNAL(queryCompleted(const DeclareCursorQuery&)), this, SIGNAL(queryCompleted(const DeclareCursorQuery&)));
+    connect(&conn_, SIGNAL(queryCompleted(const DeclareSelectCursorQuery&)), this, SIGNAL(queryCompleted(const DeclareSelectCursorQuery&)));
     connect(&conn_, SIGNAL(queryCompleted(const FetchAllInCursorQuery&)), this, SIGNAL(queryCompleted(const FetchAllInCursorQuery&)));
     connect(&conn_, SIGNAL(queryCompleted(const CloseCursorQuery&)), this, SIGNAL(queryCompleted(const CloseCursorQuery&)));
     
@@ -32,11 +33,13 @@ void QueryThread::run() {
     connect(this, SIGNAL(rollbackRequest()), &conn_, SLOT(onRollbackRequest()));
     connect(this, SIGNAL(savepointRequest(const QString&)), &conn_, SLOT(onSavepointRequest(const QString&)));
     connect(this, SIGNAL(rollbackToSavepointRequest(const QString&)), &conn_, SLOT(onRollbackToSavepointRequest(const QString&)));
-    connect(this, SIGNAL(queryRequest(const DeclareCursorQuery&)), &conn_, SLOT(onQueryRequest(const DeclareCursorQuery&)));
+    connect(this, SIGNAL(queryRequest(const DeclareSelectCursorQuery&)), &conn_, SLOT(onQueryRequest(const DeclareSelectCursorQuery&)));
+    connect(this, SIGNAL(queryRequest(const FetchAllInCursorQuery&)), &conn_, SLOT(onQueryRequest(const FetchAllInCursorQuery&)));
+    connect(this, SIGNAL(queryRequest(const CloseCursorQuery&)), &conn_, SLOT(onQueryRequest(const CloseCursorQuery&)));
     exec();
 }
 
-void QueryThread::onQueryRequest(const DeclareCursorQuery& q) {
+void QueryThread::onQueryRequest(const DeclareSelectCursorQuery& q) {
     emit queryRequest(q);
 }
 
@@ -98,3 +101,4 @@ void QueryThread::onSavepointRequest(const QString& name) {
 void QueryThread::onRollbackToSavepointRequest(const QString& name) {
     emit rollbackToSavepointRequest(name);
 }
+

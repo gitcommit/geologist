@@ -7,8 +7,10 @@
 
 #include <Lib/ORM/DeclareSelectCursorQuery.h>
 
-DeclareSelectCursorQuery::DeclareSelectCursorQuery(const QString& cn, const QString& sql)
-: DeclareCursorQuery(cn, sql) {
+DeclareSelectCursorQuery::DeclareSelectCursorQuery(const QString& cn,
+        const QString& sql,
+        const qulonglong& qid)
+: DeclareCursorQuery(cn, sql, qid) {
 }
 
 DeclareSelectCursorQuery::DeclareSelectCursorQuery(const DeclareSelectCursorQuery& orig)

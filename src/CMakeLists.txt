@@ -22,6 +22,22 @@ SET(QT_USE_QTSQL TRUE)
 INCLUDE(${QT_USE_FILE})
 INCLUDE_DIRECTORIES(${QT_QTSQL_INCLUDE_DIR} ${QT_QTSVG_INCLUDE_DIR} ${QT_QTXML_INCLUDE_DIR}) 
 
+SET(geologist_Lib_Managers_Base_SRCS_CXX
+    Lib/Managers/Base/DataManager.cpp
+)
+
+SET(geologist_Lib_Managers_Base_MOC_SRCS
+    Lib/Managers/Base/DataManager.h
+)
+
+SET(geologist_Lib_Managers_Core_SRCS_CXX
+    Lib/Managers/Core/SIPrefixManager.cpp
+)
+
+SET(geologist_Lib_Managers_Core_MOC_SRCS
+    Lib/Managers/Core/SIPrefixManager.h
+)
+
 SET(geologist_Lib_DBModel_SRCS_CXX
     Lib/DBModel/XMLParser.cpp
     Lib/DBModel/ModelComponent.cpp
@@ -126,6 +142,7 @@ SET(geologist_Lib_DB_SRCS_CXX
     Lib/DB/ConnectionData.cpp
     Lib/DB/Connection.cpp
     Lib/DB/QueryThread.cpp
+    Lib/DB/DatabaseError.cpp
 )
 
 SET(geologist_Lib_DB_MOC_SRCS
@@ -186,6 +203,8 @@ SET(geologist_SRCS_CXX
     ${geologist_Lib_ORM_SRCS_CXX}
     ${geologist_Lib_DB_SRCS_CXX}
     ${geologist_Lib_Model_Core_SRCS_CXX}
+    ${geologist_Lib_Managers_Base_SRCS_CXX}
+    ${geologist_Lib_Managers_Core_SRCS_CXX}
     ${geologist_Lib_GUI_Widgets_SRCS_CXX}
     ${geologist_Lib_GUI_DB_SRCS_CXX}
     ${geologist_App_SRCS_CXX}
@@ -201,6 +220,8 @@ SET(geologist_MOC_SRCS
     ${geologist_Lib_Settings_MOC_SRCS}
     ${geologist_Lib_GUI_Widgets_MOC_SRCS}
     ${geologist_Lib_GUI_DB_MOC_SRCS}
+    ${geologist_Lib_Managers_Base_MOC_SRCS}
+    ${geologist_Lib_Managers_Core_MOC_SRCS}
 )
 
 # client UI files
