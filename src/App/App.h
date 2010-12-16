@@ -18,7 +18,6 @@ class App : public QApplication {
 public:
     App(int argc, char** argv);
     virtual ~App();
-    void init();
 
     qlonglong nextQueryId() {
         _lastQueryId++;
@@ -55,11 +54,13 @@ public slots:
     void onSIPrefixesLoaded(const QList<SIPrefix*>& lst);
 protected:
     virtual void registerMetatypes();
+    virtual void init();
+    virtual void configureManagers();
+
 private:
     QueryThread _dbThread;
 
     ConnectionData _cd;
-    DataManager* _siPrefixManager;
     qlonglong _lastQueryId;
     DBModel _dbModel;
 };

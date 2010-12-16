@@ -21,6 +21,7 @@
 
 DataManager::DataManager(QObject* p, const QString& fn, const QString& modN, const QString& clN)
 : QObject(p), _mapping(0), _mappingFileName(fn), _moduleName(modN), _className(clN) {
+    setObjectName(QString("%1::%2").arg(modN).arg(clN));
     connect(this, SIGNAL(execRequest(const DeclareSelectCursorQuery&)), getApp()->databaseThread(), SLOT(onQueryRequest(const DeclareSelectCursorQuery&)));
     connect(this, SIGNAL(execRequest(const FetchAllInCursorQuery&)), getApp()->databaseThread(), SLOT(onQueryRequest(const FetchAllInCursorQuery&)));
     connect(this, SIGNAL(execRequest(const CloseCursorQuery&)), getApp()->databaseThread(), SLOT(onQueryRequest(const CloseCursorQuery&)));

@@ -42,13 +42,14 @@ Q_DECLARE_METATYPE(DeclareSelectCursorQuery)
 Q_DECLARE_METATYPE(FetchAllInCursorQuery)
 
 App::App(int argc, char** argv)
-: QApplication(argc, argv), _lastQueryId(0), _dbModel(0), _siPrefixManager(0) {
+: QApplication(argc, argv), _lastQueryId(0), _dbModel(0) {
     setApplicationVersion(APP_VERSION);
     setApplicationName(APP_NAME);
     setOrganizationDomain(ORG_DOMAIN);
     setOrganizationName(ORG_NAME);
-    registerMetatypes();
     init();
+    registerMetatypes();
+    configureManagers();
 }
 
 void App::registerMetatypes() {
@@ -64,17 +65,23 @@ void App::registerMetatypes() {
     qRegisterMetaType<FetchAllInCursorQuery>("FetchAllInCursorQuery");
 }
 
+void App::configureManagers() {
+    (void) new DataManager(this, MAPPING_CONFIG_FILE, "Core", "SIPrefix");
+    DataManagerList managers = findChildren<DataManager*>();
+    for (DataManagerList::const_iterator i = managers.begin(); i != managers.end(); i++) {
+        connect(&_dbThread, SIGNAL(connected(const QString&)), (*i), SLOT(loadAll()));
+    }
+}
+
 void App::init() {
     Settings s(this);
     s.load(&_cd);
     _dbModel.setName(DB_NAME);
     _dbModel.loadFromFile(DB_CONFIG_FILE);
-    _siPrefixManager = new DataManager(this, MAPPING_CONFIG_FILE, "Core", "SIPrefix");
-
+    
     connect(&_dbThread, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
     connect(&_dbThread, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
     connect(&_dbThread, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-    connect(&_dbThread, SIGNAL(connected(const QString&)), _siPrefixManager, SLOT(loadAll()));
     
     connect(this, SIGNAL(connectRequest(const ConnectionData&)), &_dbThread, SLOT(open(const ConnectionData&)));
     connect(this, SIGNAL(disconnectRequest()), &_dbThread, SLOT(close()));

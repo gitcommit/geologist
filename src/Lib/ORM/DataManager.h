@@ -10,6 +10,8 @@
 
 #include <QtCore/QObject>
 
+#include <QtCore/QList>
+
 #include <QtXML/QDomDocument>
 #include <QtXML/QDomNode>
 
@@ -63,6 +65,8 @@ private:
     QString _className;
     Mapping* _mapping;
 };
+
+typedef QList<DataManager*> DataManagerList;
 
 #endif	/* DATAMANAGER_H */
 
