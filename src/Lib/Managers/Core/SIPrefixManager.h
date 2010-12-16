@@ -15,10 +15,6 @@ class SIPrefixManager: public DataManager {
 public:
     SIPrefixManager(QObject* p = 0);
     virtual ~SIPrefixManager();
-public slots:
-    virtual void onQueryCompleted(const DeclareSelectCursorQuery& q);
-    virtual void onQueryCompleted(const FetchAllInCursorQuery& q);
-    virtual void loadAll();
 };
 
 #endif	/* SIPREFIXMANAGER_H */

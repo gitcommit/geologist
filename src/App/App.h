@@ -22,17 +22,19 @@ public:
     virtual ~App();
     void init();
 
-    Mapping* siPrefixMapping() const {
-        return _siPrefixMapping;
-    }
-
     qlonglong nextQueryId() {
         _lastQueryId++;
         return _lastQueryId;
     }
 
-    QueryThread* databaseThread() { return &_dbThread; }
-    
+    QueryThread* databaseThread() {
+        return &_dbThread;
+    }
+
+    DBModel* databaseModel() {
+        return &_dbModel;
+    }
+
 signals:
     void beginRequest();
     void commitRequest();
@@ -59,7 +61,6 @@ private:
     QueryThread _dbThread;
 
     ConnectionData _cd;
-    Mapping* _siPrefixMapping;
     SIPrefixManager* _siPrefixManager;
     qlonglong _lastQueryId;
     DBModel _dbModel;

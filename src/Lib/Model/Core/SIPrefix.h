@@ -8,7 +8,6 @@
 #include <QtCore/QExplicitlySharedDataPointer>
 
 class SIPrefixData;
-class Mapping;
 
 class SIPrefix : public StandardEntity {
     Q_OBJECT
@@ -40,7 +39,6 @@ public:
     virtual bool hasId() const;
     virtual QString toString() const;
 
-    virtual Mapping* mapping() const;
 signals:
     void symbolChanged(const QString& newSymbol);
     void factorChanged(const qreal& newFacto);

@@ -17,6 +17,11 @@
 #include <Lib/Model/Core/SIPrefix.h>
 
 #include <Lib/ORM/Entity.h>
+#include <Lib/ORM/Query.h>
+#include <Lib/ORM/CursorQuery.h>
+#include <Lib/ORM/DeclareCursorQuery.h>
+#include <Lib/ORM/DeclareSelectCursorQuery.h>
+#include <Lib/ORM/CloseCursorQuery.h>
 
 #include <Lib/Settings/Settings.h>
 #include <Lib/DBModel/DBModel.h>
@@ -31,6 +36,11 @@ Q_DECLARE_METATYPE(QDateTime)
 Q_DECLARE_METATYPE(QString)
 Q_DECLARE_METATYPE(QSqlRecord)
 Q_DECLARE_METATYPE(QList<QSqlRecord>)
+Q_DECLARE_METATYPE(Query)
+Q_DECLARE_METATYPE(CursorQuery)
+Q_DECLARE_METATYPE(DeclareCursorQuery)
+Q_DECLARE_METATYPE(DeclareSelectCursorQuery)
+Q_DECLARE_METATYPE(FetchAllInCursorQuery)
 
 App::App(int argc, char** argv)
 : QApplication(argc, argv), _lastQueryId(0), _dbModel(0), _siPrefixManager(0) {
@@ -48,6 +58,11 @@ void App::registerMetatypes() {
     qRegisterMetaType<QDateTime > ("QDateTime");
     qRegisterMetaType<QString > ("QString>");
     qRegisterMetaType<QList<QSqlRecord> >("QList<QSqlRecord>");
+    qRegisterMetaType<Query>("Query");
+    qRegisterMetaType<CursorQuery>("CursorQuery");
+    qRegisterMetaType<DeclareCursorQuery>("DeclareCursorQuery");
+    qRegisterMetaType<DeclareSelectCursorQuery>("DeclareSelectCursorQuery");
+    qRegisterMetaType<FetchAllInCursorQuery>("FetchAllInCursorQuery");
 }
 
 void App::init() {
@@ -55,7 +70,6 @@ void App::init() {
     s.load(&_cd);
     _dbModel.setName(DB_NAME);
     _dbModel.loadFromFile(DB_CONFIG_FILE);
-    _siPrefixMapping = new Mapping(this, _dbModel.schema("core")->table("si_prefixes"));
     _siPrefixManager = new SIPrefixManager(this);
 
     connect(&_dbThread, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));

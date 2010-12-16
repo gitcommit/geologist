@@ -10,17 +10,15 @@
 class MappingData;
 class Table;
 
-class Mapping : public QObject {
-    Q_OBJECT
+class Mapping {
 public:
-    Mapping(QObject* p = 0, Table* t = 0);
-    Mapping(const Mapping& other);
+    Mapping(Table* t = 0);
     virtual ~Mapping();
     virtual void setTable(Table* t);
     virtual Table* table() const;
-    virtual DeclareSelectCursorQuery declareSelectAllCursor() const;
-    virtual FetchAllInCursorQuery fetchAllInSelectAllCursor() const;
-    virtual CloseCursorQuery closeFetchAllCursor() const;
+    virtual DeclareSelectCursorQuery declareSelectAllCursor(const qulonglong& queryId) const;
+    virtual FetchAllInCursorQuery fetchAllInSelectAllCursor(const qulonglong& queryId) const;
+    virtual CloseCursorQuery closeFetchAllCursor(const qulonglong& queryId) const;
 protected:
     virtual QString selectAllCursorName() const;
     virtual QString selectAllQuery() const;

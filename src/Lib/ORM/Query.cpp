@@ -7,12 +7,14 @@
 
 #include <Lib/ORM/Query.h>
 
+#include <QtCore/QDebug>
+
 Query::Query(const QString& sql, const qulonglong& id)
-: QSharedData(), _sql(sql), _id(id) {
+: _sql(sql), _id(id) {
 }
 
 Query::Query(const Query& orig)
-: QSharedData(orig), _sql(orig._sql), _id(orig._id) {
+: _sql(orig._sql), _id(orig._id) {
 }
 
 Query::~Query() {
@@ -23,7 +25,7 @@ void Query::loadRecordsFromQuery(QSqlQuery* q) {
     if (!q->isActive()) {
         return;
     }
-    while(q->next()) {
+    while (q->next()) {
         _res.append(q->record());
     }
 }

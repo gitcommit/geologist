@@ -14,7 +14,7 @@ DataManager::DataManager(QObject* p)
     connect(this, SIGNAL(execRequest(const DeclareSelectCursorQuery&)), getApp()->databaseThread(), SLOT(onQueryRequest(const DeclareSelectCursorQuery&)));
     connect(this, SIGNAL(execRequest(const FetchAllInCursorQuery&)), getApp()->databaseThread(), SLOT(onQueryRequest(const FetchAllInCursorQuery&)));
     connect(this, SIGNAL(execRequest(const CloseCursorQuery&)), getApp()->databaseThread(), SLOT(onQueryRequest(const CloseCursorQuery&)));
-    
+
     connect(getApp()->databaseThread(), SIGNAL(queryCompleted(const DeclareSelectCursorQuery&)), this, SLOT(onQueryCompleted(const DeclareSelectCursorQuery&)));
     connect(getApp()->databaseThread(), SIGNAL(queryCompleted(const FetchAllInCursorQuery&)), this, SLOT(onQueryCompleted(const FetchAllInCursorQuery&)));
 }
@@ -22,14 +22,35 @@ DataManager::DataManager(QObject* p)
 DataManager::~DataManager() {
 }
 
-/*void DataManager::onQueryCompleted(const DeclareSelectCursorQuery& q) {
-    
+qulonglong DataManager::nextQueryId() {
+    _qid = getApp()->nextQueryId();
+    return _qid;
+}
+
+qulonglong DataManager::queryId() const {
+    return _qid;
+}
+
+bool DataManager::isMyQuery(const Query* q) const {
+    Q_CHECK_PTR(q);
+    return (q->id() == queryId());
+}
+
+void DataManager::loadAll() {
+    emit execRequest(mapping()->declareSelectAllCursor(nextQueryId()));
+}
+
+
+void DataManager::onQueryCompleted(const DeclareSelectCursorQuery& q) {
+    if (!isMyQuery(&q)) {
+        return;
+    }
+    emit execRequest(mapping()->fetchAllInSelectAllCursor(nextQueryId()));
 }
 
 void DataManager::onQueryCompleted(const FetchAllInCursorQuery& q) {
-    
-}*/
-
-/*void DataManager::loadAll() {
-    
-}*/
+    if (!isMyQuery(&q)) {
+        return;
+    }
+    emit execRequest(mapping()->closeFetchAllCursor(nextQueryId()));
+}

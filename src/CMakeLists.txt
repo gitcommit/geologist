@@ -126,7 +126,6 @@ SET(geologist_Lib_ORM_MOC_SRCS
     Lib/ORM/Entity.h
     Lib/ORM/IdentifiedEntity.h
     Lib/ORM/StandardEntity.h
-    Lib/ORM/Mapping.h
 )
 
 SET(geologist_Lib_Model_Core_SRCS_CXX

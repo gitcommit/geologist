@@ -15,7 +15,7 @@
 #include <QtSql/QSqlRecord>
 #include <QtSql/QSqlQuery>
 
-class Query : public QSharedData {
+class Query {
 public:
     Query(const QString& sql = QString::null, const qulonglong& id = 0);
     Query(const Query& orig);

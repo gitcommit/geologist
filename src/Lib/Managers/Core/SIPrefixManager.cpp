@@ -9,32 +9,11 @@
 
 #include <Lib/Tools/tools.h>
 
+#include <QtCore/QDebug>
 SIPrefixManager::SIPrefixManager(QObject* p)
 : DataManager(p) {
+    setMapping(Mapping(getApp()->databaseModel()->schema("core")->table("si_prefixes")));
 }
 
 SIPrefixManager::~SIPrefixManager() {
-}
-
-void SIPrefixManager::loadAll() {
-    qid = getApp()->nextQueryId();
-
-    emit execRequest(DeclareSelectCursorQuery("select_all_si_prefixes",
-            "select id, name, code, symbol, factor, description from core.si_prefixes order by name asc",
-            qid));
-}
-
-void SIPrefixManager::onQueryCompleted(const DeclareSelectCursorQuery& q) {
-    if (q.id() != qid) {
-        return;
-    }
-    qid = getApp()->nextQueryId();
-    emit execRequest(FetchAllInCursorQuery(q.cursorName(), qid));
-}
-
-void SIPrefixManager::onQueryCompleted(const FetchAllInCursorQuery& q) {
-    if (q.id() != qid) {
-        return;
-    }
-    emit execRequest(CloseCursorQuery(q.cursorName(), getApp()->nextQueryId()));
 }

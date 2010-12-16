@@ -15,6 +15,7 @@
                 <column name="id" type="int" nullable="false" sequence="seq_si_prefixes"/>
                 <column name="name" type="name" nullable="false" default_value="'New SI Prefix'"/>
                 <column name="code" type="code" nullable="true"/>
+                <column name="symbol" type="text" nullable="false"/>
                 <column name="factor" type="numeric" nullable="false"/>
                 <column name="description" type="text" nullable="false" default_value="''"/>
                 <primary_key_constraint name="pk_si_prefixes">
@@ -25,6 +26,9 @@
                 </unique_constraint>
                 <unique_constraint name="u_si_prefixes_code">
                     <constraint_column name="code"/>
+                </unique_constraint>
+                <unique_constraint name="u_si_prefixes_symbol">
+                    <constraint_column name="symbol"/>
                 </unique_constraint>
                 <check_constraint name="chk_si_prefixes_factor_non_neutral" definition="!= 0.0">
                     <constraint_column name="factor"/>
