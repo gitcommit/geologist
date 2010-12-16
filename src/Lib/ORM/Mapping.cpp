@@ -6,9 +6,10 @@
 
 #include <Lib/DBModel/Table.h>
 #include <Lib/DBModel/TableColumn.h>
+#include <Lib/Managers/Base/DataManager.h>
 
 Mapping::Mapping(Table* t)
-: _d(0) {
+: QObject(t), _d(0) {
     _d = new MappingData();
     _d->setTable(t);
 }
@@ -28,12 +29,16 @@ QString Mapping::selectAllCursorName() const {
     return _d->selectAllCursorName();
 }
 
+PropertyList Mapping::properties() const {
+    return findChildren<Property*>();
+}
+
 QString Mapping::selectAllQuery() const {
     Q_CHECK_PTR(table());
-    TableColumnList cols = table()->columns();
+    PropertyList pl = properties();
     QStringList cn;
-    for(TableColumnList::const_iterator i = cols.begin(); i != cols.end(); i++) {
-        cn << (*i)->name();
+    for (PropertyList::const_iterator it = pl.begin(); it != pl.end(); it++) {
+        cn << (*it)->tableColumn()->name();
     }
     return QString("SELECT %1 FROM %2").arg(cn.join(", ")).arg(table()->qualifiedName());
 }
@@ -48,4 +53,9 @@ FetchAllInCursorQuery Mapping::fetchAllInSelectAllCursor(const qulonglong& query
 
 CloseCursorQuery Mapping::closeFetchAllCursor(const qulonglong& queryId) const {
     return CloseCursorQuery(selectAllCursorName(), queryId);
+}
+
+DataManager* Mapping::dataManager() const {
+    Q_CHECK_PTR(parent());
+    return qobject_cast<DataManager*>(parent());
 }

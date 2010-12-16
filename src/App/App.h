@@ -11,9 +11,7 @@
 
 #include <Lib/Model/Core/SIPrefix.h>
 
-class SIPrefixMapper;
-class SIPrefixManager;
-class Mapping;
+class DataManager;
 
 class App : public QApplication {
     Q_OBJECT;
@@ -61,7 +59,7 @@ private:
     QueryThread _dbThread;
 
     ConnectionData _cd;
-    SIPrefixManager* _siPrefixManager;
+    DataManager* _siPrefixManager;
     qlonglong _lastQueryId;
     DBModel _dbModel;
 };

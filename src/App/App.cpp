@@ -29,7 +29,7 @@
 #include <Lib/DBModel/Table.h>
 
 #include <Lib/ORM/Mapping.h>
-#include <Lib/Managers/Core/SIPrefixManager.h>
+#include <Lib/Managers/Base/DataManager.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(QDateTime)
@@ -70,7 +70,7 @@ void App::init() {
     s.load(&_cd);
     _dbModel.setName(DB_NAME);
     _dbModel.loadFromFile(DB_CONFIG_FILE);
-    _siPrefixManager = new SIPrefixManager(this);
+    _siPrefixManager = new DataManager(this, MAPPING_CONFIG_FILE, "Core", "SIPrefix");
 
     connect(&_dbThread, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
     connect(&_dbThread, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
@@ -117,10 +117,6 @@ void App::onDatabaseMessage(const QString& msg) {
 void App::onConnected(const QString& msg) {
     emit databaseMessage(tr("Connected: %1").arg(msg));
     emit databaseOpened(msg);
-    /*currentUserQueryId_ = nextQueryId();
-    emit beginRequest();
-    emit queryRequest(TypedQuery("SELECT CURRENT_USER AS CURRENT_USER;", currentUserQueryId_));
-     */
     emit debugMessage(tr("\n-- CREATE DATABASE script --\n%1\n-- end of CREATE DATABASE script.\n")
             .arg(_dbModel.create().join("\n")));
     emit beginRequest();

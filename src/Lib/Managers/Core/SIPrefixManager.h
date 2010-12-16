@@ -13,7 +13,7 @@
 class SIPrefixManager: public DataManager {
     Q_OBJECT
 public:
-    SIPrefixManager(QObject* p = 0);
+    SIPrefixManager(QObject* p = 0, const QString& configFileName = QString::null);
     virtual ~SIPrefixManager();
 };
 

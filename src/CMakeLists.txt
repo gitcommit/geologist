@@ -119,6 +119,7 @@ SET(geologist_Lib_ORM_SRCS_CXX
 
     Lib/ORM/EntityStatus.cpp
     Lib/ORM/Mapping.cpp
+    Lib/ORM/Property.cpp
     Lib/ORM/Private/MappingData.cpp
 )
 
@@ -126,6 +127,9 @@ SET(geologist_Lib_ORM_MOC_SRCS
     Lib/ORM/Entity.h
     Lib/ORM/IdentifiedEntity.h
     Lib/ORM/StandardEntity.h
+
+    Lib/ORM/Mapping.h
+    Lib/ORM/Property.h
 )
 
 SET(geologist_Lib_Model_Core_SRCS_CXX

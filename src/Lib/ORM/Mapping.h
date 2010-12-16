@@ -7,10 +7,16 @@
 #include <Lib/ORM/FetchAllInCursorQuery.h>
 #include <Lib/ORM/CloseCursorQuery.h>
 
+#include <QtCore/QObject>
+
+#include <Lib/ORM/Property.h>
+
 class MappingData;
 class Table;
+class DataManager;
 
-class Mapping {
+class Mapping: public QObject {
+    Q_OBJECT
 public:
     Mapping(Table* t = 0);
     virtual ~Mapping();
@@ -19,6 +25,8 @@ public:
     virtual DeclareSelectCursorQuery declareSelectAllCursor(const qulonglong& queryId) const;
     virtual FetchAllInCursorQuery fetchAllInSelectAllCursor(const qulonglong& queryId) const;
     virtual CloseCursorQuery closeFetchAllCursor(const qulonglong& queryId) const;
+    DataManager* dataManager() const;
+    PropertyList properties() const;
 protected:
     virtual QString selectAllCursorName() const;
     virtual QString selectAllQuery() const;

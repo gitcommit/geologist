@@ -7,12 +7,12 @@
 
 #include <Lib/Managers/Core/SIPrefixManager.h>
 
-#include <Lib/Tools/tools.h>
-
 #include <QtCore/QDebug>
-SIPrefixManager::SIPrefixManager(QObject* p)
-: DataManager(p) {
-    setMapping(Mapping(getApp()->databaseModel()->schema("core")->table("si_prefixes")));
+#include <QtCore/QStringList>
+
+
+SIPrefixManager::SIPrefixManager(QObject* p, const QString& configFileName)
+: DataManager(p, configFileName) {
 }
 
 SIPrefixManager::~SIPrefixManager() {

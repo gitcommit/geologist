@@ -11,6 +11,7 @@ class SIPrefixData;
 
 class SIPrefix : public StandardEntity {
     Q_OBJECT
+    Q_CLASSINFO("module", "Core");
     Q_PROPERTY(QString symbol READ symbol WRITE setSymbol NOTIFY symbolChanged)
     Q_PROPERTY(qreal factor READ factor WRITE setFactor NOTIFY factorChanged)
 public:

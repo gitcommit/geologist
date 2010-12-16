@@ -19,6 +19,7 @@ public:
 	void setNullable(const bool& b);
 	QString name() const;
 	virtual QString qualifiedName() const;
+        virtual QString pathName() const;
 	DataType* dataType() const;
 	bool nullable() const;
 	QStringList create() const;

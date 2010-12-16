@@ -2,6 +2,7 @@
 
 #include <QtCore/QStringList>
 
+#include <Lib/DBModel/Schema.h>
 #include <Lib/DBModel/Table.h>
 #include <Lib/DBModel/DataType.h>
 
@@ -61,4 +62,8 @@ QStringList TableColumn::create() const {
 
 QString TableColumn::qualifiedName() const {
 	return QString("%1.%2").arg(table()->qualifiedName()).arg(name());
+}
+
+QString TableColumn::pathName() const {
+    return QString("%1.%2.%3").arg(table()->schema()->name()).arg(table()->name()).arg(name());
 }
