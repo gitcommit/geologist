@@ -23,7 +23,7 @@ INCLUDE(${QT_USE_FILE})
 INCLUDE_DIRECTORIES(${QT_QTSQL_INCLUDE_DIR} ${QT_QTSVG_INCLUDE_DIR} ${QT_QTXML_INCLUDE_DIR}) 
 
 SET(geologist_Lib_DBModel_SRCS_CXX
-    Lib/DBModel/XMLParser.cpp
+    Lib/DBModel/DBXMLParser.cpp
     Lib/DBModel/ModelComponent.cpp
     Lib/DBModel/DBModel.cpp
     Lib/DBModel/InDBModelComponent.cpp
@@ -55,7 +55,7 @@ SET(geologist_Lib_DBModel_SRCS_CXX
 )
 
 SET(geologist_Lib_DBModel_MOC_SRCS
-    Lib/DBModel/XMLParser.h
+    Lib/DBModel/DBXMLParser.h
     Lib/DBModel/ModelComponent.h
     Lib/DBModel/DBModel.h
     Lib/DBModel/InDBModelComponent.h
@@ -110,6 +110,7 @@ SET(geologist_Lib_ORM_SRCS_CXX
     Lib/ORM/DataManager.cpp
     Lib/ORM/Mapping.cpp
     Lib/ORM/Property.cpp
+    Lib/ORM/MappingXMLParser.cpp
     Lib/ORM/Private/MappingData.cpp
 )
 
@@ -118,6 +119,7 @@ SET(geologist_Lib_ORM_MOC_SRCS
     Lib/ORM/IdentifiedEntity.h
     Lib/ORM/StandardEntity.h
 
+    Lib/ORM/MappingXMLParser.h
     Lib/ORM/DataManager.h
     Lib/ORM/Mapping.h
     Lib/ORM/Property.h

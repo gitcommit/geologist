@@ -14,14 +14,13 @@
 
 #include <Lib/GUI/DB/DatabaseConnectionDialog.h>
 
-#include <Lib/Model/Core/SIPrefix.h>
-
 #include <Lib/ORM/Entity.h>
 #include <Lib/ORM/Query.h>
 #include <Lib/ORM/CursorQuery.h>
 #include <Lib/ORM/DeclareCursorQuery.h>
 #include <Lib/ORM/DeclareSelectCursorQuery.h>
 #include <Lib/ORM/CloseCursorQuery.h>
+#include <Lib/ORM/MappingXMLParser.h>
 
 #include <Lib/Settings/Settings.h>
 #include <Lib/DBModel/DBModel.h>
@@ -66,7 +65,10 @@ void App::registerMetatypes() {
 }
 
 void App::configureManagers() {
-    (void) new DataManager(this, MAPPING_CONFIG_FILE, "Core", "SIPrefix");
+    MappingXMLParser* p = new MappingXMLParser(this);
+    p->loadFromFile(MAPPING_CONFIG_FILE);
+    delete p;
+
     DataManagerList managers = findChildren<DataManager*>();
     for (DataManagerList::const_iterator i = managers.begin(); i != managers.end(); i++) {
         connect(&_dbThread, SIGNAL(connected(const QString&)), (*i), SLOT(loadAll()));

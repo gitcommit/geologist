@@ -22,8 +22,9 @@ public:
     virtual ~Property();
     Mapping* mapping() const;
     TableColumn* tableColumn() const { return _col; }
-    
+    QString name() const { return _name; }
 private:
+    QString _name;
     TableColumn* _col;
 };
 

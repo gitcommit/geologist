@@ -11,7 +11,7 @@
 class Schema;
 class DataType;
 
-class XMLParser;
+class DBXMLParser;
 
 class DBModel : public ModelComponent {
     Q_OBJECT
@@ -51,7 +51,7 @@ protected:
     virtual QStringList createForeignKeyConstraints() const;
 private:
     QExplicitlySharedDataPointer<DBModelData> _d;
-    XMLParser* _parser;
+    DBXMLParser* _parser;
 };
 
 #endif

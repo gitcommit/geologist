@@ -1,13 +1,13 @@
-#include <Lib/DBModel/XMLParser.h>
+#include <Lib/DBModel/DBXMLParser.h>
 
-XMLParser::XMLParser(QObject* p)
+DBXMLParser::DBXMLParser(QObject* p)
 : XMLFileParser(p) {
 }
 
-XMLParser::~XMLParser() {
+DBXMLParser::~DBXMLParser() {
 }
 
-void XMLParser::createSchemata(const QDomNodeList& schemata) const {
+void DBXMLParser::createSchemata(const QDomNodeList& schemata) const {
     for (int schemaI = 0; schemaI != schemata.size(); schemaI++) {
         QDomElement schemaE = schemata.item(schemaI).toElement();
         Q_ASSERT(schemaE.hasAttribute("name"));
@@ -16,7 +16,7 @@ void XMLParser::createSchemata(const QDomNodeList& schemata) const {
     }
 }
 
-void XMLParser::createDataTypes(const QDomNodeList& types) const {
+void DBXMLParser::createDataTypes(const QDomNodeList& types) const {
     for (int i = 0; i != types.size(); i++) {
         QDomElement e = types.item(i).toElement();
         Q_ASSERT(e.hasAttribute("name"));
@@ -26,14 +26,14 @@ void XMLParser::createDataTypes(const QDomNodeList& types) const {
     }
 }
 
-void XMLParser::createSequences(const QString& schemaName,
+void DBXMLParser::createSequences(const QString& schemaName,
         const QDomNodeList& sequences) const {
     for (int i = 0; i != sequences.size(); i++) {
         emit createSequence(schemaName, nameAttribute(sequences.item(i)));
     }
 }
 
-QStringList XMLParser::constraintColumnNames(const QDomNode& constraintNode) const {
+QStringList DBXMLParser::constraintColumnNames(const QDomNode& constraintNode) const {
     QStringList ret;
     QDomNodeList lst = constraintNode.toElement().elementsByTagName("constraint_column");
     for (int i = 0; i != lst.size(); i++) {
@@ -42,7 +42,7 @@ QStringList XMLParser::constraintColumnNames(const QDomNode& constraintNode) con
     return ret;
 }
 
-void XMLParser::createPrimaryKeyConstraints(const QString& schemaName,
+void DBXMLParser::createPrimaryKeyConstraints(const QString& schemaName,
         const QString& tableName, const QDomNodeList& pk) const {
     Q_ASSERT(pk.size() <= 1);
     for (int i = 0; i != pk.size(); i++) {
@@ -51,7 +51,7 @@ void XMLParser::createPrimaryKeyConstraints(const QString& schemaName,
     }
 }
 
-void XMLParser::createUniqueConstraints(const QString& schemaName,
+void DBXMLParser::createUniqueConstraints(const QString& schemaName,
         const QString& tableName, const QDomNodeList& nodes) const {
     for (int i = 0; i != nodes.size(); i++) {
         emit createUniqueConstraint(schemaName, tableName,
@@ -60,7 +60,7 @@ void XMLParser::createUniqueConstraints(const QString& schemaName,
     }
 }
 
-void XMLParser::createForeignKeyConstraints(const QString& schemaName,
+void DBXMLParser::createForeignKeyConstraints(const QString& schemaName,
         const QString& tableName, const QDomNodeList& nodes) const {
     for (int i = 0; i != nodes.size(); i++) {
         QDomElement e = nodes.item(i).toElement();
@@ -84,7 +84,7 @@ void XMLParser::createForeignKeyConstraints(const QString& schemaName,
     }
 }
 
-void XMLParser::createCheckConstraints(const QString& schemaName,
+void DBXMLParser::createCheckConstraints(const QString& schemaName,
         const QString& tableName, const QDomNodeList& nodes) const {
     for (int i = 0; i != nodes.size(); i++) {
         emit createCheckConstraint(schemaName, tableName,
@@ -93,7 +93,7 @@ void XMLParser::createCheckConstraints(const QString& schemaName,
     }
 }
 
-void XMLParser::createTables(const QString& schemaName,
+void DBXMLParser::createTables(const QString& schemaName,
         const QDomNodeList& tables) const {
     for (int i = 0; i != tables.size(); i++) {
         QString tableName = nameAttribute(tables.item(i));
@@ -105,7 +105,7 @@ void XMLParser::createTables(const QString& schemaName,
     }
 }
 
-void XMLParser::createTableColumns(const QString& schemaName,
+void DBXMLParser::createTableColumns(const QString& schemaName,
         const QString& tableName, const QDomNodeList& cols) const {
     for (int i = 0; i != cols.size(); i++) {
         emit createTableColumn(schemaName, tableName,
@@ -115,7 +115,7 @@ void XMLParser::createTableColumns(const QString& schemaName,
     }
 }
 
-QDomElement XMLParser::dataTypeElementByName(const QString& dataTypeName) const {
+QDomElement DBXMLParser::dataTypeElementByName(const QString& dataTypeName) const {
     QDomNodeList l = dbElement().elementsByTagName("data_type");
     for (int i = 0; i != l.size(); i++) {
         if (dataTypeName == nameAttribute(l.item(i))) {
@@ -125,11 +125,13 @@ QDomElement XMLParser::dataTypeElementByName(const QString& dataTypeName) const 
     return QDomElement();
 }
 
-QDomElement XMLParser::dbElement() const {
+QDomElement DBXMLParser::dbElement() const {
+    Q_ASSERT(!documentElement().isNull());
+    Q_ASSERT(documentElement().elementsByTagName("database").size() == 1);
     return documentElement().elementsByTagName("database").item(0).toElement();
 }
 
-void XMLParser::parse() {
+void DBXMLParser::parse() {
     QDomElement dbEl = dbElement();
     Q_ASSERT(!dbEl.isNull());
     QDomNodeList schemata = dbEl.elementsByTagName("schema");

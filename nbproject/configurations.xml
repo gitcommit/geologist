@@ -83,8 +83,8 @@
             <in>TableConstraint.h</in>
             <in>UniqueConstraint.cpp</in>
             <in>UniqueConstraint.h</in>
-            <in>XMLParser.cpp</in>
             <in>XMLParser.h</in>
+            <in>xdbXMLParser.cpp</in>
           </df>
           <df name="GUI" kind="SOURCE_LOGICAL_FOLDER">
             <df name="Core">
@@ -116,14 +116,6 @@
               <in>PasswordEdit.h</in>
               <in>SmartGroupBox.cpp</in>
               <in>SmartGroupBox.h</in>
-            </df>
-          </df>
-          <df name="Managers">
-            <df name="Base">
-            </df>
-            <df name="Core">
-              <in>SIPrefixManager.cpp</in>
-              <in>SIPrefixManager.h</in>
             </df>
           </df>
           <df name="Model" kind="SOURCE_LOGICAL_FOLDER">
@@ -167,6 +159,8 @@
             <in>IdentifiedEntity.h</in>
             <in>Mapping.cpp</in>
             <in>Mapping.h</in>
+            <in>MappingXMLParser.cpp</in>
+            <in>MappingXMLParser.h</in>
             <in>Property.cpp</in>
             <in>Property.h</in>
             <in>Query.cpp</in>
@@ -179,6 +173,8 @@
             <in>Settings.h</in>
           </df>
           <df name="Tools" kind="SOURCE_LOGICAL_FOLDER">
+            <in>XMLFileParser.cpp</in>
+            <in>XMLFileParser.h</in>
             <in>tools.cpp</in>
             <in>tools.h</in>
           </df>
@@ -369,6 +365,16 @@
           </incDir>
         </ccTool>
       </item>
+      <item path="src/Lib/DBModel/DBXMLParser.cpp" ex="false" tool="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../usr/qt/include</pElem>
+            <pElem>../../../usr/qt/include/QtXml</pElem>
+            <pElem>src/Lib/DBModel</pElem>
+            <pElem>src</pElem>
+          </incDir>
+        </ccTool>
+      </item>
       <item path="src/Lib/DBModel/DataType.cpp" ex="false" tool="1">
         <ccTool>
           <incDir>
@@ -509,16 +515,6 @@
             <pElem>../../../usr/qt/include</pElem>
             <pElem>src/Lib/DBModel</pElem>
             <pElem>src/Lib/DBModel/Private</pElem>
-          </incDir>
-        </ccTool>
-      </item>
-      <item path="src/Lib/DBModel/XMLParser.cpp" ex="false" tool="1">
-        <ccTool>
-          <incDir>
-            <pElem>../../../usr/qt/include</pElem>
-            <pElem>../../../usr/qt/include/QtXml</pElem>
-            <pElem>src/Lib/DBModel</pElem>
-            <pElem>src</pElem>
           </incDir>
         </ccTool>
       </item>

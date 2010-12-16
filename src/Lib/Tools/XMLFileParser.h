@@ -16,6 +16,7 @@ public:
     virtual void loadFromFile(const QString& fileName);
 
 protected:
+    QDomDocument document() const { return _doc; }
     virtual QDomElement documentElement() const;
     virtual QString nameAttribute(const QDomNode& n) const;
     virtual bool stringToBool(const QString& str) const;

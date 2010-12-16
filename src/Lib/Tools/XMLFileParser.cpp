@@ -2,7 +2,6 @@
 
 #include <QtCore/QFile>
 #include <QtCore/QStringList>
-#include <QtCore/QDebug>
 
 XMLFileParser::XMLFileParser(QObject* p)
 : QObject(p) {

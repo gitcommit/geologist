@@ -10,7 +10,7 @@
 #include <Lib/ORM/Mapping.h>
 
 Property::Property(Mapping* m, const QString& name, TableColumn* col)
-: QObject(m), _col(col) {
+: QObject(m), _name(name), _col(col) {
 }
 
 Property::~Property() {

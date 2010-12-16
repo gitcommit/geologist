@@ -1,5 +1,5 @@
-#ifndef XMLPARSER_H_
-#define XMLPARSER_H_
+#ifndef DBXMLPARSER_H_
+#define DBXMLPARSER_H_
 
 #include <Lib/Tools/XMLFileParser.h>
 
@@ -7,11 +7,11 @@
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomElement>
 
-class XMLParser : public XMLFileParser {
+class DBXMLParser : public XMLFileParser {
     Q_OBJECT
 public:
-    XMLParser(QObject* p = 0);
-    virtual ~XMLParser();
+    DBXMLParser(QObject* p = 0);
+    virtual ~DBXMLParser();
     
 signals:
     void createDataType(const QString& name, const QString& sqlName, const bool& requiresQuoting) const;
@@ -46,4 +46,4 @@ private:
     QDomDocument _doc;
 };
 
-#endif /*XMLPARSER_H_*/
+#endif /*DBXMLPARSER_H_*/

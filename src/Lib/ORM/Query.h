@@ -29,7 +29,7 @@ public:
         return _sql;
     }
     qulonglong id() const { return _id; }
-    QList<QSqlRecord> records() { return _res; }
+    QList<QSqlRecord> records() const { return _res; }
     void loadRecordsFromQuery(QSqlQuery* q);
 private:
     QString _sql;

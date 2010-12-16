@@ -27,9 +27,14 @@
 class DataManager : public QObject {
     Q_OBJECT
 public:
-    DataManager(QObject* p = 0, const QString& mappingFileName = QString::null,
-            const QString& moduleName = QString::null, const QString& className = QString::null);
+    DataManager(QObject* p = 0,
+            const QString& moduleName = QString::null, const QString& className = QString::null,
+            const QString& schemaName = QString::null, const QString& tableName = QString::null);
     virtual ~DataManager();
+    Mapping* mapping() {
+        return _mapping;
+    }
+
 signals:
     void execRequest(const DeclareSelectCursorQuery& q);
     void execRequest(const FetchAllInCursorQuery& q);
@@ -41,28 +46,25 @@ public slots:
 
 protected:
     virtual void configure();
-    QString mappingFileName() const { return _mappingFileName; }
-    QDomDocument domDocument() const;
-    QDomNode moduleNode(const QString& moduleName);
-    QDomNode classNode(const QString& moduleName, const QString& className);
+    virtual void parseQueryResult(const FetchAllInCursorQuery& q);
     qulonglong nextQueryId();
     qulonglong queryId() const;
     bool isMyQuery(const Query* q) const;
-
-    Mapping* mapping() {
-        return _mapping;
-    }
 
     void setMapping(Mapping* m) {
         _mapping = m;
     }
     QString moduleName() const { return _moduleName; }
     QString className() const { return _className; }
+    QString schemaName() const { return _schemaName; }
+    QString tableName() const { return _tableName; }
 private:
     qulonglong _qid;
     QString _mappingFileName;
     QString _moduleName;
     QString _className;
+    QString _schemaName;
+    QString _tableName;
     Mapping* _mapping;
 };
 
