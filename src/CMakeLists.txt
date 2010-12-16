@@ -75,6 +75,11 @@ SET(geologist_Lib_DBModel_MOC_SRCS
 
 SET(geologist_Lib_Tools_SRCS_CXX
     Lib/Tools/tools.cpp
+    Lib/Tools/XMLFileParser.cpp
+)
+
+SET(geologist_Lib_Tooles_MOC_SRCS
+    Lib/Tools/XMLFileParser.h
 )
 
 SET(geologist_App_SRCS_CXX
@@ -199,6 +204,7 @@ SET(geologist_SRCS_CXX
 
 # files which need to be moc'd by Qt (headers)
 SET(geologist_MOC_SRCS
+    ${geologist_Lib_Tooles_MOC_SRCS}
     ${geologist_App_MOC_SRCS}
     ${geologist_Lib_DBModel_MOC_SRCS}
     ${geologist_Lib_ORM_MOC_SRCS}
