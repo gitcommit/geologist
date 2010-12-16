@@ -11,6 +11,9 @@
 #include <QtCore/QSharedData>
 
 #include <QtCore/QString>
+#include <QtCore/QList>
+#include <QtSql/QSqlRecord>
+#include <QtSql/QSqlQuery>
 
 class Query : public QSharedData {
 public:
@@ -26,9 +29,12 @@ public:
         return _sql;
     }
     qulonglong id() const { return _id; }
+    QList<QSqlRecord> records() { return _res; }
+    void loadRecordsFromQuery(QSqlQuery* q);
 private:
     QString _sql;
     qulonglong _id;
+    QList<QSqlRecord> _res;
 };
 
 #endif	/* QUERY_H */

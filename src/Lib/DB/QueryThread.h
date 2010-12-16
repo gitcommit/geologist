@@ -12,6 +12,10 @@
 #include <Lib/DB/ConnectionData.h>
 #include <Lib/DB/Connection.h>
 
+#include <Lib/ORM/DeclareSelectCursorQuery.h>
+#include <Lib/ORM/FetchAllInCursorQuery.h>
+#include <Lib/ORM/CloseCursorQuery.h>
+
 class QueryThread : public QThread {
     Q_OBJECT;
 
@@ -30,6 +34,10 @@ public slots:
     void onSavepointRequest(const QString& name);
     void onRollbackToSavepointRequest(const QString& name);
 
+    void onQueryRequest(const DeclareSelectCursorQuery& q);
+    void onQueryRequest(const FetchAllInCursorQuery& q);
+    void onQueryRequest(const CloseCursorQuery& q);
+    
     void onConnectionMessage(const QString& msg);
     void onConnected(const QString& msg);
     void onDisconnected();
@@ -40,12 +48,19 @@ signals:
     void rollbackRequest();
     void savepointRequest(const QString& name);
     void rollbackToSavepointRequest(const QString& name);
-
+    void queryRequest(const DeclareSelectCursorQuery& q);
+    void queryRequest(const FetchAllInCursorQuery& q);
+    void queryRequest(const CloseCursorQuery& q);
+    
     void message(const QString& msg);
     void connected(const QString& info);
     void disconnected();
     void connectRequest(const ConnectionData& cd, const QString& connectionName);
     void disconnectRequest();
+    void queryCompleted(const DeclareSelectCursorQuery& q);
+    void queryCompleted(const FetchAllInCursorQuery& q);
+    void queryCompleted(const CloseCursorQuery& q);
+    
 protected:
     virtual void run();
 

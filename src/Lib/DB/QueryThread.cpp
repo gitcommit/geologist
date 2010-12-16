@@ -23,14 +23,29 @@ void QueryThread::run() {
     connect(&conn_, SIGNAL(message(const QString&)), this, SLOT(onConnectionMessage(const QString&)));
     connect(&conn_, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));
     connect(&conn_, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-
+    connect(&conn_, SIGNAL(queryCompleted(const DeclareCursorQuery&)), this, SIGNAL(queryCompleted(const DeclareCursorQuery&)));
+    connect(&conn_, SIGNAL(queryCompleted(const FetchAllInCursorQuery&)), this, SIGNAL(queryCompleted(const FetchAllInCursorQuery&)));
+    connect(&conn_, SIGNAL(queryCompleted(const CloseCursorQuery&)), this, SIGNAL(queryCompleted(const CloseCursorQuery&)));
+    
     connect(this, SIGNAL(beginRequest()), &conn_, SLOT(onBeginRequest()));
     connect(this, SIGNAL(commitRequest()), &conn_, SLOT(onCommitRequest()));
     connect(this, SIGNAL(rollbackRequest()), &conn_, SLOT(onRollbackRequest()));
     connect(this, SIGNAL(savepointRequest(const QString&)), &conn_, SLOT(onSavepointRequest(const QString&)));
     connect(this, SIGNAL(rollbackToSavepointRequest(const QString&)), &conn_, SLOT(onRollbackToSavepointRequest(const QString&)));
-
+    connect(this, SIGNAL(queryRequest(const DeclareCursorQuery&)), &conn_, SLOT(onQueryRequest(const DeclareCursorQuery&)));
     exec();
+}
+
+void QueryThread::onQueryRequest(const DeclareCursorQuery& q) {
+    emit queryRequest(q);
+}
+
+void QueryThread::onQueryRequest(const FetchAllInCursorQuery& q) {
+    emit queryRequest(q);
+}
+
+void QueryThread::onQueryRequest(const CloseCursorQuery& q) {
+    emit queryRequest(q);
 }
 
 void QueryThread::open(const ConnectionData& cd) {

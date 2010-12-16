@@ -123,3 +123,39 @@ void Connection::onRollbackToSavepointRequest(const QString& name) {
 void Connection::log(const QString& sql) {
     logStrm_ << sql << endl;
 }
+
+void Connection::onQueryRequest(const DeclareCursorQuery& qry) {
+    emit message(tr("Declaration of cursor requested: %1").arg(qry.sql()));
+    QSqlQuery q = exec(qry.sql());
+    if (!q.isActive()) {
+        qFatal(tr("Cursor declaration failed: %1").arg(q.lastError().text()).toLocal8Bit());
+    }
+    emit message(tr("Cursor %1 declared.").arg(qry.cursorName()));
+    emit queryCompleted(qry);
+
+
+}
+
+void Connection::onQueryRequest(const FetchAllInCursorQuery& qry) {
+    emit message(tr("Fetch all in cursor requested for cursor: %1").arg(qry.cursorName()));
+    QSqlQuery q = exec(qry.sql());
+    if (!q.isActive()) {
+        qFatal(tr("Cursor fetch failed: %1").arg(q.lastError().text()).toLocal8Bit());
+    }
+    FetchAllInCursorQuery res(qry);
+    res.loadRecordsFromQuery(&q);
+    emit message(tr("Fetch from cursor %1 completed.").arg(qry.cursorName()));
+    emit queryCompleted(res);
+}
+
+void Connection::onQueryRequest(const CloseCursorQuery& qry) {
+    emit message(tr("Closing of cursor requested: %1").arg(qry.cursorName()));
+    QSqlQuery q = exec(qry.sql());
+    if (!q.isActive()) {
+        qFatal(tr("Cursor closing failed: %1").arg(q.lastError().text()).toLocal8Bit());
+    }
+    emit message(tr("Cursor %1 closed.").arg(qry.cursorName()));
+    emit queryCompleted(qry);
+
+
+}

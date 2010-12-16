@@ -151,7 +151,6 @@
             <in>FetchAllInCursorQuery.h</in>
             <in>IdentifiedEntity.cpp</in>
             <in>IdentifiedEntity.h</in>
-            <in>Mapper.h</in>
             <in>Mapping.cpp</in>
             <in>Mapping.h</in>
             <in>Query.cpp</in>

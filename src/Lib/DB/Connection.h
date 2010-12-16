@@ -9,6 +9,11 @@
 #include <QtSql/QSqlQuery>
 
 #include <Lib/DB/ConnectionData.h>
+
+#include <Lib/ORM/DeclareSelectCursorQuery.h>
+#include <Lib/ORM/FetchAllInCursorQuery.h>
+#include <Lib/ORM/CloseCursorQuery.h>
+
 class Connection : public QObject {
     Q_OBJECT;
 
@@ -32,6 +37,9 @@ public slots:
     void onRollbackRequest();
     void onSavepointRequest(const QString& name);
     void onRollbackToSavepointRequest(const QString& name);
+    void onQueryRequest(const DeclareSelectCursorQuery& q);
+    void onQueryRequest(const FetchAllInCursorQuery& q);
+    void onQueryRequest(const CloseCursorQuery& q);
 
 signals:
     void connected(const QString& info);
@@ -42,6 +50,11 @@ signals:
     void rollback();
     void savepoint(const QString& name);
     void rollbackToSavepoint(const QString& name);
+    
+    void queryCompleted(const DeclareSelectCursorQuery& q);
+    void queryCompleted(const FetchAllInCursorQuery& q);
+    void queryCompleted(const CloseCursorQuery& q);
+    
     void logQuery(const QString& sql);
 protected slots:
     void log(const QString& sql);

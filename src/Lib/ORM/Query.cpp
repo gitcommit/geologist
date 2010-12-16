@@ -18,3 +18,13 @@ Query::Query(const Query& orig)
 Query::~Query() {
 }
 
+void Query::loadRecordsFromQuery(QSqlQuery* q) {
+    Q_CHECK_PTR(q);
+    if (!q->isActive()) {
+        return;
+    }
+    while(q->next()) {
+        _res.append(q->record());
+    }
+}
+
