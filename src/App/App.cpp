@@ -28,8 +28,7 @@
 #include <Lib/DBModel/Schema.h>
 #include <Lib/DBModel/Table.h>
 
-#include <Lib/ORM/Mapping.h>
-#include <Lib/Managers/Base/DataManager.h>
+#include <Lib/ORM/DataManager.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(QDateTime)

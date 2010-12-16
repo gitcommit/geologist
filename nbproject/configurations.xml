@@ -19,6 +19,8 @@
             <in>Connection.h</in>
             <in>ConnectionData.cpp</in>
             <in>ConnectionData.h</in>
+            <in>DatabaseError.cpp</in>
+            <in>DatabaseError.h</in>
             <in>QueryThread.cpp</in>
             <in>QueryThread.h</in>
           </df>
@@ -86,8 +88,6 @@
           </df>
           <df name="GUI" kind="SOURCE_LOGICAL_FOLDER">
             <df name="Core">
-              <df name="Managers">
-              </df>
             </df>
             <df name="DB" kind="SOURCE_LOGICAL_FOLDER">
               <in>DatabaseConnectionDialog.cpp</in>
@@ -120,8 +120,10 @@
           </df>
           <df name="Managers">
             <df name="Base">
-              <in>DataManager.cpp</in>
-              <in>DataManager.h</in>
+            </df>
+            <df name="Core">
+              <in>SIPrefixManager.cpp</in>
+              <in>SIPrefixManager.h</in>
             </df>
           </df>
           <df name="Model" kind="SOURCE_LOGICAL_FOLDER">
@@ -149,6 +151,8 @@
             <in>CloseCursorQuery.h</in>
             <in>CursorQuery.cpp</in>
             <in>CursorQuery.h</in>
+            <in>DataManager.cpp</in>
+            <in>DataManager.h</in>
             <in>DeclareCursorQuery.cpp</in>
             <in>DeclareCursorQuery.h</in>
             <in>DeclareSelectCursorQuery.cpp</in>
@@ -163,6 +167,8 @@
             <in>IdentifiedEntity.h</in>
             <in>Mapping.cpp</in>
             <in>Mapping.h</in>
+            <in>Property.cpp</in>
+            <in>Property.h</in>
             <in>Query.cpp</in>
             <in>Query.h</in>
             <in>StandardEntity.cpp</in>

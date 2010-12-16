@@ -6,7 +6,7 @@
 
 #include <Lib/DBModel/Table.h>
 #include <Lib/DBModel/TableColumn.h>
-#include <Lib/Managers/Base/DataManager.h>
+#include <Lib/ORM/DataManager.h>
 
 Mapping::Mapping(Table* t)
 : QObject(t), _d(0) {

@@ -5,7 +5,7 @@
  * Created on 16. Dezember 2010, 09:55
  */
 
-#include <Lib/Managers/Base/DataManager.h>
+#include <Lib/ORM/DataManager.h>
 
 #include <QtCore/QStringList>
 #include <QtCore/QDebug>
