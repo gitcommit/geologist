@@ -112,6 +112,7 @@ SET(geologist_Lib_ORM_SRCS_CXX
     Lib/ORM/Property.cpp
     Lib/ORM/MappingXMLParser.cpp
     Lib/ORM/Private/MappingData.cpp
+    Lib/ORM/Session.cpp
 )
 
 SET(geologist_Lib_ORM_MOC_SRCS
@@ -123,15 +124,18 @@ SET(geologist_Lib_ORM_MOC_SRCS
     Lib/ORM/DataManager.h
     Lib/ORM/Mapping.h
     Lib/ORM/Property.h
+    Lib/ORM/Session.h
 )
 
 SET(geologist_Lib_Model_Core_SRCS_CXX
     Lib/Model/Core/SIPrefix.cpp
+    Lib/Model/Core/SIPrefixManager.cpp
     Lib/Model/Core/Private/SIPrefixData.cpp
 )
 
 SET(geologist_Lib_Model_Core_MOC_SRCS
     Lib/Model/Core/SIPrefix.h
+    Lib/Model/Core/SIPrefixManager.h
 )
 
 SET(geologist_Lib_DB_SRCS_CXX

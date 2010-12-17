@@ -28,6 +28,7 @@
 #include <Lib/DBModel/Table.h>
 
 #include <Lib/ORM/DataManager.h>
+#include <Lib/ORM/Session.h>
 
 Q_DECLARE_METATYPE(ConnectionData)
 Q_DECLARE_METATYPE(QDateTime)
@@ -41,7 +42,7 @@ Q_DECLARE_METATYPE(DeclareSelectCursorQuery)
 Q_DECLARE_METATYPE(FetchAllInCursorQuery)
 
 App::App(int argc, char** argv)
-: QApplication(argc, argv), _lastQueryId(0), _dbModel(0) {
+: QApplication(argc, argv), _lastQueryId(0), _dbModel(0), _session(0) {
     setApplicationVersion(APP_VERSION);
     setApplicationName(APP_NAME);
     setOrganizationDomain(ORG_DOMAIN);
@@ -80,6 +81,7 @@ void App::init() {
     s.load(&_cd);
     _dbModel.setName(DB_NAME);
     _dbModel.loadFromFile(DB_CONFIG_FILE);
+    _session = new Session();
     
     connect(&_dbThread, SIGNAL(message(const QString&)), this, SLOT(onDatabaseMessage(const QString&)));
     connect(&_dbThread, SIGNAL(connected(const QString&)), this, SLOT(onConnected(const QString&)));

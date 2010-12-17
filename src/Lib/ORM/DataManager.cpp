@@ -28,7 +28,6 @@ DataManager::DataManager(QObject* p, const QString& modN, const QString& clN, co
 
     connect(getApp()->databaseThread(), SIGNAL(queryCompleted(const DeclareSelectCursorQuery&)), this, SLOT(onQueryCompleted(const DeclareSelectCursorQuery&)));
     connect(getApp()->databaseThread(), SIGNAL(queryCompleted(const FetchAllInCursorQuery&)), this, SLOT(onQueryCompleted(const FetchAllInCursorQuery&)));
-
     configure();
 }
 
@@ -60,6 +59,19 @@ void DataManager::onQueryCompleted(const DeclareSelectCursorQuery& q) {
     emit execRequest(mapping()->fetchAllInSelectAllCursor(nextQueryId()));
 }
 
+PropertyList DataManager::properties() const {
+    Q_ASSERT(hasMapping());
+    return mapping()->properties();
+}
+
+void DataManager::configure() {
+    Schema* schema = getApp()->databaseModel()->schema(schemaName());
+    Q_CHECK_PTR(schema);
+    Table* table = schema->table(tableName());
+    Q_CHECK_PTR(table);
+    setMapping(new Mapping(table));
+}
+
 void DataManager::onQueryCompleted(const FetchAllInCursorQuery& q) {
     if (!isMyQuery(&q)) {
         return;
@@ -69,21 +81,19 @@ void DataManager::onQueryCompleted(const FetchAllInCursorQuery& q) {
 }
 
 void DataManager::parseQueryResult(const FetchAllInCursorQuery& q) {
-    PropertyList pl = mapping()->properties();
     QList<QSqlRecord> res = q.records();
     for (QList<QSqlRecord>::const_iterator it = res.begin(); it != res.end(); it++) {
-        QSqlRecord rec = (*it);
-        for (PropertyList::const_iterator pit = pl.begin(); pit != pl.end(); pit++) {
-            Property* p = (*pit);
-            qDebug() << QString("%1: %2").arg(p->name()).arg(rec.field(p->tableColumn()->name()).value().toString());
-        }
+        qDebug() << "loaded: " << fromRecord(*it)->toString();
     }
 }
 
-void DataManager::configure() {
-    Schema* schema = getApp()->databaseModel()->schema(schemaName());
-    Q_CHECK_PTR(schema);
-    Table* table = schema->table(tableName());
-    Q_CHECK_PTR(table);
-    setMapping(new Mapping(table));
+Entity* DataManager::fromRecord(const QSqlRecord& r) {
+    Entity *e = newEntity();
+    Q_CHECK_PTR(e);
+    PropertyList pl = properties();
+    for (PropertyList::const_iterator pit = pl.begin(); pit != pl.end(); pit++) {
+        Property* p = (*pit);
+        e->setProperty(p->name().toLocal8Bit(), r.field(p->tableColumn()->name()).value());
+    }
+    return e;
 }

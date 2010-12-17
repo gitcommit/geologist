@@ -18,6 +18,8 @@
 
 #include <Lib/Tools/tools.h>
 
+#include <Lib/Model/Core/SIPrefixManager.h>
+
 MappingXMLParser::MappingXMLParser(QObject* p)
 : XMLFileParser(p) {
 }
@@ -36,12 +38,19 @@ void MappingXMLParser::parse() {
             QDomElement cE = classes.item(ci).toElement();
             Q_ASSERT(cE.hasAttribute("name"));
             Q_ASSERT(cE.hasAttribute("table_name"));
+            Q_ASSERT(cE.hasAttribute("manager_class_name"));
 
             QString qualifiedTableName = cE.attribute("table_name");
             QString schemaName = qualifiedTableName.split(".")[0];
             QString tableName = qualifiedTableName.split(".")[1];
             QString className = nameAttribute(classes.item(ci));
-            DataManager* manager = new DataManager(getApp(), moduleName, className, schemaName, tableName);
+            QString managerClassName = cE.attribute("manager_class_name");
+
+            DataManager* manager = createManager(getApp(), moduleName,
+                    className,
+                    schemaName,
+                    tableName,
+                    managerClassName);
             QDomNodeList pl = cE.elementsByTagName("property");
             Schema* schema = getApp()->databaseModel()->schema(schemaName);
             Q_CHECK_PTR(schema);
@@ -58,4 +67,13 @@ void MappingXMLParser::parse() {
             }
         }
     }
+}
+
+DataManager* MappingXMLParser::createManager(QObject* p, const QString& moduleName,
+        const QString& className, const QString& schemaName, const QString& tableName,
+        const QString& managerClassName) {
+    if ("SIPrefixManager" == managerClassName) {
+        return new SIPrefixManager(p, moduleName, className, schemaName, tableName);
+    }
+    return 0;
 }

@@ -12,6 +12,7 @@
 #include <Lib/Model/Core/SIPrefix.h>
 
 class DataManager;
+class Session;
 
 class App : public QApplication {
     Q_OBJECT;
@@ -32,6 +33,10 @@ public:
         return &_dbModel;
     }
 
+    Session* session() {
+        return _session;
+    }
+    
 signals:
     void beginRequest();
     void commitRequest();
@@ -63,6 +68,7 @@ private:
     ConnectionData _cd;
     qlonglong _lastQueryId;
     DBModel _dbModel;
+    Session* _session;
 };
 
 #endif

@@ -10,6 +10,8 @@
 
 #include <Lib/Tools/XMLFileParser.h>
 
+class DataManager;
+
 class MappingXMLParser: public XMLFileParser {
     Q_OBJECT
 public:
@@ -17,6 +19,10 @@ public:
     virtual ~MappingXMLParser();
 protected:
     virtual void parse();
+private:
+    DataManager* createManager(QObject* p, const QString& moduleName,
+        const QString& className, const QString& schemaName, const QString& tableName,
+        const QString& managerClassName);
 };
 
 #endif	/* MAPPINGXMLPARSER_H */

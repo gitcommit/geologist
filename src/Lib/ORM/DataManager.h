@@ -19,10 +19,13 @@
 #include <Lib/ORM/FetchAllInCursorQuery.h>
 #include <Lib/ORM/CloseCursorQuery.h>
 #include <Lib/ORM/Mapping.h>
+#include <Lib/ORM/Property.h>
 
 #include <Lib/DBModel/DBModel.h>
 #include <Lib/DBModel/Schema.h>
 #include <Lib/DBModel/Table.h>
+
+class Entity;
 
 class DataManager : public QObject {
     Q_OBJECT
@@ -31,10 +34,12 @@ public:
             const QString& moduleName = QString::null, const QString& className = QString::null,
             const QString& schemaName = QString::null, const QString& tableName = QString::null);
     virtual ~DataManager();
-    Mapping* mapping() {
+    Mapping* mapping() const {
         return _mapping;
     }
 
+    PropertyList properties() const;
+    bool hasMapping() const { return (0 != mapping()); }
 signals:
     void execRequest(const DeclareSelectCursorQuery& q);
     void execRequest(const FetchAllInCursorQuery& q);
@@ -43,10 +48,11 @@ public slots:
     virtual void loadAll();
     virtual void onQueryCompleted(const DeclareSelectCursorQuery& q);
     virtual void onQueryCompleted(const FetchAllInCursorQuery& q);
-
 protected:
-    virtual void configure();
     virtual void parseQueryResult(const FetchAllInCursorQuery& q);
+    virtual Entity* fromRecord(const QSqlRecord& r);
+    virtual Entity* newEntity() = 0;
+    virtual void configure();
     qulonglong nextQueryId();
     qulonglong queryId() const;
     bool isMyQuery(const Query* q) const;

@@ -1,7 +1,7 @@
 
 <xml version="1.0" encoding="utf-8">
     <module name="Core">
-        <class name="SIPrefix" table_name="core.si_prefixes">
+        <class name="SIPrefix" table_name="core.si_prefixes" manager_class_name="SIPrefixManager">
             <property property_name="id" column_name="id"/>
             <property property_name="name" column_name="name"/>
             <property property_name="code" column_name="code"/>
